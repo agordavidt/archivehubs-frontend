@@ -1,17 +1,19 @@
-// vite.config.js
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
   root: 'src',
-  envDir: resolve(__dirname),     // ← ADD THIS — env files live at project root
+  envDir: resolve(__dirname),
   publicDir: '../public',
   build: {
     outDir: '../dist',
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        home: resolve(__dirname, 'src/pages/home.html'),
+        index:  resolve(__dirname, 'src/pages/index.html'),
+        login:  resolve(__dirname, 'src/pages/login.html'),
+        signup: resolve(__dirname, 'src/pages/signup.html'),
+        home:   resolve(__dirname, 'src/pages/home.html'),
       },
     },
   },

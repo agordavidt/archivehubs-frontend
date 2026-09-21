@@ -50,22 +50,47 @@ async function request(path, { method = 'GET', body, isForm = false, signal } = 
 }
 
 export const api = {
-  // auth
-  login:  (email, password) => request('/auth/login', { method: 'POST', body: { email, password } }),
-  logout: ()                => request('/auth/logout'),
+  // ── AUTH ────────────────────────────────────────────────────
+  signup:  (data) => request('/auth/signup', { method: 'POST', body: data }),
+  login:   (email, password) =>
+    request('/auth/login', { method: 'POST', body: { email, password } }),
+  logout:  () => request('/auth/logout'),
 
-  // user
-  getCurrentUser: ()        => request('/user'),
+  requestVerificationEmail: (email) =>
+    request('/auth/request-verification-email', { method: 'POST', body: { email } }),
+  verifyEmail: (token) =>
+    request('/auth/verify-email', { method: 'POST', body: { token } }),
+  forgotPassword: (email) =>
+    request('/auth/forgot-password', { method: 'POST', body: { email } }),
+  resetPassword: (token, newPassword) =>
+    request('/auth/reset-password', { method: 'POST', body: { token, newPassword } }),
 
-  // feed
+  // ── ACCOUNT ONBOARDING ──────────────────────────────────────
+  createIndividualAccount: (data) =>
+    request('/account/create-individual-account', { method: 'POST', body: data }),
+  createCorporateAccount: (data) =>
+    request('/account/create-corporate-account', { method: 'POST', body: data }),
+
+  // ── USER ────────────────────────────────────────────────────
+  getCurrentUser: () => request('/user'),
+
+  // ── FEED ────────────────────────────────────────────────────
   getFeed: ({ paginate = 0, revalidate = false } = {}) =>
     request(`/feed/?paginate=${paginate}${revalidate ? '&revalidate=true' : ''}`),
 
-  // posts
-  likePost:   (postId) => request(`/post/${postId}/like`,   { method: 'POST' }),
-  unlikePost: (postId) => request(`/post/${postId}/unlike`, { method: 'POST' }),
+  // ── POSTS ───────────────────────────────────────────────────
+  createPost: ({ textContent, tags = [], media = [] }) => {
+    const form = new FormData();
+    form.append('textContent', textContent);
+    media.forEach(f => form.append('media', f));
+    form.append('tags', JSON.stringify(tags));
+    return request('/post/create', { method: 'POST', body: form, isForm: true });
+  },
+  likePost:   (id) => request(`/post/${id}/like`,   { method: 'POST' }),
+  unlikePost: (id) => request(`/post/${id}/unlike`, { method: 'POST' }),
+  deletePost: (postId) => request('/post/delete', { method: 'POST', body: { postId } }),
 
-  // comments
+  // ── COMMENTS ────────────────────────────────────────────────
   getComments: (postId)          => request(`/post/${postId}/comments`),
   addComment:  (postId, comment) => request('/post/comment', { method: 'POST', body: { postId, comment } }),
 };

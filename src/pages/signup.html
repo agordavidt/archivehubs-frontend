@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account – ArchiveHubs</title>
+    <link rel="stylesheet" href="/css/tokens.css">
+    <link rel="stylesheet" href="/css/auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card wide">
+      <img src="/images/header.jpg" alt="ArchiveHubs" class="auth-logo" onerror="this.style.display='none'">
+
+      <!-- Progress (2 real steps; hidden on verify screen) -->
+      <div id="progressWrap" class="auth-progress hidden">
+        <div class="meta">
+          <span id="stepLabel">Step 1 of 2</span>
+          <strong id="stepName">Your Details</strong>
+        </div>
+        <div class="auth-progress-track">
+          <div id="progressBar" class="auth-progress-fill" style="width:50%"></div>
+        </div>
+        <div class="auth-step-dots">
+          <div class="auth-step-dot" data-step="1">1</div>
+          <div class="auth-step-dot" data-step="2">2</div>
+        </div>
+      </div>
+
+      <!-- ── STEP 0: Choose account type ──────────────────────── -->
+      <div id="step-choose" class="auth-panel active">
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-subtitle">Choose the account type that fits you</p>
+
+        <div class="auth-option" data-type="individual" onclick="selectType('individual')">
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <div class="opt-icon"><i class="fas fa-user"></i></div>
+            <div>
+              <h3>Individual Account</h3>
+              <p>Ideal for personal use. Simple with all essential features.</p>
+            </div>
+          </div>
+        </div>
+        <div class="auth-option" data-type="corporate" onclick="selectType('corporate')">
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <div class="opt-icon"><i class="fas fa-building"></i></div>
+            <div>
+              <h3>Corporate Account</h3>
+              <p>For businesses &amp; organisations. Team tools, analytics, priority support.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="auth-footer">Already have an account? <a href="login.html">Sign in</a></p>
+      </div>
+
+      <!-- ══════════ INDIVIDUAL FLOW ══════════ -->
+
+      <!-- IND STEP 1: Personal Details -->
+      <div id="ind-step1" class="auth-panel">
+        <h1 class="auth-title">Personal details</h1>
+        <p class="auth-subtitle">Tell us a bit about yourself</p>
+        <p id="ind-err1" class="auth-error"></p>
+
+        <form class="auth-form" id="indForm1" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ind-firstName">First name *</label>
+              <input type="text" id="ind-firstName" autocomplete="given-name">
+              <div class="field-hint" data-for="ind-firstName"></div>
+            </div>
+            <div class="form-group">
+              <label for="ind-surName">Surname *</label>
+              <input type="text" id="ind-surName" autocomplete="family-name">
+              <div class="field-hint" data-for="ind-surName"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ind-otherName">Other name</label>
+            <input type="text" id="ind-otherName" autocomplete="additional-name">
+          </div>
+
+          <div class="form-group">
+            <label for="ind-email">Email *</label>
+            <input type="email" id="ind-email" autocomplete="email" placeholder="you@example.com">
+            <div class="field-hint" data-for="ind-email">We’ll send a verification link to this address.</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ind-password">Password *</label>
+              <div class="password-wrap">
+                <input type="password" id="ind-password" autocomplete="new-password">
+                <i class="fas fa-eye toggle" onclick="togglePassword('ind-password', this)"></i>
+              </div>
+              <div class="field-hint" data-for="ind-password">Minimum 8 characters.</div>
+            </div>
+            <div class="form-group">
+              <label for="ind-confirmPassword">Confirm password *</label>
+              <div class="password-wrap">
+                <input type="password" id="ind-confirmPassword" autocomplete="new-password">
+                <i class="fas fa-eye toggle" onclick="togglePassword('ind-confirmPassword', this)"></i>
+              </div>
+              <div class="field-hint" data-for="ind-confirmPassword"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ind-phone">Phone number *</label>
+            <div class="phone-row">
+              <select id="ind-countryCode">
+                <option value="" disabled selected>Code</option>
+                <option value="+234">+234</option>
+                <option value="+1" disabled>+1</option>
+                <option value="+44" disabled>+44</option>
+              </select>
+              <input type="tel" id="ind-phone" placeholder="08069779435" autocomplete="tel">
+            </div>
+            <div class="field-hint" data-for="ind-phone">Enter 10–11 digits, e.g. 08069779435</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ind-sex">Sex *</label>
+              <select id="ind-sex">
+                <option value="" disabled selected>Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ind-country">Country *</label>
+              <select id="ind-country">
+                <option value="" disabled selected>Select</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="United States" disabled>United States</option>
+                <option value="United Kingdom" disabled>United Kingdom</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ind-state">State / Province *</label>
+            <select id="ind-state">
+              <option value="" disabled selected>Select state</option>
+              <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+              <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+              <option>Benue</option><option>Borno</option><option>Cross River</option>
+              <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+              <option>Ekiti</option><option>Enugu</option><option>Gombe</option>
+              <option>Imo</option><option>Jigawa</option><option>Kaduna</option>
+              <option>Kano</option><option>Katsina</option><option>Kebbi</option>
+              <option>Kogi</option><option>Kwara</option><option>Lagos</option>
+              <option>Nasarawa</option><option>Niger</option><option>Ogun</option>
+              <option>Ondo</option><option>Osun</option><option>Oyo</option>
+              <option>Plateau</option><option>Rivers</option><option>Sokoto</option>
+              <option>Taraba</option><option>Yobe</option><option>Zamfara</option>
+              <option>Abuja</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="auth-actions">
+          <button type="button" class="auth-btn auth-btn-ghost" onclick="goBack()">Back</button>
+          <button type="button" class="auth-btn auth-btn-primary" onclick="indNext()">
+            <span>Continue</span>
+            <i class="fas fa-arrow-right" style="font-size:0.8em;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- IND STEP 2: Professional Profile -->
+      <div id="ind-step2" class="auth-panel">
+        <h1 class="auth-title">Professional profile</h1>
+        <p class="auth-subtitle">Help us personalise your experience</p>
+        <p id="ind-err2" class="auth-error"></p>
+
+        <form class="auth-form" id="indForm2" novalidate>
+          <div class="form-group">
+            <label for="ind-profStatus">Professional status *</label>
+            <select id="ind-profStatus" onchange="updateIndFields()">
+              <option value="" disabled selected>Select your status</option>
+              <option value="student">Student</option>
+              <option value="unemployed">Unemployed</option>
+              <option value="employed">Employed</option>
+              <option value="self-employed">Self-employed</option>
+              <option value="others">Others</option>
+            </select>
+            <input type="text" id="ind-profOther" placeholder="Please specify" class="hidden" style="margin-top:10px;">
+          </div>
+
+          <div id="ind-bgGroup" class="form-group hidden">
+            <label id="ind-bgLabel">Background *</label>
+            <select id="ind-background" onchange="toggleOther(this,'ind-bgOther')">
+              <option value="" disabled selected>Select background</option>
+            </select>
+            <input type="text" id="ind-bgOther" placeholder="Please specify" class="hidden" style="margin-top:10px;">
+          </div>
+
+          <div id="ind-intGroup" class="form-group hidden">
+            <label id="ind-intLabel">Interest *</label>
+            <select id="ind-interest" onchange="toggleOther(this,'ind-intOther')">
+              <option value="" disabled selected>Select interest</option>
+            </select>
+            <input type="text" id="ind-intOther" placeholder="Please specify" class="hidden" style="margin-top:10px;">
+          </div>
+        </form>
+
+        <label class="terms-row">
+          <input type="checkbox" id="ind-terms">
+          <span>I agree to the <a href="terms.html" target="_blank">Terms &amp; Conditions</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></span>
+        </label>
+
+        <div class="auth-actions">
+          <button type="button" class="auth-btn auth-btn-ghost" onclick="goToIndStep1()">Back</button>
+          <button type="button" class="auth-btn auth-btn-primary" id="ind-submit" onclick="submitIndividual()">
+            <span>Create Account</span>
+            <span id="ind-spin" class="auth-spinner hidden"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ══════════ CORPORATE FLOW ══════════ -->
+
+      <!-- CORP STEP 1: Corporate Details -->
+      <div id="corp-step1" class="auth-panel">
+        <h1 class="auth-title">Corporate details</h1>
+        <p class="auth-subtitle">Information about your organisation</p>
+        <p id="corp-err1" class="auth-error"></p>
+
+        <form class="auth-form" id="corpForm1" novalidate>
+          <div class="form-group">
+            <label for="corp-name">Corporate name *</label>
+            <input type="text" id="corp-name" autocomplete="organization">
+          </div>
+
+          <div class="form-group">
+            <label for="corp-acronym">Acronym</label>
+            <input type="text" id="corp-acronym">
+          </div>
+
+          <div class="form-group">
+            <label for="corp-email">Email *</label>
+            <input type="email" id="corp-email" autocomplete="email" placeholder="contact@company.com">
+            <div class="field-hint" data-for="corp-email">We’ll send a verification link to this address.</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="corp-password">Password *</label>
+              <div class="password-wrap">
+                <input type="password" id="corp-password" autocomplete="new-password">
+                <i class="fas fa-eye toggle" onclick="togglePassword('corp-password', this)"></i>
+              </div>
+              <div class="field-hint" data-for="corp-password">Minimum 8 characters.</div>
+            </div>
+            <div class="form-group">
+              <label for="corp-confirmPassword">Confirm password *</label>
+              <div class="password-wrap">
+                <input type="password" id="corp-confirmPassword" autocomplete="new-password">
+                <i class="fas fa-eye toggle" onclick="togglePassword('corp-confirmPassword', this)"></i>
+              </div>
+              <div class="field-hint" data-for="corp-confirmPassword"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="corp-phone">Phone number *</label>
+            <div class="phone-row">
+              <select id="corp-countryCode">
+                <option value="" disabled selected>Code</option>
+                <option value="+234">+234</option>
+                <option value="+1" disabled>+1</option>
+                <option value="+44" disabled>+44</option>
+              </select>
+              <input type="tel" id="corp-phone" placeholder="08069779435" autocomplete="tel">
+            </div>
+            <div class="field-hint" data-for="corp-phone">Enter 10–11 digits, e.g. 08069779435</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="corp-status">Corporate status *</label>
+              <select id="corp-status" onchange="toggleReg()">
+                <option value="" disabled selected>Select</option>
+                <option value="registered">Registered</option>
+                <option value="not-registered">Not – Registered</option>
+                <option value="governmental">Governmental</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="corp-country">Country *</label>
+              <select id="corp-country">
+                <option value="" disabled selected>Select</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="United States" disabled>United States</option>
+                <option value="United Kingdom" disabled>United Kingdom</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="corp-regWrap" class="form-group hidden">
+            <label for="corp-regNumber">Registration number *</label>
+            <input type="text" id="corp-regNumber">
+          </div>
+
+          <div class="form-group">
+            <label for="corp-state">State / Province *</label>
+            <select id="corp-state">
+              <option value="" disabled selected>Select state</option>
+              <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+              <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+              <option>Benue</option><option>Borno</option><option>Cross River</option>
+              <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+              <option>Ekiti</option><option>Enugu</option><option>Gombe</option>
+              <option>Imo</option><option>Jigawa</option><option>Kaduna</option>
+              <option>Kano</option><option>Katsina</option><option>Kebbi</option>
+              <option>Kogi</option><option>Kwara</option><option>Lagos</option>
+              <option>Nasarawa</option><option>Niger</option><option>Ogun</option>
+              <option>Ondo</option><option>Osun</option><option>Oyo</option>
+              <option>Plateau</option><option>Rivers</option><option>Sokoto</option>
+              <option>Taraba</option><option>Yobe</option><option>Zamfara</option>
+              <option>Abuja</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="auth-actions">
+          <button type="button" class="auth-btn auth-btn-ghost" onclick="goBack()">Back</button>
+          <button type="button" class="auth-btn auth-btn-primary" onclick="corpNext()">
+            <span>Continue</span>
+            <i class="fas fa-arrow-right" style="font-size:0.8em;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- CORP STEP 2: Organisation Profile -->
+      <div id="corp-step2" class="auth-panel">
+        <h1 class="auth-title">Organisation profile</h1>
+        <p class="auth-subtitle">Tell us more about your organisation</p>
+        <p id="corp-err2" class="auth-error"></p>
+
+        <form class="auth-form" id="corpForm2" novalidate>
+          <div class="form-group">
+            <label for="corp-accountType">Corporate account type *</label>
+            <select id="corp-accountType" onchange="updateCorpType()">
+              <option value="" disabled selected>Select organisation type</option>
+              <option value="private">Private Corporation</option>
+              <option value="public">Public Corporation</option>
+              <option value="others">Others</option>
+            </select>
+            <input type="text" id="corp-typeOther" placeholder="Please specify" class="hidden" style="margin-top:10px;">
+          </div>
+
+          <!-- Private group -->
+          <div id="corp-privateGroup" class="hidden">
+            <div class="form-group">
+              <label for="corp-orgPrivate">Organization *</label>
+              <select id="corp-orgPrivate" onchange="toggleOther(this,'corp-orgOther')">
+                <option value="" disabled selected>Select organisation</option>
+                <option value="self-employed">Self-employed</option>
+                <option value="sole-proprietorship">Sole Proprietorship</option>
+                <option value="partnership">Partnership</option>
+                <option value="private-ltd">Private Limited Liability Company</option>
+                <option value="public-ltd">Public Limited Liability Company</option>
+                <option value="ngo">Non-Profit Organization (NGO)</option>
+                <option value="social-enterprise">Social Enterprise</option>
+                <option value="civil-society">Civil Society Organization</option>
+                <option value="cooperative">Cooperative Society</option>
+                <option value="community">Community Initiative Group</option>
+                <option value="faith-based">Faith Based Organization</option>
+                <option value="others">Others</option>
+              </select>
+              <input type="text" id="corp-orgOther" placeholder="Please specify" class="hidden" style="margin-top:10px;">
+            </div>
+            <div class="form-group">
+              <label for="corp-sectorPrivate">Sector *</label>
+              <select id="corp-sectorPrivate" onchange="toggleOther(this,'corp-sectorPrivOther')">
+                <option value="" disabled selected>Select sector</option>
+                <option value="manufacturing">Manufacturing &amp; Industrial</option>
+                <option value="retail">Retail &amp; Wholesale</option>
+                <option value="professional">Professional Services</option>
+                <option value="ict">Information &amp; Communication Technology (ICT)</option>
+                <option value="financial">Financial Services</option>
+                <option value="transport">Transport &amp; Logistics</option>
+                <option value="real-estate">Real Estate &amp; Construction</option>
+                <option value="healthcare">Healthcare &amp; Life Sciences</option>
+                <option value="agriculture">Agriculture &amp; Agribusiness</option>
+                <option value="media">Media, Entertainment &amp; Creative Arts</option>
+                <option value="education">Education &amp; Training</option>
+                <option value="energy">Energy &amp; Environment</option>
+                <option value="others">Others</option>
+              </select>
+              <input type="text" id="corp-sectorPrivOther" placeholder="Please specify" class="hidden" style="margin-top:10px;">
+            </div>
+          </div>
+
+          <!-- Public group -->
+          <div id="corp-publicGroup" class="hidden">
+            <div class="form-group">
+              <label for="corp-orgPublic">Organization *</label>
+              <select id="corp-orgPublic" onchange="toggleOther(this,'corp-orgPubOther')">
+                <option value="" disabled selected>Select organisation</option>
+                <option value="ministry">Ministry</option>
+                <option value="department">Department</option>
+                <option value="agency">Agency</option>
+                <option value="commission">Commission</option>
+                <option value="council">Council</option>
+                <option value="board">Board</option>
+                <option value="commercial">Commercial Public Corporation</option>
+                <option value="regulatory">Regulatory &amp; Oversight Corporation</option>
+                <option value="service">Service-Oriented Public Corporation</option>
+                <option value="infrastructure">Infrastructure &amp; Industrial Development Corporation</option>
+                <option value="natural">Natural Resource &amp; Extractive Corporation</option>
+                <option value="others">Others</option>
+              </select>
+              <input type="text" id="corp-orgPubOther" placeholder="Please specify" class="hidden" style="margin-top:10px;">
+            </div>
+            <div class="form-group">
+              <label for="corp-sectorPublic">Sector *</label>
+              <select id="corp-sectorPublic" onchange="toggleOther(this,'corp-sectorPubOther')">
+                <option value="" disabled selected>Select sector</option>
+                <option value="energy-natural">Energy &amp; Natural Resources</option>
+                <option value="infrastructure">Infrastructure &amp; Public Works</option>
+                <option value="health-social">Health &amp; Social Services</option>
+                <option value="ict">Information &amp; Communication Technology (ICT)</option>
+                <option value="education">Education &amp; Training</option>
+                <option value="finance">Finance &amp; Economic Development</option>
+                <option value="trade">Trade, Commerce &amp; Industry</option>
+                <option value="environment">Environment &amp; Agriculture</option>
+                <option value="transportation">Transportation</option>
+                <option value="media">Media, Entertainment &amp; Creative Arts</option>
+                <option value="defense">Defense, Security &amp; Emergency Services</option>
+                <option value="governance">Governance &amp; Regulation</option>
+                <option value="others">Others</option>
+              </select>
+              <input type="text" id="corp-sectorPubOther" placeholder="Please specify" class="hidden" style="margin-top:10px;">
+            </div>
+          </div>
+        </form>
+
+        <label class="terms-row">
+          <input type="checkbox" id="corp-terms">
+          <span>I agree to the <a href="terms.html" target="_blank">Terms &amp; Conditions</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></span>
+        </label>
+
+        <div class="auth-actions">
+          <button type="button" class="auth-btn auth-btn-ghost" onclick="goToCorpStep1()">Back</button>
+          <button type="button" class="auth-btn auth-btn-primary" id="corp-submit" onclick="submitCorporate()">
+            <span>Create Account</span>
+            <span id="corp-spin" class="auth-spinner hidden"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── VERIFY EMAIL ─────────────────────────────────────── -->
+      <div id="verify" class="auth-panel">
+        <div class="auth-state">
+          <h1 class="auth-title">Account Created</h1>
+          <p class="auth-subtitle">
+            We sent a verification link to <strong id="verify-email"></strong>.<br>
+            Please check your email and verify your account to log in.
+          </p>
+          <a href="login.html" class="auth-btn auth-btn-gold">Go to Sign In</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="toast" class="auth-toast"><span id="toastMsg"></span></div>
+
+  <script type="module" src="/js/pages/signup.js"></script>
+
+</body>
+</html>
