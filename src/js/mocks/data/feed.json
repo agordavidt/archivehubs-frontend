@@ -1,0 +1,38 @@
+{
+  "message": "Mock feed",
+  "posts": [
+    {
+      "id": "p-001",
+      "textContent": "Just shipped the first slice of the new ArchiveHubs frontend. Mock-driven, backend-ready. 🚀",
+      "createdAt": 1737200000000,
+      "mediaUrls": [],
+      "authorName": "John Doe",
+      "userProfilePic": "images/profile.jpg",
+      "likeCount": 12,
+      "commentCount": 2,
+      "isLiked": false
+    },
+    {
+      "id": "p-002",
+      "textContent": "Neo4j graph queries are surprisingly elegant once you stop thinking in tables.",
+      "createdAt": 1737100000000,
+      "mediaUrls": ["images/hubs.jpg"],
+      "authorName": "Emma Watson",
+      "userProfilePic": "images/profile.jpg",
+      "likeCount": 48,
+      "commentCount": 0,
+      "isLiked": true
+    },
+    {
+      "id": "p-003",
+      "textContent": "Anyone else doing the design-system-in-a-weekend challenge?",
+      "createdAt": 1737000000000,
+      "mediaUrls": [],
+      "authorName": "James Rodriguez",
+      "userProfilePic": "images/profile.jpg",
+      "likeCount": 5,
+      "commentCount": 1,
+      "isLiked": false
+    }
+  ]
+}

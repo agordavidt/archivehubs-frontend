@@ -1,0 +1,28 @@
+{
+  "comments": [
+    {
+      "id": "c-001",
+      "postId": "p-001",
+      "text": "Nice work — how are you handling the ID mismatch between feed and like endpoints?",
+      "createdAt": 1737200100000,
+      "author": { "id": "u-emma", "name": "Emma Watson", "profilePic": "images/profile.jpg" },
+      "parentId": null
+    },
+    {
+      "id": "c-002",
+      "postId": "p-001",
+      "text": "Curious about the same thing. Would love a follow-up post.",
+      "createdAt": 1737200200000,
+      "author": { "id": "u-james", "name": "James Rodriguez", "profilePic": "images/profile.jpg" },
+      "parentId": "c-001"
+    },
+    {
+      "id": "c-003",
+      "postId": "p-003",
+      "text": "I'm in. Let's compare notes Friday.",
+      "createdAt": 1737001000000,
+      "author": { "id": "u-emma", "name": "Emma Watson", "profilePic": "images/profile.jpg" },
+      "parentId": null
+    }
+  ]
+}

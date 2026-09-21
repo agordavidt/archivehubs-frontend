@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | ArchiveHubs</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="main-content">
+    <section class="middle-section" style="grid-column: 1 / -1; max-width: 640px; margin: 0 auto; padding-top: 20px;">
+      <div class="posts-section">
+        <div class="feed-loading" style="text-align:center;padding:40px;">
+          <div class="spinner"></div>
+          <p>Loading posts…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Comment Modal (matches your existing markup) -->
+  <div id="commentModal" class="comment-modal">
+    <div class="comment-modal-content">
+      <div class="comment-modal-header">
+        <h3>Comments</h3>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      <div class="comment-filters">
+        <button class="filter-btn active" data-filter="relevant">Most Relevant</button>
+        <button class="filter-btn" data-filter="newest">Newest</button>
+        <button class="filter-btn" data-filter="all">All Comments</button>
+      </div>
+      <div class="post-preview"></div>
+      <div class="comments-container"></div>
+      <div class="add-comment-section">
+        <img src="images/profile.jpg" alt="" class="comment-profile-pic">
+        <div class="comment-input-container">
+          <textarea class="comment-input" placeholder="Write a comment…"></textarea>
+          <button class="post-comment-btn">Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/pages/home.js"></script>
+</body>
+</html>
