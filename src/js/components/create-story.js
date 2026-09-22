@@ -2,7 +2,6 @@ import { api }   from '../core/api.js';
 import { store } from '../core/store.js';
 import { getUser, getAccountDisplayName, getAccountAvatar } from '../core/session.js';
 
-// ── Constants ────────────────────────────────────────────────
 const BG_COLOURS = [
   '#4a90e2', '#f7d000', '#ff5c5c', '#16a34a', '#7b61ff',
   '#f97316', '#0ea5e9', '#111827', '#ec4899', '#facc15',
@@ -17,20 +16,16 @@ const FONTS = [
   { label: 'Comic Sans', value: "'Comic Sans MS', cursive" },
 ];
 
-// ── State ────────────────────────────────────────────────────
 let modal, dropZone, previewImg, previewVideo, previewBg, uploadHint;
 let textOverlay, addTextBtn, removeTextBtn, removeMediaBtn;
 let fileInput, postBtn;
-let file           = null;      // File
-let fileUrl        = null;      // Object URL
-let kind           = null;      // 'image' | 'video' | null
-let bgColour       = BG_COLOURS[0];
-let textColour     = TEXT_COLOURS[0];
-let fontFamily     = FONTS[0].value;
-let textSize       = 18;
-let hasText        = false;
+let file = null, fileUrl = null, kind = null;
+let bgColour = BG_COLOURS[0];
+let textColour = TEXT_COLOURS[0];
+let fontFamily = FONTS[0].value;
+let textSize = 18;
+let hasText = false;
 
-// ── Init ─────────────────────────────────────────────────────
 export function initCreateStory() {
   modal = document.getElementById('createStoryModal');
   if (!modal) { console.warn('[create-story] modal not found'); return; }
@@ -47,7 +42,6 @@ export function initCreateStory() {
   fileInput      = modal.querySelector('[data-cs-file-input]');
   postBtn        = modal.querySelector('[data-cs-post]');
 
-  // Open triggers
   document.querySelectorAll('[data-open-create-story]').forEach(el =>
     el.addEventListener('click', open));
 
@@ -63,9 +57,9 @@ export function initCreateStory() {
   renderTextSwatches();
   renderFontSelect();
   updatePreview();
+  updatePostBtn();
 }
 
-// ── Open / close ─────────────────────────────────────────────
 function open() {
   reset();
   modal.classList.remove('hidden');
@@ -93,25 +87,32 @@ function reset() {
   hasText = false;
   textOverlay.textContent = '';
   textOverlay.classList.add('hidden');
+  textOverlay.style.fontFamily = '';
+  textOverlay.style.fontSize = '';
+  textOverlay.style.color = '';
   addTextBtn.classList.remove('hidden');
   removeTextBtn.classList.add('hidden');
   removeMediaBtn.classList.add('hidden');
   previewImg.classList.add('hidden');
+  previewImg.removeAttribute('src');
   previewVideo.classList.add('hidden');
+  previewVideo.removeAttribute('src');
   uploadHint.classList.remove('hidden');
-  updatePreview();
-  updatePostBtn();
+  const range = modal.querySelector('[data-cs-text-size]');
+  if (range) range.value = textSize;
+  const rangeVal = modal.querySelector('[data-cs-text-size-value]');
+  if (rangeVal) rangeVal.textContent = `${textSize}px`;
   renderBgSwatches();
   renderTextSwatches();
+  updatePreview();
+  updatePostBtn();
 }
 
-// ── Upload ───────────────────────────────────────────────────
 function wireUpload() {
   modal.querySelector('[data-cs-upload]')?.addEventListener('click', () => fileInput.click());
   dropZone.addEventListener('click', (e) => {
-    // Only trigger file picker if the click isn't on the text overlay
     if (e.target === textOverlay || textOverlay.contains(e.target)) return;
-    if (file) return; // already has media
+    if (file) return;
     fileInput.click();
   });
   fileInput.addEventListener('change', (e) => {
@@ -120,7 +121,6 @@ function wireUpload() {
     fileInput.value = '';
   });
 
-  // Drag & drop
   ['dragenter', 'dragover'].forEach(ev =>
     dropZone.addEventListener(ev, (e) => {
       e.preventDefault();
@@ -140,7 +140,9 @@ function wireUpload() {
     if (fileUrl) URL.revokeObjectURL(fileUrl);
     file = null; fileUrl = null; kind = null;
     previewImg.classList.add('hidden');
+    previewImg.removeAttribute('src');
     previewVideo.classList.add('hidden');
+    previewVideo.removeAttribute('src');
     uploadHint.classList.remove('hidden');
     removeMediaBtn.classList.add('hidden');
     updatePostBtn();
@@ -167,7 +169,6 @@ function setFile(f) {
   updatePostBtn();
 }
 
-// ── Text ─────────────────────────────────────────────────────
 function wireTextControls() {
   addTextBtn.addEventListener('click', () => {
     textOverlay.classList.remove('hidden');
@@ -177,7 +178,6 @@ function wireTextControls() {
     setTimeout(() => textOverlay.focus(), 30);
     updatePostBtn();
   });
-
   removeTextBtn.addEventListener('click', () => {
     textOverlay.textContent = '';
     textOverlay.classList.add('hidden');
@@ -186,51 +186,53 @@ function wireTextControls() {
     addTextBtn.classList.remove('hidden');
     updatePostBtn();
   });
-
   textOverlay.addEventListener('input', () => {
     hasText = textOverlay.textContent.trim().length > 0;
     updatePostBtn();
   });
-
   modal.querySelector('[data-cs-bold]')?.addEventListener('click', () => {
-    textOverlay.focus();
-    document.execCommand('bold');
+    textOverlay.focus(); document.execCommand('bold');
   });
   modal.querySelector('[data-cs-italic]')?.addEventListener('click', () => {
-    textOverlay.focus();
-    document.execCommand('italic');
+    textOverlay.focus(); document.execCommand('italic');
   });
 }
 
-// ── Fonts ────────────────────────────────────────────────────
-function renderFontSelect() {
+function wireFonts() {
   const sel = modal.querySelector('[data-cs-font]');
-  sel.innerHTML = FONTS.map(f => `<option value="${f.value}">${f.label}</option>`).join('');
-  sel.value = fontFamily;
-  sel.addEventListener('change', (e) => {
+  sel?.addEventListener('change', (e) => {
     fontFamily = e.target.value;
     updatePreview();
   });
 }
 
-// ── Size ─────────────────────────────────────────────────────
+function renderFontSelect() {
+  const sel = modal.querySelector('[data-cs-font]');
+  if (!sel) return;
+  sel.innerHTML = FONTS.map(f => `<option value="${f.value}">${f.label}</option>`).join('');
+  sel.value = fontFamily;
+}
+
 function wireSize() {
   const range = modal.querySelector('[data-cs-text-size]');
   const label = modal.querySelector('[data-cs-text-size-value]');
+  if (!range) return;
   range.value = textSize;
-  label.textContent = `${textSize}px`;
+  if (label) label.textContent = `${textSize}px`;
   range.addEventListener('input', (e) => {
     textSize = Number(e.target.value);
-    label.textContent = `${textSize}px`;
+    if (label) label.textContent = `${textSize}px`;
     updatePreview();
   });
 }
 
-// ── Colours ──────────────────────────────────────────────────
+function wireColours() { /* handled in render functions */ }
+
 function renderBgSwatches() {
   const wrap = modal.querySelector('[data-cs-bg-swatches]');
+  if (!wrap) return;
   wrap.innerHTML = BG_COLOURS.map(c =>
-    `<button type="button" class="cs-swatch ${c === bgColour ? 'active' : ''}" style="background:${c}" data-bg="${c}" aria-label="${c}"></button>`
+    `<button type="button" class="cs-swatch ${c === bgColour ? 'active' : ''}" style="background:${c}" data-bg="${c}"></button>`
   ).join('');
   wrap.onclick = (e) => {
     const btn = e.target.closest('[data-bg]');
@@ -243,8 +245,9 @@ function renderBgSwatches() {
 
 function renderTextSwatches() {
   const wrap = modal.querySelector('[data-cs-text-swatches]');
+  if (!wrap) return;
   wrap.innerHTML = TEXT_COLOURS.map(c =>
-    `<button type="button" class="cs-swatch ${c === textColour ? 'active' : ''}" style="background:${c}; border:2px solid var(--border-color);" data-text-colour="${c}" aria-label="${c}"></button>`
+    `<button type="button" class="cs-swatch ${c === textColour ? 'active' : ''}" style="background:${c}; border:2px solid var(--border-color);" data-text-colour="${c}"></button>`
   ).join('');
   wrap.onclick = (e) => {
     const btn = e.target.closest('[data-text-colour]');
@@ -255,29 +258,25 @@ function renderTextSwatches() {
   };
 }
 
-function wireColours() {
-  // handled in render functions
-}
-
-// ── Preview update ──────────────────────────────────────────
 function updatePreview() {
-  previewBg.style.background = bgColour;
-  textOverlay.style.fontFamily = fontFamily;
-  textOverlay.style.fontSize   = `${textSize}px`;
-  textOverlay.style.color      = textColour;
+  if (previewBg) previewBg.style.background = bgColour;
+  if (textOverlay) {
+    textOverlay.style.fontFamily = fontFamily;
+    textOverlay.style.fontSize   = `${textSize}px`;
+    textOverlay.style.color      = textColour;
+  }
 }
 
-// ── Post button state ──────────────────────────────────────
 function updatePostBtn() {
+  if (!postBtn) return;
   postBtn.disabled = !file && !hasText;
 }
 
-// ── Submit ───────────────────────────────────────────────────
 function wireSubmit() {
   modal.querySelector('[data-cs-discard]')?.addEventListener('click', () => {
     if (confirm('Discard this story?')) close();
   });
-  postBtn.addEventListener('click', submit);
+  postBtn?.addEventListener('click', submit);
 }
 
 async function submit() {
@@ -289,18 +288,21 @@ async function submit() {
   const me = getUser();
   const optimistic = {
     id: 'temp-story-' + Date.now(),
+    authorId: me?.id,
+    authorName: me ? getAccountDisplayName(me) : 'You',
+    authorAvatar: me ? getAccountAvatar(me) : '/images/profile.jpg',
     mediaUrls: fileUrl ? [fileUrl] : [],
     kind,
     caption: textOverlay.textContent.trim(),
     bg: bgColour,
-    textColour,
-    fontFamily,
-    textSize,
-    authorName: me ? getAccountDisplayName(me) : 'You',
-    authorAvatar: me ? getAccountAvatar(me) : '/images/profile.jpg',
+    colour: textColour,
+    font: fontFamily,
+    size: textSize,
     createdAt: Date.now(),
+    expiresAt: Date.now() + 24 * 60 * 60 * 1000,
     _pending: true,
   };
+
   store.emit('story:created', optimistic);
 
   try {
@@ -312,6 +314,7 @@ async function submit() {
       size: textSize,
       colour: textColour,
     });
+    // Replace optimistic with server-shape
     store.emit('story:deleted', { id: optimistic.id });
     store.emit('story:created', res.story || optimistic);
     close();

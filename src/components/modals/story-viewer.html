@@ -1,0 +1,31 @@
+<div id="storyViewer" class="sv-overlay hidden" role="dialog" aria-modal="true" aria-label="Story viewer">
+  <div class="sv-backdrop" data-sv-close></div>
+
+  <div class="sv-container">
+    <div class="sv-progress-track">
+      <div class="sv-progress-bar" data-sv-progress></div>
+    </div>
+
+    <div class="sv-header">
+      <img class="sv-avatar" data-sv-avatar src="/images/profile.jpg" alt="">
+      <div class="sv-info">
+        <span class="sv-name" data-sv-name></span>
+        <span class="sv-time" data-sv-time></span>
+      </div>
+      <button class="sv-close" data-sv-close aria-label="Close">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <div class="sv-content">
+      <button class="sv-tap-zone sv-prev" data-sv-prev aria-label="Previous"></button>
+
+      <img class="sv-media hidden" data-sv-media-img alt="">
+      <video class="sv-media hidden" data-sv-media-video muted playsinline></video>
+
+      <div class="sv-text-content hidden" data-sv-text></div>
+
+      <button class="sv-tap-zone sv-next" data-sv-next aria-label="Next"></button>
+    </div>
+  </div>
+</div>

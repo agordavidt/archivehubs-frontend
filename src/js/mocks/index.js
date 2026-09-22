@@ -2,11 +2,13 @@ import userJSON from './data/user.json';
 import feedJSON from './data/feed.json';
 import commentsJSON from './data/comments.json';
 import accountsJSON from './data/accounts.json';
+import storiesJSON from './data/stories.json';
 
 const delay = (ms) => new Promise(r => setTimeout(r, ms));
 async function tick() { await delay(60 + Math.random() * 90); }  // was 200-400
 
-
+const stories = storiesJSON.stories.map(s => ({ ...s }));
+let nextStoryId = 100;
 
 // ── Persistent mock state ─────────────────────────────────
 const MOCK_SESSION_KEY = 'ah:mock:userId';
@@ -594,6 +596,52 @@ export async function mockRequest(path, { method = 'GET', body } = {}) {
       }));
     return { users: matches };
   }
+
+    // ── GET /stories ───────────────────────────────────────────
+    if (method === 'GET' && pathname === '/stories') {
+      const active = stories
+        .filter(s => s.expiresAt > Date.now())
+        .sort((a, b) => b.createdAt - a.createdAt);
+      return { stories: active };
+    }
+
+    // ── POST /stories ──────────────────────────────────────────
+    if (method === 'POST' && pathname === '/stories') {
+      const personId = currentUserId();
+      if (!personId) throw mockError(401, 'Unauthorized');
+      const me = users.find(u => u.id === personId);
+
+      const data = body instanceof FormData
+        ? {
+            caption: body.get('caption') || '',
+            bg:      body.get('bg') || '#4a90e2',
+            media:   body.get('media'),
+            font:    body.get('font') || '',
+            size:    Number(body.get('size')) || 18,
+            colour:  body.get('colour') || '#ffffff',
+          }
+        : (body || {});
+
+      const mediaUrls = data.media instanceof File ? [URL.createObjectURL(data.media)] : [];
+
+      const story = {
+        id: `s-${Date.now().toString(36)}`,
+        authorId: personId,
+        authorName: me ? `${me.firstName} ${me.lastName}`.trim() : 'You',
+        authorAvatar: me?.profilePic || 'images/profile.jpg',
+        mediaUrls,
+        caption: data.caption || '',
+        bg: data.bg || '#4a90e2',
+        font: data.font || '',
+        size: data.size || 18,
+        colour: data.colour || '#ffffff',
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 24 * 60 * 60 * 1000,
+      };
+
+      stories.unshift(story);
+      return { message: 'Story created', story };
+    }
 
   throw mockError(501, `[mock] Unhandled: ${method} ${path}`);
 }

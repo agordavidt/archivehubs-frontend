@@ -1,0 +1,26 @@
+{
+  "stories": [
+    {
+      "id": "s-seed-1",
+      "authorId": "u-emma",
+      "authorName": "Emma Watson",
+      "authorAvatar": "images/profile.jpg",
+      "mediaUrls": ["images/hubs.jpg"],
+      "caption": "",
+      "bg": "#4a90e2",
+      "createdAt": 1737250000000,
+      "expiresAt": 9999999999999
+    },
+    {
+      "id": "s-seed-2",
+      "authorId": "u-james",
+      "authorName": "James Rodriguez",
+      "authorAvatar": "images/profile.jpg",
+      "mediaUrls": [],
+      "caption": "Working on something new ✨",
+      "bg": "#7b61ff",
+      "createdAt": 1737240000000,
+      "expiresAt": 9999999999999
+    }
+  ]
+}

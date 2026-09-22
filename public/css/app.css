@@ -56,6 +56,7 @@
 @import url('app/components/share-repost.css');
 @import url('app/components/create-post-modal.css');
 @import url('app/components/create-story-modal.css');
+@import url('app/components/story-viewer.css');
 
 /* Overrides — always last */
 @import url('app/utilities.css');

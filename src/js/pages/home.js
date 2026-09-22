@@ -1,6 +1,7 @@
 import { mountPartials }        from '../core/include.js';
 import { requireAuth }          from '../core/session.js';
 import { initNavbar }           from '../components/navbar.js';
+import { initStories }          from '../components/stories.js';
 import { initFeed }             from '../components/feed.js';
 import { initComments }         from '../components/comments.js';
 import { initCreatePost }       from '../components/create-post.js';
@@ -18,6 +19,9 @@ async function boot() {
   initComments();
   initCreatePost();
   initCreateStory();
+
+  // Stories after the synchronous stuff so its first paint doesn't block
+  initStories();
 
   console.log('[home] ready');
 }
