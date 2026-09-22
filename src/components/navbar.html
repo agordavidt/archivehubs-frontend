@@ -1,0 +1,149 @@
+<!-- ═══ DESKTOP NAVBAR ═══ -->
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/pages/home.html" class="logo">
+      <img src="/images/Logo.jpg" alt="ArchiveHubs" class="logo-img">
+    </a>
+    <div class="search-box">
+      <div class="search-trigger">
+        <i class="fas fa-search search-icon"></i>
+        <div class="search-text">Search</div>
+      </div>
+      <input type="text" placeholder="Search..." class="search-input">
+    </div>
+  </div>
+
+  <div class="nav-middle">
+    <a href="/pages/home.html" class="nav-link" data-nav="home">
+      <i class="fa-solid fa-home"></i><span>Home</span>
+    </a>
+    <a href="/pages/connections.html" class="nav-link" data-nav="connections">
+      <i class="fas fa-user-friends"></i><span>MyConnections</span>
+    </a>
+    <a href="/pages/video.html" class="nav-link" data-nav="video">
+      <i class="fas fa-video"></i><span>Video</span>
+    </a>
+    <a href="/pages/messages.html" class="nav-link" data-nav="messages">
+      <i class="fas fa-comment-dots"></i><span>Messages</span>
+    </a>
+    <a href="/pages/notifications.html" class="nav-link" data-nav="notifications">
+      <i class="fas fa-bell"></i><span>Notifications</span>
+    </a>
+
+    <div class="account-dropdown-wrapper">
+      <a href="#" class="nav-link profile-nav-link" id="accountPopup" aria-haspopup="true" aria-expanded="false">
+        <img class="nav-avatar" src="/images/profile.jpg" alt="" data-nav-avatar>
+        <span>Account</span>
+      </a>
+
+      <div id="accountPopupPanel" class="account-popup" role="menu">
+        <!-- Active account -->
+        <div class="account-popup-userinfo underline clickable">
+          <div class="account-popup-avatar">
+            <a href="#" data-active-link>
+              <img src="/images/profile.jpg" alt="" data-active-avatar>
+            </a>
+          </div>
+          <div class="account-popup-user-details">
+            <a href="#" class="account-popup-username" data-active-name>—</a>
+            <span class="account-popup-type" data-active-type>—</span>
+          </div>
+        </div>
+
+        <!-- Other accounts (rendered by JS) -->
+        <div class="account-popup-switcher underline" data-switcher-list></div>
+
+        <div class="account-popup-view-profile-row">
+          <button class="account-popup-view-profile" data-view-all>See all profiles</button>
+        </div>
+
+        <div class="account-popup-section account-popup-account">
+          <div class="account-popup-account-row highlight">
+            <img src="/images/profile.jpg" alt="" class="account-popup-account-icon">
+            <div class="account-popup-account-info">
+              <div class="account-popup-account-name">Archivehubs Explorer</div>
+              <div class="account-popup-premium">
+                <a href="#">Try free Premium for 1 month</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="account-popup-link">
+            <i class="fa fa-gear"></i><span>Settings &amp; privacy</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-question-circle"></i><span>Help &amp; Support</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-moon"></i><span>Display &amp; Accessibility</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-calendar"></i><span>Planner (APS)</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-file-alt"></i><span>General Terms</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+        </div>
+
+        <hr class="account-popup-divider">
+
+        <div class="account-popup-signout-row">
+          <button class="account-popup-signout" data-signout>Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-right">
+    <a href="/pages/jobs.html" class="nav-link" data-nav="jobs">
+      <i class="fas fa-briefcase"></i><span>Jobs</span>
+    </a>
+    <a href="/pages/business.html" class="nav-link" data-nav="business">
+      <i class="fas fa-building"></i><span>Business</span>
+    </a>
+    <a href="/pages/drive.html" class="nav-link" data-nav="drive">
+      <i class="fas fa-cloud-arrow-up"></i><span>Drive</span>
+    </a>
+    <a href="/pages/menu.html" class="nav-link" data-nav="menu">
+      <i class="fas fa-bars"></i><span>Menu</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ═══ MOBILE HEADER ═══ -->
+<div class="mobile-header">
+  <nav class="mobile-upper-nav">
+    <a href="/pages/home.html" class="mobile-logo">
+      <img src="/images/Logo.jpg" alt="ArchiveHubs">
+    </a>
+    <div class="upper-nav-right">
+      <button class="upper-nav-btn"><i class="fas fa-plus"></i></button>
+      <button class="upper-nav-btn" id="searchTriggerBtn"><i class="fas fa-search"></i></button>
+      <button class="upper-nav-btn"><i class="fas fa-ellipsis-v"></i></button>
+    </div>
+  </nav>
+</div>
+
+<!-- ═══ MOBILE BOTTOM NAV ═══ -->
+<nav class="mobile-nav">
+  <a href="/pages/home.html" class="mobile-nav-link" data-nav="home">
+    <i class="fa-solid fa-home"></i>
+  </a>
+  <a href="/pages/connections.html" class="mobile-nav-link" data-nav="connections">
+    <i class="fas fa-user-friends"></i>
+  </a>
+  <a href="/pages/messages.html" class="mobile-nav-link" data-nav="messages">
+    <i class="fas fa-comment-dots"></i>
+  </a>
+  <a href="/pages/notifications.html" class="mobile-nav-link" data-nav="notifications">
+    <i class="fas fa-bell"></i>
+  </a>
+  <a href="/pages/menu.html" class="mobile-nav-link" data-nav="menu">
+    <i class="fas fa-bars"></i>
+  </a>
+</nav>

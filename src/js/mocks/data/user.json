@@ -1,26 +1,21 @@
-[
-  {
-    "id": "u-john-001",
-    "email": "john@archivehubs.dev",
-    "firstName": "Abraham",
-    "lastName": "Adeyemi",
-    "otherName": "",
-    "phoneNumber": "+2348000000000",
-    "sex": "male",
-    "country": "Nigeria",
-    "state_province": "Lagos",
-    "account_type": "individual",
-    "isVerified": true,
-    "profilePic": "images/profile.jpg",
-    "createdAt": 1737000000000
-  },
-  {
-    "id": "b-acme-001",
-    "name": "Acme Corp",
-    "account_type": "corporate",
-    "logo": "images/Logo.jpg",
-    "managedBy": [
-      "u-john-001"
-    ]
-  }
-]
+{
+  "active": { "id": "u-john-001", "account_type": "individual" },
+  "accounts": [
+    {
+      "id": "u-john-001",
+      "account_type": "individual",
+      "displayName": "John Doe",
+      "avatar": "images/profile.jpg",
+      "headline": "Software Developer · AI Enthusiast",
+      "role": "owner"
+    },
+    {
+      "id": "b-acme-001",
+      "account_type": "corporate",
+      "displayName": "Acme Corp",
+      "avatar": "images/Logo.jpg",
+      "headline": "Enterprise Software · 1.2k followers",
+      "role": "admin"
+    }
+  ]
+}
