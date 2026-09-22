@@ -1,0 +1,11 @@
+/* ================================================================
+   UTILITIES — the only file allowed to use !important
+   ================================================================ */
+
+.hidden { display: none !important; }
+
+/* Global scrollbar */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }

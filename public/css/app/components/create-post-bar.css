@@ -1,0 +1,46 @@
+/* ================================================================
+   CREATE-POST BAR — the "start a post" strip on the feed
+   ================================================================ */
+
+.create-post {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: 15px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.post-input-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.user-profile-pic {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-input-wrapper {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+.post-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.post-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}

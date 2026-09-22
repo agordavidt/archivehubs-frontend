@@ -1,0 +1,102 @@
+/* ================================================================
+   CONNECTIONS — section wrapper, horizontal cards, connect/decline
+   ================================================================ */
+
+.connections-section {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  margin-top: 2px;
+  padding: 15px;
+}
+
+.connections-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 0 5px;
+}
+
+.connections-header h3 { font-size: 16px; font-weight: 600; }
+
+.see-all-btn {
+  color: var(--accent-color);
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.see-all-btn:hover { background: var(--bg-hover); }
+
+.connections-container {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.connections-container::-webkit-scrollbar { display: none; }
+
+.connection-card {
+  flex: 0 0 auto;
+  width: 250px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.connection-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
+.connection-avatar {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid var(--bg-secondary);
+}
+
+.connection-info h4  { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+.connection-info p   { font-size: 12px; color: var(--text-secondary); line-height: 1.3; }
+
+.connection-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.connect-btn,
+.decline-btn {
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 90px;
+  background: var(--bg-primary);
+}
+
+.connect-btn { border: 1px solid var(--accent-color); color: var(--color-dark); }
+.decline-btn { border: 1px solid var(--color-dark); color: var(--color-dark); }
+
+.connect-btn:hover { background: var(--accent-color); }
+.decline-btn:hover { background: var(--color-dark); color: var(--accent-color); }

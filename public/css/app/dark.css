@@ -1,0 +1,170 @@
+/* ================================================================
+   DARK MODE — single consolidated block. Do NOT add [data-theme]
+   rules anywhere else in the codebase.
+   ================================================================ */
+
+[data-theme="dark"] {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Structural elements */
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .profile-card,
+[data-theme="dark"] .quick-links,
+[data-theme="dark"] .create-post,
+[data-theme="dark"] .post,
+[data-theme="dark"] .stories-section,
+[data-theme="dark"] .connections-section,
+[data-theme="dark"] .business-post-section,
+[data-theme="dark"] .sidebar-section,
+[data-theme="dark"] .account-popup,
+[data-theme="dark"] .comment-modal-content,
+[data-theme="dark"] .messaging-panel,
+[data-theme="dark"] .new-message-panel,
+[data-theme="dark"] .chat-thread-container,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .thread-dropdown,
+[data-theme="dark"] .messaging-dropdown,
+[data-theme="dark"] .contact-suggestions {
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+/* Text */
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] h1, [data-theme="dark"] h2,
+[data-theme="dark"] h3, [data-theme="dark"] h4,
+[data-theme="dark"] h5, [data-theme="dark"] h6,
+[data-theme="dark"] a,
+[data-theme="dark"] .nav-link,
+[data-theme="dark"] .dropdown-item,
+[data-theme="dark"] .post-text,
+[data-theme="dark"] .theme-toggle-left span,
+[data-theme="dark"] .see-all-btn,
+[data-theme="dark"] .post-actions button,
+[data-theme="dark"] .account-popup-username,
+[data-theme="dark"] .account-switcher-name,
+[data-theme="dark"] .account-popup-link,
+[data-theme="dark"] .account-popup-signout,
+[data-theme="dark"] .chat-item-name,
+[data-theme="dark"] .thread-contact-name,
+[data-theme="dark"] .messaging-title,
+[data-theme="dark"] .tab-btn,
+[data-theme="dark"] .settings-option span {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .nav-link         { color: var(--text-secondary); }
+[data-theme="dark"] .nav-link:hover,
+[data-theme="dark"] .nav-link.active  { color: var(--text-primary); }
+[data-theme="dark"] .nav-link.active::after { background-color: var(--text-primary); }
+
+/* Inputs */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] .post-input,
+[data-theme="dark"] .message-input,
+[data-theme="dark"] .messaging-search input,
+[data-theme="dark"] .compose-message-textarea,
+[data-theme="dark"] .comment-input,
+[data-theme="dark"] .away-message-input,
+[data-theme="dark"] .date-input {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder { color: var(--text-secondary); }
+
+/* Icons */
+[data-theme="dark"] i,
+[data-theme="dark"] .nav-link i,
+[data-theme="dark"] .search-box i { color: var(--text-primary); }
+
+/* Hover states */
+[data-theme="dark"] .nav-link:hover,
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .suggestion-item:hover,
+[data-theme="dark"] .news-item:hover,
+[data-theme="dark"] .page-item:hover,
+[data-theme="dark"] .chat-item:hover,
+[data-theme="dark"] .action-btn:hover,
+[data-theme="dark"] .link-item:hover,
+[data-theme="dark"] .stat-item:hover,
+[data-theme="dark"] .account-popup-userinfo:hover,
+[data-theme="dark"] .account-switcher-item:hover,
+[data-theme="dark"] .account-popup-link:hover,
+[data-theme="dark"] .suggested-contact-item:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Buttons */
+[data-theme="dark"] .connect-btn {
+  background-color: var(--bg-primary);
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .connect-btn:hover { background-color: var(--bg-hover); }
+
+[data-theme="dark"] .account-popup-view-profile {
+  background: var(--bg-hover); color: var(--text-primary);
+}
+
+[data-theme="dark"] .account-popup-view-profile:hover { background: #4e4f50; }
+
+[data-theme="dark"] .account-popup-account-row { background: rgba(123,97,255,0.15); }
+
+[data-theme="dark"] .account-popup-signout {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .account-popup-signout:hover {
+  background: var(--bg-hover); border-color: #4e4f50;
+}
+
+[data-theme="dark"] .account-popup-link i { color: var(--text-secondary); }
+
+/* Dividers */
+[data-theme="dark"] hr,
+[data-theme="dark"] .account-popup-divider,
+[data-theme="dark"] .underline::after { border-color: var(--border-color); }
+
+/* Theme toggle icon visibility */
+[data-theme="dark"] .dark-icon  { display: none; }
+[data-theme="dark"] .light-icon { display: block; }
+
+/* Stories */
+[data-theme="dark"] .create-story     { background: var(--bg-secondary); }
+[data-theme="dark"] .stories-container { background: var(--border-color); }
+
+/* Chat messages */
+[data-theme="dark"] .chat-messages    { background: var(--bg-secondary); }
+
+/* Message bubbles */
+[data-theme="dark"] .message-bubble.received .message-bubble-content {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Navbar */
+[data-theme="dark"] .navbar           { background-color: var(--bg-primary); border-color: var(--border-color); }
+[data-theme="dark"] .nav-right::before { background-color: var(--border-color); }
+
+/* Mobile */
+[data-theme="dark"] .mobile-upper-nav { background: var(--bg-primary); border-color: var(--border-color); }
+[data-theme="dark"] .upper-nav-btn    { background: var(--bg-secondary); color: var(--text-primary); }
+
+/* Scrollbar (dark) */
+[data-theme="dark"] ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #4e4f50; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #5e5f60; }

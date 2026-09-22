@@ -1,0 +1,39 @@
+/* ================================================================
+   LAYOUT — main grid, sidebars, sidebar scrollbar
+   ================================================================ */
+
+.main-content {
+  max-width: var(--content-max-w);
+  margin: 0 auto;
+  padding: 84px 20px 24px;
+  display: grid;
+  grid-template-columns: var(--sidebar-left-w) minmax(0, 2fr) var(--sidebar-right-w);
+  gap: 24px;
+  position: relative;
+}
+
+.left-sidebar {
+  top: 80px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 250px;
+}
+
+.right-sidebar {
+  top: 20px;
+  margin-left: 0;
+  width: 330px;
+  height: calc(100vh - 70px);
+  overflow-y: visible;
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  border-left: 1px solid var(--border-color);
+}
+
+.right-sidebar::-webkit-scrollbar { width: 6px; }
+.right-sidebar::-webkit-scrollbar-thumb {
+  background-color: #c2c2c2;
+  border-radius: 3px;
+}

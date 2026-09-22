@@ -1,0 +1,120 @@
+/* ================================================================
+   STORIES — horizontal scroll cards + create-story tile
+   ================================================================ */
+
+.stories-section {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  padding: 15px;
+}
+
+.stories-section::-webkit-scrollbar { display: none; }
+
+.stories-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.story-card {
+  flex: 0 0 auto;
+  width: 180px; height: 200px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.story-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.story-card:active { transform: translateY(-4px); }
+
+.create-story {
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+  background: var(--bg-secondary);
+}
+
+.create-story:hover { transform: scale(1.02); }
+
+.create-story-top {
+  position: relative;
+  height: 100%; width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.create-story-plus {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 3px solid var(--bg-primary);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.create-story-plus:hover { transform: translateX(-50%) scale(1.1); }
+.create-story-plus i { color: white; font-size: 12px; }
+
+.story-content {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.story-content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.3) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.story-avatar {
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.story-username {
+  position: absolute;
+  bottom: 10px; left: 10px;
+  color: white;
+  font-size: 12px; font-weight: 600;
+  z-index: 2;
+}
+
+.story-success-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  z-index: 1000;
+  animation: fadeInOut 3s ease;
+}
+
+.file-input { display: none; }

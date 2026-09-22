@@ -1,0 +1,11 @@
+/* ================================================================
+   SPONSORED / BUSINESS POST — section wrapper only for now
+   ================================================================ */
+
+.business-post-section {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  margin: 20px 0;
+  overflow: hidden;
+}

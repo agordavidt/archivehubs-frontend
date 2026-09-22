@@ -1,0 +1,61 @@
+/* ================================================================
+   ARCHIVEHUBS — APP STYLESHEET ENTRY
+   Import chain only. Edit component files, not this one.
+
+   Order matters:
+     tokens → base → layout → components → utilities → dark →
+     responsive → animations
+   Rules in later files win specificity ties.
+
+   HOW TO ADD A NEW FEATURE
+   ─────────────────────────────────────────────────────────────────
+   1. Create app/components/<feature>.css
+   2. Add an @import line to the appropriate section below
+   3. Only define rules for classes that appear in HTML/partials
+   4. Dark-mode rules go in dark.css, not in the component file
+   5. Media queries go in responsive.css, not in the component file
+
+   Dev note: @import triggers one HTTP request per file. Fine for
+   dev; when you move to production, concatenate via a build step
+   (postcss-import, lightningcss, or Vite's CSS bundling).
+   ================================================================ */
+
+/* Foundation */
+@import url('tokens.css');
+@import url('app/base.css');
+@import url('app/layout.css');
+
+/* Layout parts */
+@import url('app/components/navbar.css');
+@import url('app/components/mobile-header.css');
+@import url('app/components/mobile-nav.css');
+@import url('app/components/account-popup.css');
+
+/* Left column */
+@import url('app/components/profile-card.css');
+@import url('app/components/quick-links.css');
+
+/* Middle column */
+@import url('app/components/stories.css');
+@import url('app/components/create-post-bar.css');
+@import url('app/components/post-card.css');
+@import url('app/components/comment-modal.css');
+
+/* Right column */
+@import url('app/components/connections.css');
+@import url('app/components/sponsored.css');
+@import url('app/components/right-sidebar.css');
+@import url('app/components/toggles.css');
+
+/* Messaging */
+@import url('app/components/messaging.css');
+@import url('app/components/messaging-modals.css');
+
+/* Modals */
+@import url('app/components/share-repost.css');
+
+/* Overrides — always last */
+@import url('app/utilities.css');
+@import url('app/dark.css');
+@import url('app/responsive.css');
+@import url('app/animations.css');

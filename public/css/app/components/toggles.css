@@ -1,0 +1,93 @@
+/* ================================================================
+   TOGGLES — theme toggle icon, switch, and settings slider
+   Three variants share a file so their states stay consistent.
+   ================================================================ */
+
+/* Theme toggle — icon button */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.theme-toggle:hover { background-color: var(--bg-hover); }
+.theme-toggle i { font-size: 16px; color: var(--text-secondary); }
+.theme-toggle:hover i { color: var(--color-dark); }
+
+/* Toggle switch — uses `label` child (theme settings) */
+.toggle-switch {
+  position: relative;
+  width: 40px; height: 20px;
+  margin-left: auto;
+}
+
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+.toggle-switch label {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-switch label::before {
+  position: absolute;
+  content: "";
+  height: 16px; width: 16px;
+  left: 2px; bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + label         { background-color: var(--accent-color); }
+.toggle-switch input:checked + label::before { transform: translateX(20px); }
+
+/* Toggle slider — uses `.toggle-slider` child (messaging settings) */
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--border-color);
+  transition: .3s;
+  border-radius: 22px;
+}
+
+.toggle-slider::before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 2px; bottom: 2px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider          { background-color: var(--accent-color); }
+input:checked + .toggle-slider::before  { transform: translateX(22px); }
+
+/* Icon visibility helpers for theme toggle */
+.dark-icon  { display: block; }
+.light-icon { display: none; }
+
+/* Inline theme toggle with label */
+.theme-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.theme-toggle-left i    { font-size: 18px; width: 20px; text-align: center; }
+.theme-toggle-left span { color: var(--text-secondary); }

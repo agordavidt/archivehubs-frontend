@@ -1,0 +1,38 @@
+/* ================================================================
+   QUICK LINKS — left sidebar quick-access list + general terms
+   ================================================================ */
+
+.quick-links {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: 15px;
+  box-shadow: var(--shadow-md);
+  margin-top: 20px;
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.2s;
+}
+
+.link-item i,
+.link-item img.link-icon {
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  font-size: 18px;
+  object-fit: contain;
+}
+
+.link-item:hover { background: var(--bg-hover); }
+
+.general-terms {
+  padding: 15px;
+  margin-top: 0;
+  border-top: 1px solid var(--border-color);
+}

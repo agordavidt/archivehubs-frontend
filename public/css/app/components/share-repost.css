@@ -1,0 +1,47 @@
+/* ================================================================
+   SHARE / REPOST MODALS — replaces inline styles in home.html
+   ================================================================ */
+
+.share-modal-overlay,
+.repost-modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 10000;
+}
+
+.share-modal-backdrop,
+.repost-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.share-modal-box,
+.repost-modal-box {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 540px; max-width: 92vw;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.repost-expanded {
+  position: absolute;
+  left: 0; top: 40px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+  width: 320px; z-index: 10000;
+  overflow: hidden;
+}
+
+.repost-option-btn {
+  display: block; width: 100%;
+  text-align: left; background: transparent;
+  border: 0; cursor: pointer; padding: 12px 14px;
+  transition: background 0.2s;
+}
+
+.repost-option-btn:hover { background: var(--bg-hover); }
