@@ -511,7 +511,98 @@ export async function mockRequest(path, { method = 'GET', body } = {}) {
     };
   }
 
+
+  // ════════════ POSTS (create) ════════════
+  if (method === 'POST' && pathname === '/post/create') {
+    const personId = currentUserId();
+    if (!personId) throw mockError(401, 'Unauthorized');
+
+    const me = users.find(u => u.id === personId);
+    const textContent = body.get('textContent') || '';
+    const tagsStr = body.get('tags');
+    const tags = tagsStr ? JSON.parse(tagsStr) : [];
+    const mediaFiles = body.getAll('media').filter(x => x instanceof File);
+
+    const mediaUrls = mediaFiles.map(f => URL.createObjectURL(f));
+
+    const post = {
+      id: `p-${Date.now().toString(36)}`,
+      textContent: stripHtml(textContent),
+      createdAt: Date.now(),
+      mediaUrls,
+      authorName: me ? `${me.firstName} ${me.lastName}`.trim() : 'You',
+      userProfilePic: me?.profilePic || 'images/profile.jpg',
+      likeCount: 0,
+      commentCount: 0,
+      isLiked: false,
+      tags,
+    };
+
+    posts.unshift(post);
+
+    return { message: 'Post created successfully', post };
+  }
+
+  // ════════════ STORIES ════════════
+  if (method === 'POST' && pathname === '/stories') {
+    const personId = currentUserId();
+    if (!personId) throw mockError(401, 'Unauthorized');
+    const me = users.find(u => u.id === personId);
+
+    // body here is an object (component sends JSON to api.createStory in mock
+    // only if we adapt it — see note below). For now accept both shapes.
+    const data = body instanceof FormData
+      ? { caption: body.get('caption'), bg: body.get('bg'), media: body.get('media') }
+      : (body || {});
+
+    const mediaUrls = data.media instanceof File ? [URL.createObjectURL(data.media)] : [];
+
+    const story = {
+      id: `s-${Date.now().toString(36)}`,
+      authorId: personId,
+      authorName: me ? `${me.firstName} ${me.lastName}`.trim() : 'You',
+      authorAvatar: me?.profilePic || 'images/profile.jpg',
+      mediaUrls,
+      caption: data.caption || '',
+      bg: data.bg || '#4a90e2',
+      createdAt: Date.now(),
+      expiresAt: Date.now() + 24 * 60 * 60 * 1000,
+    };
+
+    return { message: 'Story created', story };
+  }
+
+  // Search — needed by tag-people autocomplete
+  if (method === 'POST' && pathname === '/search/search_activity') {
+    const { searchTerm = '' } = body || {};
+    const q = searchTerm.toLowerCase();
+    const matches = users
+      .filter(u => u.id !== currentUserId())
+      .filter(u => {
+        const name = `${u.firstName} ${u.lastName}`.toLowerCase();
+        return !q || name.includes(q) || u.email.toLowerCase().includes(q);
+      })
+      .slice(0, 10)
+      .map(u => ({
+        id: u.id,
+        account_type: u.account_type || 'individual',
+        name: `${u.firstName} ${u.lastName}`.trim(),
+        firstName: u.firstName,
+        lastName: u.lastName,
+        profilePic: u.profilePic,
+        email: u.email,
+        headline: u.headline || '',
+      }));
+    return { users: matches };
+  }
+
   throw mockError(501, `[mock] Unhandled: ${method} ${path}`);
+}
+
+function stripHtml(html) {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.textContent || '';
 }
 
 function mockError(status, message) {

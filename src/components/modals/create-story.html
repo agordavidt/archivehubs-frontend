@@ -1,0 +1,103 @@
+<div id="createStoryModal" class="cs-overlay hidden" role="dialog" aria-modal="true" aria-label="Create Story">
+  <div class="cs-backdrop" data-close-story></div>
+
+  <div class="cs-modal">
+    <!-- LEFT: Preview -->
+    <div class="cs-preview-panel" data-cs-dropzone>
+      <div class="cs-phone-frame">
+        <div class="cs-preview-content" data-cs-preview>
+          <div class="cs-preview-bg" data-cs-preview-bg></div>
+
+          <img   class="cs-preview-img hidden"   data-cs-preview-img   alt="">
+          <video class="cs-preview-video hidden" data-cs-preview-video muted playsinline loop></video>
+
+          <div class="cs-upload-placeholder" data-cs-upload-hint>
+            <span class="material-symbols-outlined">add_photo_alternate</span>
+            <span>Click or drag &amp; drop<br>image / video</span>
+          </div>
+
+          <div class="cs-text-overlay hidden"
+               data-cs-text
+               contenteditable="true"
+               data-placeholder="Type something…"
+               spellcheck="false"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Controls -->
+    <div class="cs-controls-panel">
+      <div class="cs-controls-header">
+        <h2>Create Story</h2>
+        <button class="cs-close-btn" data-close-story aria-label="Close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="cs-controls-body">
+        <input type="file" data-cs-file-input accept="image/*,video/*" hidden>
+
+        <div class="cs-control-group">
+          <span class="cs-control-label">Media</span>
+          <button class="cs-upload-btn" data-cs-upload type="button">
+            <span class="material-symbols-outlined">upload</span>
+            Upload photo / video
+          </button>
+          <button class="cs-text-tool-btn hidden" data-cs-remove-media type="button">
+            <span class="material-symbols-outlined">delete</span> Remove media
+          </button>
+        </div>
+
+        <div class="cs-control-group">
+          <span class="cs-control-label">Background</span>
+          <div class="cs-bg-swatches" data-cs-bg-swatches></div>
+        </div>
+
+        <div class="cs-control-group">
+          <span class="cs-control-label">Text Overlay</span>
+          <div class="cs-text-tools">
+            <div class="cs-text-tool-row">
+              <button class="cs-text-tool-btn" data-cs-add-text type="button">
+                <span class="material-symbols-outlined">title</span> Add text
+              </button>
+              <button class="cs-text-tool-btn hidden" data-cs-remove-text type="button">
+                <span class="material-symbols-outlined">delete</span> Remove
+              </button>
+            </div>
+            <div class="cs-text-tool-row">
+              <button class="cs-text-tool-btn" data-cs-bold type="button" title="Bold">
+                <span class="material-symbols-outlined">format_bold</span>
+              </button>
+              <button class="cs-text-tool-btn" data-cs-italic type="button" title="Italic">
+                <span class="material-symbols-outlined">format_italic</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-control-group">
+          <span class="cs-control-label">Font</span>
+          <select class="cs-font-select" data-cs-font></select>
+        </div>
+
+        <div class="cs-control-group">
+          <span class="cs-control-label">Text Size</span>
+          <div class="cs-range-wrapper">
+            <input type="range" class="cs-range" data-cs-text-size min="10" max="60" value="18" step="1">
+            <span class="cs-range-value" data-cs-text-size-value>18px</span>
+          </div>
+        </div>
+
+        <div class="cs-control-group">
+          <span class="cs-control-label">Text Colour</span>
+          <div class="cs-text-swatches" data-cs-text-swatches></div>
+        </div>
+      </div>
+
+      <div class="cs-controls-footer">
+        <button class="cs-post-btn" data-cs-post disabled type="button">Post Story</button>
+        <button class="cs-discard-btn" data-cs-discard type="button">Discard</button>
+      </div>
+    </div>
+  </div>
+</div>

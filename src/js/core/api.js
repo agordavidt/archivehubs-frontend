@@ -193,4 +193,15 @@ export const api = {
       method: 'POST',
       body: { postId, comment },
     }),
+
+    createStory: ({ media, caption, bg, font, size, colour }) => {
+    const form = new FormData();
+    if (media)  form.append('media', media);
+    form.append('caption', caption || '');
+    form.append('bg', bg || '');
+    form.append('font', font || '');
+    form.append('size', String(size || 18));
+    form.append('colour', colour || '');
+    return request('/stories', { method: 'POST', body: form, isForm: true });
+  },
 };

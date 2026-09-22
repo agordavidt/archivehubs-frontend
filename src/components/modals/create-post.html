@@ -1,0 +1,197 @@
+<div id="createPostModal" class="cp-overlay hidden" role="dialog" aria-modal="true" aria-label="Create Post">
+  <div class="cp-backdrop" data-close-post></div>
+
+  <div class="cp-modal">
+    <!-- Header -->
+    <div class="cp-header">
+      <button class="cp-back-btn hidden" data-cp-back aria-label="Back">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <h1 class="cp-title">Create Post</h1>
+      <button class="cp-close-btn" data-close-post aria-label="Close">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- User row -->
+    <div class="cp-user-row">
+      <img src="/images/profile.jpg" alt="" class="cp-avatar" data-me-avatar>
+      <div class="cp-user-info">
+        <span class="cp-username" data-me-name>—</span>
+        <button class="cp-audience-btn" data-cp-audience-open type="button">
+          <span class="material-symbols-outlined" data-audience-icon>groups</span>
+          <span data-audience-label>Connections</span>
+          <span class="material-symbols-outlined">arrow_drop_down</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="cp-content">
+      <div class="cp-editor show-placeholder"
+           data-cp-editor
+           contenteditable="true"
+           data-placeholder="What's on your mind?"
+           spellcheck="true"
+           role="textbox"
+           aria-multiline="true"></div>
+
+      <div class="cp-media-grid hidden" data-cp-media-grid></div>
+
+      <div class="cp-location-tag hidden" data-cp-location-tag>
+        <span class="material-symbols-outlined">location_on</span>
+        <span data-cp-location-text></span>
+        <button type="button" data-cp-location-remove aria-label="Remove location">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="cp-people-tags hidden" data-cp-people-tags></div>
+    </div>
+
+    <!-- Format toolbar -->
+    <div class="cp-format-bar" data-cp-format-bar>
+      <div class="cp-format-item">
+        <button class="cp-format-btn" data-cp-bg-open title="Background colour" type="button">
+          <span class="material-symbols-outlined">format_color_fill</span>
+        </button>
+        <div class="cp-popup cp-color-popup hidden" data-cp-bg-popup>
+          <div class="cp-color-grid" data-cp-bg-grid></div>
+        </div>
+      </div>
+
+      <div class="cp-format-item">
+        <button class="cp-format-btn" data-cp-text-open title="Text colour" type="button">
+          <span class="material-symbols-outlined">format_color_text</span>
+        </button>
+        <div class="cp-popup cp-color-popup hidden" data-cp-text-popup>
+          <div class="cp-color-grid" data-cp-text-grid></div>
+        </div>
+      </div>
+
+      <div class="cp-format-item">
+        <button class="cp-format-btn" data-cp-size-open title="Font size" type="button">
+          <span class="material-symbols-outlined">format_size</span>
+        </button>
+        <div class="cp-popup hidden" data-cp-size-popup>
+          <button class="cp-popup-option" data-size="small" type="button">Small</button>
+          <button class="cp-popup-option" data-size="medium" type="button">Medium</button>
+          <button class="cp-popup-option" data-size="large" type="button">Large</button>
+        </div>
+      </div>
+
+      <button class="cp-format-btn" data-cp-bold title="Bold (Ctrl+B)" type="button">
+        <span class="material-symbols-outlined">format_bold</span>
+      </button>
+      <button class="cp-format-btn" data-cp-italic title="Italic (Ctrl+I)" type="button">
+        <span class="material-symbols-outlined">format_italic</span>
+      </button>
+      <button class="cp-format-btn" data-cp-underline title="Underline (Ctrl+U)" type="button">
+        <span class="material-symbols-outlined">format_underlined</span>
+      </button>
+
+      <div class="cp-format-item">
+        <button class="cp-format-btn" data-cp-align-open title="Alignment" type="button">
+          <span class="material-symbols-outlined">format_align_left</span>
+        </button>
+        <div class="cp-popup hidden" data-cp-align-popup>
+          <button class="cp-popup-option" data-align="left" type="button">
+            <span class="material-symbols-outlined" style="font-size:16px">format_align_left</span> Left
+          </button>
+          <button class="cp-popup-option" data-align="center" type="button">
+            <span class="material-symbols-outlined" style="font-size:16px">format_align_center</span> Center
+          </button>
+          <button class="cp-popup-option" data-align="right" type="button">
+            <span class="material-symbols-outlined" style="font-size:16px">format_align_right</span> Right
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add-to-post bar -->
+    <div class="cp-add-bar">
+      <span class="cp-add-label">Add to your post</span>
+      <div class="cp-add-icons">
+        <input type="file" data-cp-photo-input accept="image/*,video/*" multiple hidden>
+
+        <button class="cp-add-btn" data-cp-photo-open title="Photo / Video" type="button">
+          <span class="material-symbols-outlined" style="color:#45bd62">add_photo_alternate</span>
+        </button>
+        <button class="cp-add-btn" data-cp-tag-open title="Tag people" type="button">
+          <span class="material-symbols-outlined" style="color:#f7d000">sell</span>
+        </button>
+        <div class="cp-format-item">
+          <button class="cp-add-btn" data-cp-emoji-open title="Emoji" type="button">
+            <span class="material-symbols-outlined" style="color:#f7c43e">add_reaction</span>
+          </button>
+          <div class="cp-popup cp-emoji-picker hidden" data-cp-emoji-picker>
+            <div class="cp-emoji-grid" data-cp-emoji-grid></div>
+          </div>
+        </div>
+        <button class="cp-add-btn" data-cp-location-open title="Check in" type="button">
+          <span class="material-symbols-outlined" style="color:#f5533d">add_location_alt</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="cp-footer">
+      <button class="cp-post-btn" data-cp-post disabled type="button">Post</button>
+    </div>
+
+    <!-- Nested: Audience -->
+    <div class="cp-nested-modal hidden" data-cp-audience-modal>
+      <div class="cp-nested-box">
+        <div class="cp-nested-header">
+          <button class="cp-format-btn" data-cp-audience-close type="button">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <h2>Post Audience</h2>
+        </div>
+        <p class="cp-audience-desc">
+          Your post will appear in Feed, on your Profile and in search results.
+        </p>
+        <div class="cp-audience-options" data-cp-audience-options></div>
+      </div>
+    </div>
+
+    <!-- Nested: Tag people -->
+    <div class="cp-nested-modal hidden" data-cp-tag-modal>
+      <div class="cp-nested-box">
+        <div class="cp-nested-header">
+          <button class="cp-format-btn" data-cp-tag-close type="button">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <h2>Tag People</h2>
+        </div>
+        <div class="cp-tag-search">
+          <input type="text" data-cp-tag-search placeholder="Search people…" autocomplete="off">
+        </div>
+        <div class="cp-tag-list" data-cp-tag-list></div>
+        <div class="cp-nested-footer">
+          <button class="cp-cancel-btn" data-cp-tag-cancel type="button">Cancel</button>
+          <button class="cp-done-btn" data-cp-tag-done type="button">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nested: Location input (inline prompt overlay) -->
+    <div class="cp-nested-modal hidden" data-cp-location-modal>
+      <div class="cp-nested-box cp-nested-box-sm">
+        <div class="cp-nested-header">
+          <button class="cp-format-btn" data-cp-location-close type="button">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <h2>Add location</h2>
+        </div>
+        <div class="cp-tag-search">
+          <input type="text" data-cp-location-input placeholder="Where are you?" autocomplete="off">
+        </div>
+        <div class="cp-nested-footer">
+          <button class="cp-cancel-btn" data-cp-location-cancel type="button">Cancel</button>
+          <button class="cp-done-btn" data-cp-location-done type="button">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

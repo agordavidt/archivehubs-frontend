@@ -12,12 +12,47 @@
 </head>
 <body>
 
-  <!-- Shared navbar + mobile header + mobile nav -->
+  <!-- Shared chrome -->
   <div data-include="/components/navbar.html"></div>
 
-  <!-- Main Content -->
   <main class="main-content">
     <section class="middle-section" style="grid-column: 1 / -1; max-width: 640px; margin: 0 auto; padding-top: 80px;">
+
+      <!-- Create post bar -->
+      <div class="create-post">
+        <div class="post-input-container">
+          <img src="/images/profile.jpg" alt="" class="user-profile-pic" data-me-avatar>
+          <div class="post-input-wrapper" data-open-create-post style="cursor:pointer">
+            <input type="text" placeholder="Start a post" class="post-input" readonly>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="action-btn" data-open-create-post type="button">
+            <i class="fas fa-image"></i><span>Media</span>
+          </button>
+          <button class="action-btn" data-open-create-story type="button">
+            <i class="fas fa-plus-square"></i><span>Story</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stories -->
+      <div class="stories-section">
+        <div class="stories-container">
+          <div class="story-card create-story" data-open-create-story>
+            <div class="story-content">
+              <div class="create-story-top">
+                <img src="/images/profile.jpg" alt="" class="story-avatar" data-me-avatar>
+                <div class="create-story-plus"><i class="fas fa-plus"></i></div>
+                <span class="story-username">Create Story</span>
+              </div>
+            </div>
+          </div>
+          <!-- Rendered stories go here via stories.js (later slice) -->
+        </div>
+      </div>
+
+      <!-- Feed -->
       <div class="posts-section">
         <div class="feed-loading" style="text-align:center;padding:40px;">
           <div class="spinner"></div>
@@ -27,29 +62,10 @@
     </section>
   </main>
 
-  <!-- Comment Modal -->
-  <div id="commentModal" class="comment-modal">
-    <div class="comment-modal-content">
-      <div class="comment-modal-header">
-        <h3>Comments</h3>
-        <button class="close-modal-btn">&times;</button>
-      </div>
-      <div class="comment-filters">
-        <button class="filter-btn active" data-filter="relevant">Most Relevant</button>
-        <button class="filter-btn" data-filter="newest">Newest</button>
-        <button class="filter-btn" data-filter="all">All Comments</button>
-      </div>
-      <div class="post-preview"></div>
-      <div class="comments-container"></div>
-      <div class="add-comment-section">
-        <img src="/images/profile.jpg" alt="" class="comment-profile-pic">
-        <div class="comment-input-container">
-          <textarea class="comment-input" placeholder="Write a comment…"></textarea>
-          <button class="post-comment-btn">Post</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Shared partials -->
+  <div data-include="/components/modals/create-post.html"></div>
+  <div data-include="/components/modals/create-story.html"></div>
+  <div data-include="/components/modals/comment-modal.html"></div>
 
   <script type="module" src="/js/pages/home.js"></script>
 </body>

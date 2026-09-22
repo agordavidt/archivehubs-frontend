@@ -1,0 +1,22 @@
+<div id="commentModal" class="comment-modal" role="dialog" aria-modal="true" aria-label="Comments">
+  <div class="comment-modal-content">
+    <div class="comment-modal-header">
+      <h3>Comments</h3>
+      <button class="close-modal-btn" data-close-comments aria-label="Close">&times;</button>
+    </div>
+    <div class="comment-filters">
+      <button class="filter-btn active" data-filter="relevant">Most Relevant</button>
+      <button class="filter-btn" data-filter="newest">Newest</button>
+      <button class="filter-btn" data-filter="all">All Comments</button>
+    </div>
+    <div class="post-preview" data-post-preview></div>
+    <div class="comments-container" data-comments-list></div>
+    <div class="add-comment-section">
+      <img src="/images/profile.jpg" alt="" class="comment-profile-pic" data-me-avatar>
+      <div class="comment-input-container">
+        <textarea class="comment-input" data-comment-input placeholder="Write a comment…"></textarea>
+        <button class="post-comment-btn" data-submit-comment>Post</button>
+      </div>
+    </div>
+  </div>
+</div>
