@@ -3,11 +3,10 @@ import feedJSON from './data/feed.json';
 import commentsJSON from './data/comments.json';
 import accountsJSON from './data/accounts.json';
 
-const delay = (ms) => new Promise((r) => setTimeout(r, ms));
+const delay = (ms) => new Promise(r => setTimeout(r, ms));
+async function tick() { await delay(60 + Math.random() * 90); }  // was 200-400
 
-async function tick() {
-  await delay(200 + Math.random() * 200);
-}
+
 
 // ── Persistent mock state ─────────────────────────────────
 const MOCK_SESSION_KEY = 'ah:mock:userId';

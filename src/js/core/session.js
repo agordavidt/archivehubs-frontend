@@ -31,8 +31,9 @@ export async function initSession() {
     currentUser = await api.getCurrentUser();
     activeAccountId = currentUser?.id || null;
     store.emit('session:ready', currentUser);
-    await loadAccounts();
-    await flushPendingProfile(currentUser);
+    // Don't await — accounts can arrive late without blocking the feed.
+    loadAccounts();
+    flushPendingProfile(currentUser);
   } catch (e) {
     if (e.status === 401 || e.status === 0) {
       currentUser = null;

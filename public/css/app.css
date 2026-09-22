@@ -38,8 +38,8 @@
 /* Middle column */
 @import url('app/components/stories.css');
 @import url('app/components/create-post-bar.css');
+@import url('app/components/feed.css');
 @import url('app/components/post-card.css');
-@import url('app/components/comment-modal.css');
 
 /* Right column */
 @import url('app/components/connections.css');
@@ -52,6 +52,7 @@
 @import url('app/components/messaging-modals.css');
 
 /* Modals */
+@import url('app/components/comment-modal.css');
 @import url('app/components/share-repost.css');
 @import url('app/components/create-post-modal.css');
 @import url('app/components/create-story-modal.css');

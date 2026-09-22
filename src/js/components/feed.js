@@ -1,5 +1,5 @@
-import { api }   from '../core/api.js';
-import { store } from '../core/store.js';
+import { api }        from '../core/api.js';
+import { store }      from '../core/store.js';
 import { renderPost } from './post-card.js';
 
 let container, sentinel, io;
@@ -15,6 +15,8 @@ export function initFeed(el) {
   page = 0;
   loading = false;
   exhausted = false;
+
+  renderSkeleton(3);
 
   sentinel = document.createElement('div');
   sentinel.className = 'feed-sentinel';
@@ -42,14 +44,38 @@ export function initFeed(el) {
   loadNext();
 }
 
+function renderSkeleton(count) {
+  container.innerHTML = Array.from({ length: count }).map(() => `
+    <article class="post-skeleton" aria-hidden="true">
+      <div class="sk-header">
+        <div class="sk-avatar"></div>
+        <div class="sk-lines">
+          <div class="sk-line sk-line-40"></div>
+          <div class="sk-line sk-line-25"></div>
+        </div>
+      </div>
+      <div class="sk-line sk-line-80"></div>
+      <div class="sk-line sk-line-60" style="margin-top:8px"></div>
+      <div class="sk-image"></div>
+      <div class="sk-footer">
+        <div class="sk-line"></div>
+        <div class="sk-line"></div>
+        <div class="sk-line"></div>
+      </div>
+    </article>
+  `).join('');
+}
+
 async function loadNext() {
   if (loading || exhausted || !container) return;
   loading = true;
 
   try {
     const { posts } = await api.getFeed({ paginate: page });
-    // Backend (and our mock) return the accumulated list each call.
-    // Dedupe by ID so we only ever render each post once.
+
+    // Clear skeletons on first successful load
+    if (page === 0) container.innerHTML = '';
+
     const frag = document.createDocumentFragment();
     let added = 0;
     for (const p of posts) {
@@ -69,13 +95,14 @@ async function loadNext() {
     }
   } catch (e) {
     console.error('[feed] load failed:', e);
-    container.insertAdjacentHTML('beforeend',
-      `<div class="feed-error">Failed to load posts. <button data-retry>Retry</button></div>`);
-    container.querySelector('[data-retry]')?.addEventListener('click', () => {
-      container.querySelector('.feed-error')?.remove();
-      loading = false;
-      loadNext();
-    });
+    if (page === 0) {
+      container.innerHTML = `<div class="feed-error">Failed to load posts. <button data-retry>Retry</button></div>`;
+      container.querySelector('[data-retry]')?.addEventListener('click', () => {
+        loading = false;
+        renderSkeleton(3);
+        loadNext();
+      });
+    }
   } finally {
     loading = false;
   }
@@ -94,6 +121,7 @@ export function reloadFeed() {
   page = 0;
   exhausted = false;
   loading = false;
+  renderSkeleton(3);
   if (!sentinel.isConnected) container.after(sentinel);
   io.observe(sentinel);
   loadNext();
