@@ -5,7 +5,7 @@
 .main-content {
   max-width: var(--content-max-w);
   margin: 0 auto;
-  padding: 84px 20px 24px;
+  padding: 60px 20px 20px;   /* was 84px — nav is 60px, 16px gap */
   display: grid;
   grid-template-columns: var(--sidebar-left-w) minmax(0, 2fr) var(--sidebar-right-w);
   gap: 24px;
