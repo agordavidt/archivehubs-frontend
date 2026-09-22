@@ -43,6 +43,7 @@
 
 /* Right column */
 @import url('app/components/connections.css');
+@import url('app/components/connections-page.css');
 @import url('app/components/sponsored.css');
 @import url('app/components/right-sidebar.css');
 @import url('app/components/toggles.css');

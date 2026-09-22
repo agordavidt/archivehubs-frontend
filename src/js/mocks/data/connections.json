@@ -1,0 +1,57 @@
+{
+  "connections": [
+    { "id": "u-002", "firstName": "Emeka", "lastName": "Okoro", "profilePic": "images/profile.jpg", "headline": "Secondary School Teacher at Government College", "connectedAt": 1737000000000 },
+    { "id": "u-003", "firstName": "Blessing", "lastName": "Eze", "profilePic": "images/profile.jpg", "headline": "Registered Nurse at University Teaching Hospital", "connectedAt": 1737100000000 },
+    { "id": "u-004", "firstName": "Amina", "lastName": "Sani", "profilePic": "images/profile.jpg", "headline": "Accountant at First City Bank", "connectedAt": 1737200000000 },
+    { "id": "u-005", "firstName": "Chinedu", "lastName": "Okafor", "profilePic": "images/profile.jpg", "headline": "Small Business Owner · Retail & Trading", "connectedAt": 1737300000000 },
+    { "id": "u-006", "firstName": "Fatima", "lastName": "Yusuf", "profilePic": "images/profile.jpg", "headline": "Civil Servant at State Ministry of Education", "connectedAt": 1737400000000 },
+    { "id": "u-007", "firstName": "Ibrahim", "lastName": "Abdullahi", "profilePic": "images/profile.jpg", "headline": "Farmer · Crop and Livestock Production", "connectedAt": 1737500000000 },
+    { "id": "u-008", "firstName": "Grace", "lastName": "Adeyemi", "profilePic": "images/profile.jpg", "headline": "Fashion Designer · Self-employed", "connectedAt": 1737600000000 },
+    { "id": "u-009", "firstName": "Tobi", "lastName": "Adewale", "profilePic": "images/profile.jpg", "headline": "Quantity Surveyor at BuildRight Nigeria", "connectedAt": 1737700000000 }
+  ],
+  "requests": [
+    { "id": "u-010", "firstName": "Sarah", "lastName": "Ibrahim", "profilePic": "images/profile.jpg", "headline": "Pharmacist at City Care Pharmacy", "mutualCount": 5, "requestedAt": 1737800000000 },
+    { "id": "u-011", "firstName": "Musa", "lastName": "Garba", "profilePic": "images/profile.jpg", "headline": "Police Officer · Nigeria Police Force", "mutualCount": 2, "requestedAt": 1737810000000 },
+    { "id": "u-012", "firstName": "Ngozi", "lastName": "Nwankwo", "profilePic": "images/profile.jpg", "headline": "Human Resources Officer at Zenith Foods", "mutualCount": 8, "requestedAt": 1737820000000 }
+  ],
+  "recommendations": {
+    "aty": [
+      { "id": "u-020", "firstName": "Samuel", "lastName": "Ogunleye", "profilePic": "images/profile.jpg", "headline": "Civil Engineer at Julius Berger", "mutualCount": 12, "reason": "12 mutual connections" },
+      { "id": "u-021", "firstName": "Mary", "lastName": "Chukwu", "profilePic": "images/profile.jpg", "headline": "Primary School Teacher at Bright Future School", "mutualCount": 7, "reason": "7 mutual connections" },
+      { "id": "u-022", "firstName": "Kabiru", "lastName": "Bello", "profilePic": "images/profile.jpg", "headline": "Auto Mechanic · Self-employed", "mutualCount": 4, "reason": "Works in the same area" },
+      { "id": "u-023", "firstName": "Esther", "lastName": "Eze", "profilePic": "images/profile.jpg", "headline": "Lawyer at Eze & Partners", "mutualCount": 3, "reason": "3 mutual connections" },
+      { "id": "u-024", "firstName": "David", "lastName": "Ojo", "profilePic": "images/profile.jpg", "headline": "Banking Officer at Access Bank", "mutualCount": 2, "reason": "Similar professional interests" },
+      { "id": "u-025", "firstName": "Hauwa", "lastName": "Mohammed", "profilePic": "images/profile.jpg", "headline": "Public Health Officer at State Ministry of Health", "mutualCount": 6, "reason": "6 mutual connections" }
+    ],
+    "acr": [
+      { "id": "u-030", "firstName": "Yusuf", "lastName": "Abubakar", "profilePic": "images/profile.jpg", "headline": "Electrical Technician · Self-employed", "reason": "You both liked posts about local businesses" },
+      { "id": "u-031", "firstName": "Adaeze", "lastName": "Nwosu", "profilePic": "images/profile.jpg", "headline": "Medical Laboratory Scientist at General Hospital", "reason": "You both commented on Adeyemi's post" },
+      { "id": "u-032", "firstName": "Peter", "lastName": "Onyeka", "profilePic": "images/profile.jpg", "headline": "Real Estate Agent at Prime Homes Nigeria", "reason": "You both follow ArchiveHubs Community" }
+    ],
+    "rcr": [
+      { "id": "u-040", "firstName": "Janet", "lastName": "Akinyemi", "profilePic": "images/profile.jpg", "headline": "Business Administrator at Greenfield Stores", "reason": "Same professional field" },
+      { "id": "u-041", "firstName": "Kwame", "lastName": "Boateng", "profilePic": "images/profile.jpg", "headline": "Electrician · Self-employed", "reason": "Similar experience level" },
+      { "id": "u-042", "firstName": "Rose", "lastName": "Eneh", "profilePic": "images/profile.jpg", "headline": "Customer Service Officer at MTN Nigeria", "reason": "Works in your industry" }
+    ],
+    "pcr": [
+      { "id": "u-050", "firstName": "Michael", "lastName": "Oladipo", "profilePic": "images/profile.jpg", "headline": "Managing Director at Oladipo Trading Company", "reason": "Popular in your network" },
+      { "id": "u-051", "firstName": "Amaka", "lastName": "Okonkwo", "profilePic": "images/profile.jpg", "headline": "Veterinary Doctor at Green Farms Veterinary Clinic", "reason": "Trending this week" }
+    ],
+    "bcr": [
+      { "id": "u-060", "firstName": "Market", "lastName": "Square", "profilePic": "images/Logo.jpg", "headline": "Retail & Consumer Goods · 1.2k followers", "account_type": "corporate", "reason": "You follow similar pages" },
+      { "id": "u-061", "firstName": "Greenfield", "lastName": "Farms", "profilePic": "images/Logo.jpg", "headline": "Agriculture & Food Production · 800 followers", "account_type": "corporate", "reason": "Popular in your community" }
+    ]
+  },
+  "birthdays": {
+    "tbr": [
+      { "id": "u-002", "firstName": "Emeka", "lastName": "Okoro", "profilePic": "images/profile.jpg", "headline": "Secondary School Teacher at Government College" }
+    ],
+    "rbr": [
+      { "id": "u-004", "firstName": "Amina", "lastName": "Sani", "profilePic": "images/profile.jpg", "headline": "Accountant at First City Bank" }
+    ],
+    "ubr": [
+      { "id": "u-006", "firstName": "Fatima", "lastName": "Yusuf", "profilePic": "images/profile.jpg", "headline": "Civil Servant at State Ministry of Education" },
+      { "id": "u-007", "firstName": "Ibrahim", "lastName": "Abdullahi", "profilePic": "images/profile.jpg", "headline": "Farmer · Crop and Livestock Production" }
+    ]
+  }
+}

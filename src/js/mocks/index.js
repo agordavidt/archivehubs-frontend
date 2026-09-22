@@ -3,6 +3,7 @@ import feedJSON from './data/feed.json';
 import commentsJSON from './data/comments.json';
 import accountsJSON from './data/accounts.json';
 import storiesJSON from './data/stories.json';
+import connectionsJSON from './data/connections.json';
 
 const delay = (ms) => new Promise(r => setTimeout(r, ms));
 async function tick() { await delay(60 + Math.random() * 90); }  // was 200-400
@@ -91,6 +92,37 @@ function setCurrentUserId(id) {
 const posts = feedJSON.posts.map((p) => ({ ...p }));
 const comments = commentsJSON.comments.map((c) => ({ ...c }));
 let nextCommentId = 9000;
+
+// ── Connections state ────────────────────────────────────────
+const connectionState = {
+  connections:    connectionsJSON.connections.map(c => ({ ...c })),
+  requests:       connectionsJSON.requests.map(r => ({ ...r })),
+  sentRequests:   new Set(),   // ids we've requested
+  declined:       new Set(),   // ids we've declined (kept out of suggestions)
+  recommendations: {
+    aty: connectionsJSON.recommendations.aty.map(r => ({ ...r })),
+    acr: connectionsJSON.recommendations.acr.map(r => ({ ...r })),
+    rcr: connectionsJSON.recommendations.rcr.map(r => ({ ...r })),
+    pcr: connectionsJSON.recommendations.pcr.map(r => ({ ...r })),
+    bcr: connectionsJSON.recommendations.bcr.map(r => ({ ...r })),
+  },
+  birthdays: {
+    tbr: connectionsJSON.birthdays.tbr.map(b => ({ ...b })),
+    rbr: connectionsJSON.birthdays.rbr.map(b => ({ ...b })),
+    ubr: connectionsJSON.birthdays.ubr.map(b => ({ ...b })),
+  },
+};
+
+function connectionStatusFor(userId) {
+  if (connectionState.connections.some(c => c.id === userId)) return 'connected';
+  if (connectionState.requests.some(r => r.id === userId))    return 'incoming';
+  if (connectionState.sentRequests.has(userId))               return 'pending';
+  return 'none';
+}
+
+function decorate(user) {
+  return { ...user, connectionStatus: connectionStatusFor(user.id) };
+}
 
 // ── Dispatcher ────────────────────────────────────────────
 export async function mockRequest(path, { method = 'GET', body } = {}) {
@@ -642,6 +674,67 @@ export async function mockRequest(path, { method = 'GET', body } = {}) {
       stories.unshift(story);
       return { message: 'Story created', story };
     }
+
+      // ════════════ CONNECTIONS ════════════
+
+      // GET /connection/get_connections
+      if (method === 'GET' && pathname === '/connection/get_connections') {
+        const page = Number(params.paginate || 0);
+        const limit = 20 * (page + 1);
+        return { connections: connectionState.connections.slice(0, limit).map(decorate) };
+      }
+
+      // GET /connection/get_connection_requests
+      if (method === 'GET' && pathname === '/connection/get_connection_requests') {
+        return { requests: connectionState.requests.map(decorate) };
+      }
+
+      // POST /connection/connection_request
+      if (method === 'POST' && pathname === '/connection/connection_request') {
+        const { requestUserId } = body || {};
+        if (!requestUserId) throw mockError(400, 'requestUserId is required');
+        const personId = currentUserId();
+        if (!personId) throw mockError(401, 'Unauthorized');
+        if (requestUserId === personId) throw mockError(400, 'Cannot connect with yourself');
+
+        connectionState.sentRequests.add(requestUserId);
+        return { message: 'Connection request sent' };
+      }
+
+      // POST /connection/accept_connection_request
+      if (method === 'POST' && pathname === '/connection/accept_connection_request') {
+        const { requesterUserId } = body || {};
+        if (!requesterUserId) throw mockError(400, 'requesterUserId is required');
+        const req = connectionState.requests.find(r => r.id === requesterUserId);
+        if (!req) throw mockError(404, 'Connection request not found');
+        connectionState.requests = connectionState.requests.filter(r => r.id !== requesterUserId);
+        connectionState.connections.unshift({ ...req, connectedAt: Date.now() });
+        return { message: 'Connection accepted' };
+      }
+
+      // POST /connection/reject_connection_request
+      if (method === 'POST' && pathname === '/connection/reject_connection_request') {
+        const { requesterUserId } = body || {};
+        if (!requesterUserId) throw mockError(400, 'requesterUserId is required');
+        connectionState.requests = connectionState.requests.filter(r => r.id !== requesterUserId);
+        connectionState.declined.add(requesterUserId);
+        return { message: 'Connection rejected' };
+      }
+
+      // GET /connection/get_<kind>_connections  (recommendations + birthdays)
+      const connKindMatch = pathname.match(
+        /^\/connection\/get_(aty|acr|rcr|pcr|bcr|tbr|rbr|ubr)_connections$/
+      );
+      if (method === 'GET' && connKindMatch) {
+        const kind = connKindMatch[1];
+        const source = connectionState.recommendations[kind] || connectionState.birthdays[kind];
+        if (!source) throw mockError(404, `Unknown connection kind: ${kind}`);
+        // Filter out ones already pending/connected/declined (for rec kinds)
+        const filtered = source
+          .filter(u => !connectionState.declined.has(u.id))
+          .map(decorate);
+        return { connections: filtered };
+      }
 
   throw mockError(501, `[mock] Unhandled: ${method} ${path}`);
 }

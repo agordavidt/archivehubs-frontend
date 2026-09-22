@@ -222,4 +222,54 @@ export const api = {
     form.append('colour', colour || '');
     return request('/stories', { method: 'POST', body: form, isForm: true });
   },
+
+    // ── CONNECTIONS ─────────────────────────────────────────────
+    getConnections: (paginate = 0, revalidate = false) =>
+      request(`/connection/get_connections?paginate=${paginate}${revalidate ? '&revalidate=true' : ''}`),
+
+    getConnectionRequests: () =>
+      request('/connection/get_connection_requests'),
+
+    sendConnectionRequest: (requestUserId) =>
+      request('/connection/connection_request', { method: 'POST', body: { requestUserId } }),
+
+    acceptConnectionRequest: (requesterUserId) =>
+      request('/connection/accept_connection_request', { method: 'POST', body: { requesterUserId } }),
+
+    rejectConnectionRequest: (requesterUserId) =>
+      request('/connection/reject_connection_request', { method: 'POST', body: { requesterUserId } }),
+
+    /**
+     * Recommendation kinds:
+     *   aty — "Add to your connections" (default)
+     *   acr — Activity-based
+     *   rcr — Role-based
+     *   pcr — Popular
+     *   bcr — Business
+     */
+    getConnectionRecommendations: (kind, paginate = 0) => {
+      const map = {
+        aty: 'get_aty_connections',
+        acr: 'get_acr_connections',
+        rcr: 'get_rcr_connections',
+        pcr: 'get_pcr_connections',
+        bcr: 'get_bcr_connections',
+      };
+      const path = map[kind];
+      if (!path) throw new Error(`Unknown recommendation kind: ${kind}`);
+      return request(`/connection/${path}?paginate=${paginate}`);
+    },
+
+    /**
+     * Birthday kinds:
+     *   tbr — Today
+     *   rbr — Recent (past few days)
+     *   ubr — Upcoming
+     */
+    getBirthdays: (kind, paginate = 0) => {
+      const map = { tbr: 'get_tbr_connections', rbr: 'get_rbr_connections', ubr: 'get_ubr_connections' };
+      const path = map[kind];
+      if (!path) throw new Error(`Unknown birthday kind: ${kind}`);
+      return request(`/connection/${path}?paginate=${paginate}`);
+    },
 };

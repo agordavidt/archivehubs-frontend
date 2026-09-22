@@ -14,6 +14,7 @@ export default defineConfig({
         login:  resolve(__dirname, 'src/pages/login.html'),
         signup: resolve(__dirname, 'src/pages/signup.html'),
         home:   resolve(__dirname, 'src/pages/home.html'),
+        connections: resolve(__dirname, 'src/pages/connections.html'),
       },
     },
   },
