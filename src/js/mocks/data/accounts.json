@@ -1,0 +1,21 @@
+{
+  "active": { "id": "u-john-001", "account_type": "individual" },
+  "accounts": [
+    {
+      "id": "u-john-001",
+      "account_type": "individual",
+      "displayName": "John Doe",
+      "avatar": "images/profile.jpg",
+      "headline": "Software Developer · AI Enthusiast",
+      "role": "owner"
+    },
+    {
+      "id": "b-acme-001",
+      "account_type": "corporate",
+      "displayName": "Acme Corp",
+      "avatar": "images/Logo.jpg",
+      "headline": "Enterprise Software · 1.2k followers",
+      "role": "admin"
+    }
+  ]
+}

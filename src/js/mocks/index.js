@@ -1,6 +1,9 @@
 import userJSON     from './data/user.json';
 import feedJSON     from './data/feed.json';
 import commentsJSON from './data/comments.json';
+import accountsJSON from './data/accounts.json';
+
+
 
 const delay = (ms) => new Promise(r => setTimeout(r, ms));
 async function tick() { await delay(200 + Math.random() * 200); }
@@ -8,6 +11,17 @@ async function tick() { await delay(200 + Math.random() * 200); }
 // ── Persistent mock state ─────────────────────────────────
 const MOCK_SESSION_KEY = 'ah:mock:userId';
 const MOCK_USERS_KEY   = 'ah:mock:users';
+const MOCK_ACTIVE_KEY = 'ah:mock:activeAccountId';
+
+function currentActiveId() {
+  try { return localStorage.getItem(MOCK_ACTIVE_KEY); } catch { return null; }
+}
+function setActiveId(id) {
+  try {
+    if (id) localStorage.setItem(MOCK_ACTIVE_KEY, id);
+    else localStorage.removeItem(MOCK_ACTIVE_KEY);
+  } catch {}
+}
 
 /** @type {Array<{id:string,email:string,password:string,firstName:string,...}>} */
 let users = loadUsers();

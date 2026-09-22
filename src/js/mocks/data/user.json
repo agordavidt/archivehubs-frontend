@@ -1,15 +1,26 @@
-{
-  "id": "u-john-001",
-  "email": "john@archivehubs.dev",
-  "firstName": "Abraham",
-  "lastName": "Adeyemi",
-  "otherName": "",
-  "phoneNumber": "+2348000000000",
-  "sex": "male",
-  "country": "Nigeria",
-  "state_province": "Lagos",
-  "account_type": "individual",
-  "isVerified": true,
-  "profilePic": "images/profile.jpg",
-  "createdAt": 1737000000000
-}
+[
+  {
+    "id": "u-john-001",
+    "email": "john@archivehubs.dev",
+    "firstName": "Abraham",
+    "lastName": "Adeyemi",
+    "otherName": "",
+    "phoneNumber": "+2348000000000",
+    "sex": "male",
+    "country": "Nigeria",
+    "state_province": "Lagos",
+    "account_type": "individual",
+    "isVerified": true,
+    "profilePic": "images/profile.jpg",
+    "createdAt": 1737000000000
+  },
+  {
+    "id": "b-acme-001",
+    "name": "Acme Corp",
+    "account_type": "corporate",
+    "logo": "images/Logo.jpg",
+    "managedBy": [
+      "u-john-001"
+    ]
+  }
+]
