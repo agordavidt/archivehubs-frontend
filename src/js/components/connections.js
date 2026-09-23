@@ -346,8 +346,9 @@ async function handleCardAction(btn) {
   }
 
   if (action === 'message') {
-    // Placeholder — will hook into messaging once that lands
+    // Deep-link into the messaging page, pre-opened on this user's thread
     store.emit('message:openWith', { userId });
+    window.location.href = '/pages/messages.html';
     return;
   }
 }
