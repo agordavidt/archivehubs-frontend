@@ -346,8 +346,22 @@ async function handleCardAction(btn) {
   }
 
   if (action === 'message') {
-    // Deep-link into the messaging page, pre-opened on this user's thread
-    store.emit('message:openWith', { userId });
+    // `store` is in-memory and doesn't survive a full page navigation,
+    // so we hand the recipient off via sessionStorage instead — read
+    // once and cleared by messaging.js on the next page's boot.
+    const user = [...connections, ...requests, ...suggestions]
+      .find(u => u.id === userId);
+
+    const recipient = {
+      id: userId,
+      name: user
+        ? `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'User'
+        : 'User',
+      avatar: user?.profilePic || '/images/profile.jpg',
+      headline: user?.headline || '',
+    };
+
+    sessionStorage.setItem('ah:openConversationWith', JSON.stringify(recipient));
     window.location.href = '/pages/messages.html';
     return;
   }

@@ -12,12 +12,6 @@ async function boot() {
   initNavbar();
   await initMessaging();
 
-  const convId = new URLSearchParams(window.location.search).get('conv');
-  if (convId) {
-    const el = document.querySelector(`[data-conv-id="${convId}"]`);
-    if (el) el.click();
-  }
-
   console.log('[messages] ready');
 }
 

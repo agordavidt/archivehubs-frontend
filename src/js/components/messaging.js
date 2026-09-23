@@ -45,6 +45,7 @@ export async function initMessaging() {
   wireSocket();
 
   await loadConversations();
+  openFromDeepLink();
 }
 
 // ── Sidebar ──────────────────────────────────────────────────
@@ -436,17 +437,85 @@ function wireSocket() {
 }
 
 // ── Data loading ─────────────────────────────────────────────
-async function loadConversations() {
-  socket.emit('getConversations', {}, (res) => {
-    state.conversations = res?.conversations || [];
-    renderConversations();
-
-    // Auto-open first focused conversation on wide screens
-    if (!state.activeId && window.innerWidth >= 900) {
-      const first = state.conversations.find(c => c.focused);
-      if (first) openThread(first);
-    }
+function loadConversations() {
+  return new Promise((resolve) => {
+    socket.emit('getConversations', {}, (res) => {
+      state.conversations = res?.conversations || [];
+      renderConversations();
+      resolve();
+    });
   });
+}
+
+// ── Deep-link handoff ────────────────────────────────────────
+// Cross-page navigations (e.g. a "Message" button on the connections
+// page) can't use the `store` event bus — it's an in-memory pub/sub
+// that resets on every full page load, so an emit fired right before
+// `window.location.href = ...` never reaches this page's listeners.
+// Callers instead stash the recipient in sessionStorage; we read and
+// clear it once here on boot.
+const DEEP_LINK_KEY = 'ah:openConversationWith';
+
+function readDeepLinkUser() {
+  try {
+    const raw = sessionStorage.getItem(DEEP_LINK_KEY);
+    if (!raw) return null;
+    sessionStorage.removeItem(DEEP_LINK_KEY);
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function findOrCreateConversationFor(recipient) {
+  let conv = state.conversations.find(c =>
+    c.participants.some(p => p.id === recipient.id));
+
+  if (!conv) {
+    conv = {
+      id: `c-${Date.now().toString(36)}`,
+      participants: [{
+        id: recipient.id,
+        name: recipient.name || 'User',
+        avatar: recipient.avatar || '/images/profile.jpg',
+        headline: recipient.headline || '',
+      }],
+      lastMessage: null,
+      unreadCount: 0,
+      updatedAt: Date.now(),
+      focused: true,
+      starred: false,
+    };
+    state.conversations.unshift(conv);
+    state.messages.set(conv.id, []);
+    renderConversations();
+  }
+
+  return conv;
+}
+
+function openFromDeepLink() {
+  // 1) An explicit conversation id in the URL (used by the messaging
+  //    widget's own conversation links: /messages.html?conv=<id>)
+  const convId = new URLSearchParams(window.location.search).get('conv');
+  if (convId) {
+    const conv = state.conversations.find(c => c.id === convId);
+    if (conv) { openThread(conv); return; }
+  }
+
+  // 2) A recipient handed off via sessionStorage from another page
+  //    (e.g. the "Message" button on the connections page)
+  const deepLinkUser = readDeepLinkUser();
+  if (deepLinkUser?.id) {
+    openThread(findOrCreateConversationFor(deepLinkUser));
+    return;
+  }
+
+  // 3) Fallback: auto-open the first focused conversation on wide screens
+  if (!state.activeId && window.innerWidth >= 900) {
+    const first = state.conversations.find(c => c.focused);
+    if (first) openThread(first);
+  }
 }
 
 async function openThread(conv) {
