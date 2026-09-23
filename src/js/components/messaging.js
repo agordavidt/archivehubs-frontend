@@ -22,7 +22,10 @@ let handlers = [];
 // ── Init ─────────────────────────────────────────────────────
 export async function initMessaging() {
   root = document.querySelector('[data-msg-shell]');
-  if (!root) { console.warn('[messaging] shell not found'); return; }
+  if (!root) {
+    console.warn('[messaging] shell not found — did the partial mount?');
+    return;
+  }
 
   listEl     = root.querySelector('[data-conv-list]');
   thread     = root.querySelector('[data-msg-thread]');
@@ -216,8 +219,15 @@ async function sendMessage({ file } = {}) {
 }
 
 // ── Compose modal ────────────────────────────────────────────
+// NOTE: the compose modal markup in messaging.html lives OUTSIDE
+// `.msg-shell` (it's a sibling, not a child), so it is not inside
+// `root`. Every lookup below queries `document` instead of `root`
+// for that reason — this is the fix for the boot crash, and it
+// does not require any HTML/CSS changes.
 function wireComposeModal() {
-  const modal = root.querySelector('[data-msg-compose-modal]');
+  const modal = document.querySelector('[data-msg-compose-modal]');
+  if (!modal) { console.warn('[messaging] compose modal not found'); return; }
+
   modal.querySelectorAll('[data-compose-close]').forEach(el =>
     el.addEventListener('click', closeComposeModal));
 
@@ -272,7 +282,9 @@ function wireComposeModal() {
 }
 
 function openComposeModal() {
-  const modal = root.querySelector('[data-msg-compose-modal]');
+  const modal = document.querySelector('[data-msg-compose-modal]');
+  if (!modal) { console.warn('[messaging] compose modal not found'); return; }
+
   modal.classList.remove('hidden');
   state.composeRecipient = null;
   state.composeResults = [];
@@ -287,11 +299,12 @@ function openComposeModal() {
 }
 
 function closeComposeModal() {
-  root.querySelector('[data-msg-compose-modal]')?.classList.add('hidden');
+  document.querySelector('[data-msg-compose-modal]')?.classList.add('hidden');
 }
 
 function renderComposeSuggestions() {
-  const modal = root.querySelector('[data-msg-compose-modal]');
+  const modal = document.querySelector('[data-msg-compose-modal]');
+  if (!modal) return;
   const wrap = modal.querySelector('[data-compose-suggestions]');
 
   if (!state.composeResults.length) {
@@ -424,19 +437,16 @@ function wireSocket() {
 
 // ── Data loading ─────────────────────────────────────────────
 async function loadConversations() {
-  // Socket.io doesn't expose a "list conversations" event in the summary,
-  // so in mock we pull from the mock socket's internal list. In a real
-  // deployment this would come from a REST endpoint or a "getConversations"
-  // socket event — add one if your backend has it.
-  const list = socket?._getConversations?.() || [];
-  state.conversations = list;
-  renderConversations();
+  socket.emit('getConversations', {}, (res) => {
+    state.conversations = res?.conversations || [];
+    renderConversations();
 
-  // Auto-open first focused conversation on wide screens
-  if (!state.activeId && window.innerWidth >= 900) {
-    const first = state.conversations.find(c => c.focused);
-    if (first) openThread(first);
-  }
+    // Auto-open first focused conversation on wide screens
+    if (!state.activeId && window.innerWidth >= 900) {
+      const first = state.conversations.find(c => c.focused);
+      if (first) openThread(first);
+    }
+  });
 }
 
 async function openThread(conv) {

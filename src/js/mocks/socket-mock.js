@@ -49,6 +49,11 @@ export function createMockSocket() {
   }
 
   // ── Handlers ───────────────────────────────────────────────
+  function handleGetConversations(_payload, ack) {
+    const list = conversations.map(c => ({ ...c }));    // shallow clone
+    setTimeout(() => ack?.({ conversations: list }), jitter(50, 80));
+  }
+
   function handleGetMessages({ conversationId, limit = 30 }, ack) {
     const all = messages.get(conversationId) || [];
     const slice = all.slice(-limit);
@@ -182,6 +187,7 @@ export function createMockSocket() {
 
     emit(event, payload, ack) {
       switch (event) {
+        case 'getConversations': return handleGetConversations(payload, ack);
         case 'getMessages':  return handleGetMessages(payload, ack);
         case 'sendMessage':  return handleSendMessage(payload, ack);
         case 'markAsRead':   return handleMarkAsRead(payload, ack);
@@ -202,9 +208,6 @@ export function createMockSocket() {
       connected = false;
       dispatch('disconnect');
     },
-
-    // Test helper — expose conversation list for hydration in the UI
-    _getConversations() { return conversations; },
   };
 
   return socket.connect();

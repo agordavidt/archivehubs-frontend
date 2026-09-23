@@ -1,196 +1,1153 @@
-=== pages ===
-----archivehubs-frontend\src\pages\home.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home | ArchiveHubs</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
-  <link rel="stylesheet" href="/css/app.css">
-</head>
-<body>
+=== console error ===
+messages.js:18
+ [messages] boot failed: TypeError: Cannot read properties of null (reading 'querySelectorAll')
+    at wireComposeModal (messaging.js:221:9)
+    at initMessaging (messaging.js:38:3)
+    at boot (messages.js:13:9)
+profile.jpg:1 
+ GET http://localhost:5173/pages/images/profile.jpg 404 (Not Found)
 
-  <!-- Shared chrome -->
-  <div data-include="/components/navbar.html"></div>
+ ==== message related files ====
+========= src/components/messaging.html
+<div class="msg-shell" data-msg-shell>
 
-  <main class="main-content">
-    <section class="middle-section" style="grid-column: 1 / -1; max-width: 640px; margin: 0 auto;">
+  <!-- ═══ CONVERSATION LIST (left) ═══ -->
+  <aside class="msg-sidebar">
 
-      <!-- Create post bar -->
-      <div class="create-post">
-        <div class="post-input-container">
-          <img src="/images/profile.jpg" alt="" class="user-profile-pic" data-me-avatar>
-          <div class="post-input-wrapper" data-open-create-post style="cursor:pointer">
-            <input type="text" placeholder="Start a post" class="post-input" readonly>
-          </div>
-        </div>
-        <div class="post-actions">
-          <button class="action-btn" data-open-create-post type="button">
-            <i class="fas fa-image"></i><span>Media</span>
-          </button>
-          <button class="action-btn" data-open-create-story type="button">
-            <i class="fas fa-plus-square"></i><span>Story</span>
-          </button>
-        </div>
+    <header class="msg-sidebar-header">
+      <h1 class="msg-title">Messaging</h1>
+      <div class="msg-sidebar-actions">
+        <button class="msg-icon-btn" data-msg-compose title="New message" type="button">
+          <span class="material-symbols-outlined">edit_square</span>
+        </button>
+        <button class="msg-icon-btn" data-msg-menu title="More" type="button">
+          <span class="material-symbols-outlined">more_horiz</span>
+        </button>
       </div>
-
-      <!-- Stories -->
-      <div class="stories-section">
-        <div class="stories-container">
-          <div class="story-card create-story" data-open-create-story>
-            <div class="story-content">
-              <div class="create-story-top">
-                <img src="/images/profile.jpg" alt="" class="story-avatar" data-me-avatar>
-                <div class="create-story-plus"><i class="fas fa-plus"></i></div>
-                <span class="story-username">Create Story</span>
-              </div>
-            </div>
-          </div>
-          <!-- Rendered stories go here via stories.js (later slice) -->
-        </div>
-      </div>
-
-      <!-- Feed -->
-      <div class="posts-section">
-        <div class="feed-loading" style="text-align:center;padding:40px;">
-          <div class="spinner"></div>
-          <p>Loading posts…</p>
-        </div>
-      </div>
-    </section>
-    
-    <div class="right-sidebar">
-      <div data-include="/components/sidebars/network.html"></div>
-      <!-- Trending News, Suggested Pages, app promo go below -->
-    </div>
-    
-  </main>
-
-  <!-- Shared partials -->
-  <div data-include="/components/modals/create-post.html"></div>
-  <div data-include="/components/modals/create-story.html"></div>
-  <div data-include="/components/modals/story-viewer.html"></div>
-  <div data-include="/components/modals/comment-modal.html"></div>
-
-  <script type="module" src="/js/pages/home.js"></script>
-</body>
-</html>
-
-
-----\archivehubs-frontend\src\pages\connections.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Connections | ArchiveHubs</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
-  <link rel="stylesheet" href="/css/app.css">
-</head>
-<body>
-
-  <div data-include="/components/navbar.html"></div>
-
-  <main class="connections-page" data-connections-page>
-    <header class="cp-page-header">
-      <h1>My Connections</h1>
-      <p class="cp-page-sub">Manage your network, respond to requests, and discover people you may know.</p>
     </header>
 
-    <nav class="cp-tabs" role="tablist">
-      <button class="cp-tab active" data-tab="list" role="tab" aria-selected="true">
-        <i class="fas fa-user-friends"></i>
-        <span>Your Connections</span>
-        <span class="cp-tab-count" data-count-connections></span>
+    <div class="msg-search">
+      <span class="material-symbols-outlined">search</span>
+      <input type="text" placeholder="Search messages" data-msg-search autocomplete="off">
+    </div>
+
+    <nav class="msg-inbox-tabs" role="tablist">
+      <button class="msg-inbox-tab active" data-inbox="focused" role="tab" aria-selected="true">
+        Focused
+        <span class="msg-inbox-count hidden" data-count-focused></span>
       </button>
-      <button class="cp-tab" data-tab="requests" role="tab" aria-selected="false">
-        <i class="fas fa-user-plus"></i>
-        <span>Requests</span>
-        <span class="cp-tab-badge hidden" data-count-requests></span>
-      </button>
-      <button class="cp-tab" data-tab="suggestions" role="tab" aria-selected="false">
-        <i class="fas fa-magic"></i>
-        <span>Suggestions</span>
+      <button class="msg-inbox-tab" data-inbox="other" role="tab" aria-selected="false">
+        Other
+        <span class="msg-inbox-count hidden" data-count-other></span>
       </button>
     </nav>
 
-    <div class="cp-page-body">
+    <div class="msg-conv-list" data-conv-list>
+      <div class="msg-loading"><div class="spinner"></div></div>
+    </div>
+  </aside>
 
-      <!-- ─── Your Connections ────────────────────────────── -->
-      <section class="cp-panel active" data-panel="list">
-        <div class="cp-panel-header">
-          <h2>Your Connections</h2>
-          <div class="cp-search">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search connections…" data-search-connections>
-          </div>
-        </div>
-        <div class="connection-grid" data-connections-grid>
-          <div class="cp-loading"><div class="spinner"></div></div>
-        </div>
-      </section>
+  <!-- ═══ THREAD / EMPTY STATE (right) ═══ -->
+  <section class="msg-thread" data-msg-thread>
 
-      <!-- ─── Requests ─────────────────────────────────────── -->
-      <section class="cp-panel" data-panel="requests">
-        <div class="cp-panel-header">
-          <h2>Pending Requests</h2>
-        </div>
-        <div class="connection-grid" data-requests-grid>
-          <div class="cp-loading"><div class="spinner"></div></div>
-        </div>
-      </section>
-
-      <!-- ─── Suggestions ──────────────────────────────────── -->
-      <section class="cp-panel" data-panel="suggestions">
-        <div class="cp-panel-header">
-          <h2>People you may know</h2>
-        </div>
-
-        <div class="cp-subtabs" role="tablist">
-          <button class="cp-subtab active" data-subtab="aty" role="tab">For you</button>
-          <button class="cp-subtab" data-subtab="acr" role="tab">Activity</button>
-          <button class="cp-subtab" data-subtab="rcr" role="tab">Role</button>
-          <button class="cp-subtab" data-subtab="pcr" role="tab">Popular</button>
-          <button class="cp-subtab" data-subtab="bcr" role="tab">Business</button>
-        </div>
-
-        <div class="connection-grid" data-suggestions-grid>
-          <div class="cp-loading"><div class="spinner"></div></div>
-        </div>
-      </section>
-
+    <div class="msg-empty-state" data-msg-empty>
+      <span class="material-symbols-outlined msg-empty-icon">forum</span>
+      <h2>Your conversations</h2>
+      <p>Select a conversation from the list, or start a new one.</p>
+      <button class="msg-primary-btn" data-msg-compose type="button">
+        <span class="material-symbols-outlined">edit_square</span>
+        New message
+      </button>
     </div>
 
-    <!-- ─── Birthdays widget ─────────────────────────────── -->
-    <aside class="cp-birthdays">
-      <div class="cp-birthdays-header">
-        <h3><i class="fas fa-birthday-cake"></i> Birthdays</h3>
+    <div class="msg-active hidden" data-msg-active>
+      <!-- Header -->
+      <header class="msg-thread-header">
+        <img src="/images/profile.jpg" alt="" class="msg-thread-avatar" data-thread-avatar>
+        <div class="msg-thread-info">
+          <span class="msg-thread-name" data-thread-name></span>
+          <span class="msg-thread-status" data-thread-status></span>
+        </div>
+        <div class="msg-thread-actions">
+          <button class="msg-icon-btn" data-thread-star title="Star" type="button">
+            <span class="material-symbols-outlined">star_border</span>
+          </button>
+          <button class="msg-icon-btn" data-thread-more title="More" type="button">
+            <span class="material-symbols-outlined">more_horiz</span>
+          </button>
+          <div class="msg-thread-menu hidden" data-thread-menu>
+            <button type="button" data-thread-action="archive">
+              <span class="material-symbols-outlined">archive</span> Archive
+            </button>
+            <button type="button" data-thread-action="delete">
+              <span class="material-symbols-outlined">delete</span> Delete
+            </button>
+            <button type="button" data-thread-action="block">
+              <span class="material-symbols-outlined">block</span> Block
+            </button>
+            <button type="button" data-thread-action="report">
+              <span class="material-symbols-outlined">report</span> Report
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Messages -->
+      <div class="msg-messages" data-msg-messages></div>
+
+      <!-- Typing indicator (shown when other party types) -->
+      <div class="msg-typing hidden" data-msg-typing>
+        <span class="msg-typing-dot"></span>
+        <span class="msg-typing-dot"></span>
+        <span class="msg-typing-dot"></span>
+        <span class="msg-typing-text" data-typing-name></span>
       </div>
-      <div class="cp-birthdays-tabs">
-        <button class="cp-bday-tab active" data-bday="tbr">Today</button>
-        <button class="cp-bday-tab" data-bday="rbr">Recent</button>
-        <button class="cp-bday-tab" data-bday="ubr">Upcoming</button>
+
+      <!-- Composer -->
+      <form class="msg-composer" data-msg-composer>
+        <div class="msg-composer-input-wrap">
+          <div class="msg-composer-input"
+               contenteditable="true"
+               data-msg-input
+               data-placeholder="Write a message…"
+               role="textbox"
+               aria-multiline="true"></div>
+        </div>
+
+        <div class="msg-composer-toolbar">
+          <div class="msg-composer-attach">
+            <button type="button" class="msg-icon-btn" data-msg-attach="image" title="Photo">
+              <span class="material-symbols-outlined">image</span>
+            </button>
+            <button type="button" class="msg-icon-btn" data-msg-attach="file" title="File">
+              <span class="material-symbols-outlined">attach_file</span>
+            </button>
+            <button type="button" class="msg-icon-btn" data-msg-attach="gif" title="GIF">
+              <span class="material-symbols-outlined">gif_box</span>
+            </button>
+            <input type="file" data-msg-file-input hidden multiple>
+          </div>
+          <button type="submit" class="msg-send-btn" data-msg-send disabled>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </section>
+</div>
+
+<!-- ═══ COMPOSE MODAL ═══ -->
+<div class="msg-compose-overlay hidden" data-msg-compose-modal>
+  <div class="msg-compose-backdrop" data-compose-close></div>
+  <div class="msg-compose-modal">
+    <header class="msg-compose-header">
+      <h2>New message</h2>
+      <button class="msg-icon-btn" data-compose-close type="button">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </header>
+
+    <div class="msg-compose-recipient">
+      <label>To:</label>
+      <input type="text" placeholder="Type a name…" data-compose-search autocomplete="off">
+    </div>
+
+    <div class="msg-compose-suggestions" data-compose-suggestions></div>
+
+    <div class="msg-compose-body hidden" data-compose-body>
+      <div class="msg-compose-chosen hidden" data-compose-chosen></div>
+      <div class="msg-composer-input-wrap">
+        <div class="msg-composer-input"
+             contenteditable="true"
+             data-compose-input
+             data-placeholder="Write a message…"
+             role="textbox"
+             aria-multiline="true"></div>
       </div>
-      <div class="cp-birthdays-list" data-birthdays-list>
-        <div class="cp-loading"><div class="spinner"></div></div>
+    </div>
+
+    <footer class="msg-compose-footer">
+      <button class="msg-primary-btn" data-compose-send disabled type="button">
+        Send
+      </button>
+    </footer>
+  </div>
+</div>
+
+=====src/js/components/messaging.js
+import { connectSocket, getSocket } from '../core/socket.js';
+import { api }                       from '../core/api.js';
+import { store }                     from '../core/store.js';
+import { getUser, getAccountDisplayName, getAccountAvatar } from '../core/session.js';
+
+// ── State ────────────────────────────────────────────────────
+const state = {
+  conversations: [],           // all
+  messages: new Map(),         // convId -> Message[]
+  activeId: null,
+  filter: 'focused',           // 'focused' | 'other'
+  query: '',
+  typingUsers: new Map(),      // convId -> userId[]
+  composeRecipient: null,
+  composeResults: [],
+};
+
+let root, sidebar, thread, listEl, messagesEl, typingEl, composer, inputEl;
+let socket;
+let handlers = [];
+
+// ── Init ─────────────────────────────────────────────────────
+export async function initMessaging() {
+  root = document.querySelector('[data-msg-shell]');
+  if (!root) { console.warn('[messaging] shell not found'); return; }
+
+  listEl     = root.querySelector('[data-conv-list]');
+  thread     = root.querySelector('[data-msg-thread]');
+  messagesEl = root.querySelector('[data-msg-messages]');
+  typingEl   = root.querySelector('[data-msg-typing]');
+  composer   = root.querySelector('[data-msg-composer]');
+  inputEl    = root.querySelector('[data-msg-input]');
+
+  hydrateSidebar();
+  wireSidebar();
+  wireThread();
+  wireComposer();
+  wireComposeModal();
+  wireStore();
+
+  socket = await connectSocket();
+  wireSocket();
+
+  await loadConversations();
+}
+
+// ── Sidebar ──────────────────────────────────────────────────
+function hydrateSidebar() {
+  const me = getUser();
+  if (!me) return;
+  // Avatar/name references if any — currently the partial doesn't show user info
+}
+
+function wireSidebar() {
+  // Inbox tabs
+  root.querySelectorAll('.msg-inbox-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.inbox;
+      if (tab === state.filter) return;
+      state.filter = tab;
+      root.querySelectorAll('.msg-inbox-tab').forEach(b => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-selected', String(b === btn));
+      });
+      renderConversations();
+    });
+  });
+
+  // Search
+  const search = root.querySelector('[data-msg-search]');
+  search?.addEventListener('input', (e) => {
+    state.query = e.target.value.trim().toLowerCase();
+    renderConversations();
+  });
+
+  // Compose button (opens modal)
+  root.querySelectorAll('[data-msg-compose]').forEach(btn =>
+    btn.addEventListener('click', () => openComposeModal()));
+}
+
+// ── Thread ───────────────────────────────────────────────────
+function wireThread() {
+  root.querySelector('[data-thread-more]')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    root.querySelector('[data-thread-menu]')?.classList.toggle('hidden');
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('[data-thread-more]') && !e.target.closest('[data-thread-menu]')) {
+      root.querySelector('[data-thread-menu]')?.classList.add('hidden');
+    }
+  });
+  root.querySelectorAll('[data-thread-action]').forEach(btn =>
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.threadAction;
+      handleThreadAction(action);
+    }));
+
+  root.querySelector('[data-thread-star]')?.addEventListener('click', () => {
+    const conv = state.conversations.find(c => c.id === state.activeId);
+    if (!conv) return;
+    conv.starred = !conv.starred;
+    updateStarIcon(conv.starred);
+  });
+}
+
+function updateStarIcon(starred) {
+  const el = root.querySelector('[data-thread-star] .material-symbols-outlined');
+  if (!el) return;
+  el.textContent = starred ? 'star' : 'star_border';
+  el.style.color  = starred ? 'var(--accent-color)' : '';
+}
+
+function handleThreadAction(action) {
+  const conv = state.conversations.find(c => c.id === state.activeId);
+  if (!conv) return;
+  root.querySelector('[data-thread-menu]')?.classList.add('hidden');
+
+  if (action === 'archive') {
+    conv.focused = false;
+    closeThread();
+    renderConversations();
+    return;
+  }
+  if (action === 'delete') {
+    if (!confirm(`Delete conversation with ${conv.participants[0]?.name}?`)) return;
+    state.conversations = state.conversations.filter(c => c.id !== conv.id);
+    state.messages.delete(conv.id);
+    closeThread();
+    renderConversations();
+    return;
+  }
+  if (action === 'block' || action === 'report') {
+    alert(`${action === 'block' ? 'Block' : 'Report'} would notify moderators. Not implemented in mock.`);
+  }
+}
+
+// ── Composer ─────────────────────────────────────────────────
+function wireComposer() {
+  inputEl?.addEventListener('input', updateSendButton);
+  inputEl?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  composer?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendMessage();
+  });
+
+  // Attachments (image only in this slice)
+  const fileInput = root.querySelector('[data-msg-file-input]');
+  root.querySelector('[data-msg-attach="image"]')?.addEventListener('click', () => {
+    fileInput.accept = 'image/*';
+    fileInput.click();
+  });
+  root.querySelector('[data-msg-attach="file"]')?.addEventListener('click', () => {
+    fileInput.accept = '';
+    fileInput.click();
+  });
+  root.querySelector('[data-msg-attach="gif"]')?.addEventListener('click', () => {
+    alert('GIF picker — coming soon');
+  });
+  fileInput?.addEventListener('change', (e) => {
+    const file = e.target.files?.[0];
+    if (file) sendMessage({ file });
+    fileInput.value = '';
+  });
+}
+
+function updateSendButton() {
+  const hasText = (inputEl?.textContent || '').trim().length > 0;
+  const btn = root.querySelector('[data-msg-send]');
+  if (btn) btn.disabled = !hasText;
+}
+
+async function sendMessage({ file } = {}) {
+  const conv = state.conversations.find(c => c.id === state.activeId);
+  if (!conv) return;
+
+  const content = (inputEl?.textContent || '').trim();
+  if (!content && !file) return;
+
+  const recipientId = conv.participants[0]?.id;
+  const mediaUrl = file ? URL.createObjectURL(file) : null;
+
+  // Optimistic local append
+  const optimistic = {
+    id: `temp-${Date.now()}`,
+    conversationId: conv.id,
+    senderId: getUser()?.id || 'me',
+    content,
+    mediaUrl,
+    createdAt: Date.now(),
+    read: false,
+    _pending: true,
+  };
+  appendMessage(optimistic);
+
+  inputEl.textContent = '';
+  updateSendButton();
+
+  socket.emit('sendMessage', {
+    recipientId,
+    conversationId: conv.id,
+    content,
+    mediaUrl,
+  }, (res) => {
+    if (res?.message) {
+      // Replace optimistic
+      const list = state.messages.get(conv.id) || [];
+      const idx = list.findIndex(m => m.id === optimistic.id);
+      if (idx >= 0) list[idx] = res.message;
+    }
+  });
+}
+
+// ── Compose modal ────────────────────────────────────────────
+function wireComposeModal() {
+  const modal = root.querySelector('[data-msg-compose-modal]');
+  modal.querySelectorAll('[data-compose-close]').forEach(el =>
+    el.addEventListener('click', closeComposeModal));
+
+  const search = modal.querySelector('[data-compose-search]');
+  search?.addEventListener('input', debounce(async (e) => {
+    const q = e.target.value.trim();
+    if (!q) { state.composeResults = []; renderComposeSuggestions(); return; }
+    try {
+      const res = await api.search(q);
+      state.composeResults = res.users || [];
+      renderComposeSuggestions();
+    } catch { state.composeResults = []; renderComposeSuggestions(); }
+  }, 200));
+
+  const composeInput = modal.querySelector('[data-compose-input]');
+  composeInput?.addEventListener('input', () => {
+    const btn = modal.querySelector('[data-compose-send]');
+    btn.disabled = !composeInput.textContent.trim() || !state.composeRecipient;
+  });
+
+  modal.querySelector('[data-compose-send]')?.addEventListener('click', () => {
+    const recipient = state.composeRecipient;
+    const content = composeInput.textContent.trim();
+    if (!recipient || !content) return;
+
+    // Find or create conversation, then send
+    let conv = state.conversations.find(c => c.participants.some(p => p.id === recipient.id));
+    if (!conv) {
+      conv = {
+        id: `c-${Date.now().toString(36)}`,
+        participants: [recipient],
+        lastMessage: null,
+        unreadCount: 0,
+        updatedAt: Date.now(),
+        focused: true,
+        starred: false,
+      };
+      state.conversations.unshift(conv);
+      state.messages.set(conv.id, []);
+    }
+    state.activeId = conv.id;
+    renderConversations();
+    openThread(conv);
+    closeComposeModal();
+
+    // Now send via socket
+    setTimeout(() => {
+      inputEl.textContent = content;
+      sendMessage();
+    }, 60);
+  });
+}
+
+function openComposeModal() {
+  const modal = root.querySelector('[data-msg-compose-modal]');
+  modal.classList.remove('hidden');
+  state.composeRecipient = null;
+  state.composeResults = [];
+  modal.querySelector('[data-compose-search]').value = '';
+  modal.querySelector('[data-compose-input]').textContent = '';
+  modal.querySelector('[data-compose-send]').disabled = true;
+  modal.querySelector('[data-compose-chosen]').innerHTML = '';
+  modal.querySelector('[data-compose-chosen]').classList.add('hidden');
+  modal.querySelector('[data-compose-body]').classList.add('hidden');
+  renderComposeSuggestions();
+  setTimeout(() => modal.querySelector('[data-compose-search]').focus(), 40);
+}
+
+function closeComposeModal() {
+  root.querySelector('[data-msg-compose-modal]')?.classList.add('hidden');
+}
+
+function renderComposeSuggestions() {
+  const modal = root.querySelector('[data-msg-compose-modal]');
+  const wrap = modal.querySelector('[data-compose-suggestions]');
+
+  if (!state.composeResults.length) {
+    wrap.innerHTML = `<p class="msg-empty-list">${state.composeRecipient ? '' : 'Search for people to message'}</p>`;
+    return;
+  }
+
+  wrap.innerHTML = state.composeResults.map(u => `
+    <div class="msg-compose-suggestion" data-compose-id="${escAttr(u.id)}">
+      <img src="${escAttr(u.profilePic || '/images/profile.jpg')}" alt="">
+      <div class="msg-compose-suggestion-info">
+        <span class="msg-compose-suggestion-name">${escHtml(u.name || u.email)}</span>
+        <span class="msg-compose-suggestion-headline">${escHtml(u.headline || '')}</span>
       </div>
-    </aside>
+    </div>
+  `).join('');
 
-  </main>
+  wrap.querySelectorAll('[data-compose-id]').forEach(el =>
+    el.addEventListener('click', () => {
+      const user = state.composeResults.find(u => u.id === el.dataset.composeId);
+      if (!user) return;
+      state.composeRecipient = user;
 
-  <script type="module" src="/js/pages/connections.js"></script>
-</body>
-</html>
+      // Render chosen chip, show body
+      const chosen = modal.querySelector('[data-compose-chosen]');
+      chosen.innerHTML = `
+        <span class="msg-compose-chip">
+          <img src="${escAttr(user.profilePic || '/images/profile.jpg')}" alt="">
+          ${escHtml(user.name || user.email)}
+          <button type="button" data-remove-recipient>&times;</button>
+        </span>
+      `;
+      chosen.classList.remove('hidden');
+      chosen.querySelector('[data-remove-recipient]')?.addEventListener('click', () => {
+        state.composeRecipient = null;
+        chosen.innerHTML = '';
+        chosen.classList.add('hidden');
+        modal.querySelector('[data-compose-body]').classList.add('hidden');
+        modal.querySelector('[data-compose-send]').disabled = true;
+      });
 
-----archivehubs-frontend\src\pages\messages.html
+      wrap.innerHTML = '';
+      modal.querySelector('[data-compose-body]').classList.remove('hidden');
+      setTimeout(() => modal.querySelector('[data-compose-input]').focus(), 40);
+    }));
+}
 
+// ── Store hooks ──────────────────────────────────────────────
+function wireStore() {
+  store.on('message:openWith', ({ userId }) => {
+    // From a connection card "Message" button
+    const existing = state.conversations.find(c => c.participants.some(p => p.id === userId));
+    if (existing) { openThread(existing); return; }
+    // Otherwise open compose pre-filled with this user
+    openComposeModal();
+    api.search('').then(res => {
+      const user = (res.users || []).find(u => u.id === userId);
+      if (user) {
+        state.composeResults = [user];
+        renderComposeSuggestions();
+      }
+    }).catch(() => {});
+  });
+}
+
+// ── Socket wiring ────────────────────────────────────────────
+function wireSocket() {
+  const onNewMessage = (msg) => {
+    const list = state.messages.get(msg.conversationId) || [];
+    if (!list.some(m => m.id === msg.id)) {
+      list.push(msg);
+      state.messages.set(msg.conversationId, list);
+    }
+
+    // Update conversation summary
+    const conv = state.conversations.find(c => c.id === msg.conversationId);
+    if (conv) {
+      conv.lastMessage = { ...msg };
+      conv.updatedAt = msg.createdAt;
+
+      if (state.activeId === msg.conversationId) {
+        appendMessage(msg);
+        if (msg.senderId !== getUser()?.id) {
+          // Auto mark as read when viewing
+          socket.emit('markAsRead', { conversationId: conv.id, lastReadMessageId: msg.id });
+        }
+      } else if (msg.senderId !== getUser()?.id) {
+        conv.unreadCount = (conv.unreadCount || 0) + 1;
+      }
+      renderConversations();
+    } else {
+      // New conversation we didn't know about — refresh list
+      loadConversations();
+    }
+  };
+
+  const onReadReceipt = ({ conversationId, lastReadMessageId }) => {
+    if (state.activeId !== conversationId) return;
+    const list = state.messages.get(conversationId) || [];
+    const idx = list.findIndex(m => m.id === lastReadMessageId);
+    if (idx >= 0) {
+      for (let i = 0; i <= idx; i++) list[i].read = true;
+    } else {
+      list.forEach(m => { m.read = true; });
+    }
+    renderMessages();
+  };
+
+  const onTyping = ({ conversationId, userId, typing }) => {
+    if (!state.typingUsers.has(conversationId)) state.typingUsers.set(conversationId, new Set());
+    const set = state.typingUsers.get(conversationId);
+    if (typing) set.add(userId); else set.delete(userId);
+
+    if (state.activeId === conversationId) {
+      renderTypingIndicator();
+    }
+  };
+
+  const onDisconnect = () => {
+    console.warn('[messaging] socket disconnected');
+  };
+
+  handlers.push(
+    socket.on('newMessage',  onNewMessage),
+    socket.on('readReceipt', onReadReceipt),
+    socket.on('typing',      onTyping),
+    socket.on('disconnect',  onDisconnect),
+  );
+}
+
+// ── Data loading ─────────────────────────────────────────────
+async function loadConversations() {
+  // Socket.io doesn't expose a "list conversations" event in the summary,
+  // so in mock we pull from the mock socket's internal list. In a real
+  // deployment this would come from a REST endpoint or a "getConversations"
+  // socket event — add one if your backend has it.
+  const list = socket?._getConversations?.() || [];
+  state.conversations = list;
+  renderConversations();
+
+  // Auto-open first focused conversation on wide screens
+  if (!state.activeId && window.innerWidth >= 900) {
+    const first = state.conversations.find(c => c.focused);
+    if (first) openThread(first);
+  }
+}
+
+async function openThread(conv) {
+  state.activeId = conv.id;
+  renderConversations();      // highlight active
+  root.querySelector('[data-msg-empty]')?.classList.add('hidden');
+  root.querySelector('[data-msg-active]')?.classList.remove('hidden');
+
+  // Header
+  const other = conv.participants[0];
+  root.querySelector('[data-thread-avatar]').src = other?.avatar || '/images/profile.jpg';
+  root.querySelector('[data-thread-name]').textContent = other?.name || '';
+  const statusEl = root.querySelector('[data-thread-status]');
+  statusEl.textContent = other?.online ? 'Active now' : other?.headline || 'Offline';
+  statusEl.classList.toggle('online', !!other?.online);
+
+  updateStarIcon(!!conv.starred);
+
+  // Clear old messages, request fresh
+  state.messages.set(conv.id, state.messages.get(conv.id) || []);
+  messagesEl.innerHTML = '<div class="msg-loading"><div class="spinner"></div></div>';
+
+  socket.emit('getMessages', { conversationId: conv.id, limit: 30 }, (res) => {
+    state.messages.set(conv.id, res?.messages || []);
+    renderMessages();
+    scrollToBottom();
+  });
+
+  // Mark as read
+  const last = (state.messages.get(conv.id) || []).at(-1);
+  if (last) {
+    socket.emit('markAsRead', { conversationId: conv.id, lastReadMessageId: last.id });
+  }
+  conv.unreadCount = 0;
+  renderConversations();
+}
+
+function closeThread() {
+  state.activeId = null;
+  root.querySelector('[data-msg-empty]')?.classList.remove('hidden');
+  root.querySelector('[data-msg-active]')?.classList.add('hidden');
+}
+
+// ── Rendering ────────────────────────────────────────────────
+function renderConversations() {
+  const visible = state.conversations
+    .filter(c => (state.filter === 'focused' ? c.focused : !c.focused))
+    .filter(c => {
+      if (!state.query) return true;
+      const other = c.participants[0];
+      const hay = `${other?.name || ''} ${c.lastMessage?.content || ''}`.toLowerCase();
+      return hay.includes(state.query);
+    })
+    .sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+
+  const focusedCount = state.conversations.filter(c => c.focused && c.unreadCount > 0).length;
+  const otherCount   = state.conversations.filter(c => !c.focused && c.unreadCount > 0).length;
+
+  updateCount(root.querySelector('[data-count-focused]'), focusedCount);
+  updateCount(root.querySelector('[data-count-other]'),   otherCount);
+
+  if (!visible.length) {
+    listEl.innerHTML = `<p class="msg-empty-list">${state.query ? 'No matches.' : `No conversations in ${state.filter}.`}</p>`;
+    return;
+  }
+
+  listEl.innerHTML = visible.map(conv => convHTML(conv)).join('');
+  listEl.querySelectorAll('[data-conv-id]').forEach(el =>
+    el.addEventListener('click', () => {
+      const conv = state.conversations.find(c => c.id === el.dataset.convId);
+      if (conv) openThread(conv);
+    }));
+}
+
+function convHTML(conv) {
+  const other = conv.participants[0] || {};
+  const unread = (conv.unreadCount || 0) > 0;
+  const preview = formatPreview(conv.lastMessage, other);
+  return `
+    <div class="msg-conv ${unread ? 'unread' : ''} ${conv.id === state.activeId ? 'active' : ''}"
+         data-conv-id="${escAttr(conv.id)}">
+      <div class="msg-conv-avatar-wrap">
+        <img src="${escAttr(other.avatar || '/images/profile.jpg')}" alt="" class="msg-conv-avatar">
+        <span class="msg-conv-presence ${other.online ? '' : 'offline'}"></span>
+      </div>
+      <div class="msg-conv-body">
+        <div class="msg-conv-row1">
+          <span class="msg-conv-name">${escHtml(other.name || 'Unknown')}</span>
+          <span class="msg-conv-time">${timeAgo(conv.updatedAt)}</span>
+        </div>
+        <div class="msg-conv-preview">${escHtml(preview)}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderMessages() {
+  const list = state.messages.get(state.activeId) || [];
+  if (!list.length) {
+    messagesEl.innerHTML = '';
+    return;
+  }
+
+  const myId = getUser()?.id || 'me';
+  let out = '';
+  let lastDate = null;
+
+  list.forEach((m, i) => {
+    const d = new Date(m.createdAt);
+    const dayKey = d.toDateString();
+    if (dayKey !== lastDate) {
+      out += `<div class="msg-date-sep">${formatDay(m.createdAt)}</div>`;
+      lastDate = dayKey;
+    }
+    const prev = list[i - 1];
+    const next = list[i + 1];
+    const mine = m.senderId === myId;
+    const sameAsPrev = prev && prev.senderId === m.senderId &&
+                       (m.createdAt - prev.createdAt) < 5 * 60 * 1000;
+    const sameAsNext = next && next.senderId === m.senderId &&
+                       (next.createdAt - m.createdAt) < 5 * 60 * 1000;
+
+    out += `
+      <div class="msg-bubble ${mine ? 'mine' : 'theirs'} ${m.read ? 'read' : ''} ${sameAsPrev ? 'stacked-top' : ''} ${sameAsNext ? 'stacked-bottom' : ''}">
+        <div class="msg-bubble-inner">
+          ${escapeAndLinkify(m.content)}
+          ${m.mediaUrl ? `<img class="msg-bubble-media" src="${escAttr(m.mediaUrl)}" alt="">` : ''}
+          ${!sameAsNext ? `<span class="msg-bubble-time">${formatTime(m.createdAt)}</span>` : ''}
+        </div>
+      </div>
+    `;
+  });
+
+  messagesEl.innerHTML = out;
+}
+
+function appendMessage(msg) {
+  const list = state.messages.get(msg.conversationId) || [];
+  if (!list.some(m => m.id === msg.id)) list.push(msg);
+  state.messages.set(msg.conversationId, list);
+  if (state.activeId === msg.conversationId) {
+    renderMessages();
+    scrollToBottom();
+  }
+}
+
+function renderTypingIndicator() {
+  const typingSet = state.typingUsers.get(state.activeId);
+  if (!typingSet || !typingSet.size) {
+    typingEl.classList.add('hidden');
+    return;
+  }
+  const conv = state.conversations.find(c => c.id === state.activeId);
+  const other = conv?.participants[0];
+  typingEl.classList.remove('hidden');
+  typingEl.querySelector('[data-typing-name]').textContent = `${other?.name?.split(' ')[0] || 'Someone'} is typing…`;
+}
+
+function scrollToBottom() {
+  requestAnimationFrame(() => {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  });
+}
+
+// ── Utilities ────────────────────────────────────────────────
+function updateCount(el, n) {
+  if (!el) return;
+  if (n > 0) { el.textContent = String(n); el.classList.remove('hidden'); }
+  else el.classList.add('hidden');
+}
+
+function formatPreview(msg, other) {
+  if (!msg) return 'No messages yet';
+  const mine = msg.senderId === getUser()?.id;
+  const prefix = mine ? 'You: ' : '';
+  return prefix + (msg.content || (msg.mediaUrl ? '📷 Photo' : ''));
+}
+
+function formatDay(ms) {
+  const d = new Date(ms);
+  const now = new Date();
+  const isToday = d.toDateString() === now.toDateString();
+  const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
+  if (isToday) return 'Today';
+  if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+function formatTime(ms) {
+  return new Date(ms).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+}
+
+function timeAgo(ms) {
+  if (!ms) return '';
+  const diff = Date.now() - ms;
+  const s = Math.floor(diff / 1000);
+  if (s < 60)     return 'now';
+  if (s < 3600)   return `${Math.floor(s / 60)}m`;
+  if (s < 86400)  return `${Math.floor(s / 3600)}h`;
+  if (s < 604800) return `${Math.floor(s / 86400)}d`;
+  return new Date(ms).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+function escapeAndLinkify(text) {
+  const safe = String(text ?? '')
+    .replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  return safe.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+}
+
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c =>
+    ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+const escAttr = escHtml;
+
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+
+======= src/js/core/socket.js
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
+const WS_URL   = import.meta.env.VITE_WS_URL || 'http://localhost:3000';
+
+let socket = null;
+let connectPromise = null;
+
+export function connectSocket() {
+  if (socket) return Promise.resolve(socket);
+  if (connectPromise) return connectPromise;
+
+  connectPromise = (async () => {
+    if (USE_MOCK) {
+      const { createMockSocket } = await import('../mocks/socket-mock.js');
+      socket = createMockSocket();
+    } else {
+      const { io } = await import('socket.io-client');
+      socket = io(WS_URL, {
+        withCredentials: true,     // session cookie on handshake
+        transports: ['websocket'],
+        autoConnect: true,
+      });
+    }
+    return socket;
+  })();
+
+  return connectPromise;
+}
+
+export function getSocket() { return socket; }
+
+export function disconnectSocket() {
+  if (socket?.disconnect) socket.disconnect();
+  socket = null;
+  connectPromise = null;
+}
+
+================= src/js/mocks/socket-mock.js
+
+import conversationsData from './data/conversations.json';
+
+const REPLY_POOL = [
+  "Sounds good — let's do it.",
+  "Thanks for following up on this.",
+  "Got it. I'll take a look and get back to you.",
+  "Interesting perspective. Can you say more?",
+  "Makes sense. What's the timeline looking like?",
+  "Appreciate the context — that helps a lot.",
+  "Sure, I'm free later this week.",
+  "Let me check with the team and circle back.",
+];
+
+const MY_ID = () => {
+  try { return localStorage.getItem('ah:mock:userId') || 'me'; }
+  catch { return 'me'; }
+};
+
+const delay = (ms) => new Promise(r => setTimeout(r, ms));
+const jitter = (base, spread) => base + Math.random() * spread;
+
+export function createMockSocket() {
+  const handlers = new Map();
+  let connected = false;
+
+  // ── Seed state ─────────────────────────────────────────────
+  const conversations = conversationsData.conversations.map(c => ({ ...c }));
+  const messages = new Map();
+  conversationsData.messages.forEach((m) => {
+    if (!messages.has(m.conversationId)) messages.set(m.conversationId, []);
+    messages.get(m.conversationId).push({
+      ...m,
+      senderId: m.senderId === 'me' ? MY_ID() : m.senderId,
+    });
+  });
+
+  // ── Emitter ────────────────────────────────────────────────
+  function dispatch(event, payload) {
+    const set = handlers.get(event);
+    if (!set) return;
+    set.forEach((h) => {
+      try { h(payload); }
+      catch (e) { console.error(`[socket-mock] handler error for "${event}":`, e); }
+    });
+  }
+
+  function emitToClient(event, payload) {
+    setTimeout(() => dispatch(event, payload), jitter(30, 60));
+  }
+
+  // ── Handlers ───────────────────────────────────────────────
+  function handleGetMessages({ conversationId, limit = 30 }, ack) {
+    const all = messages.get(conversationId) || [];
+    const slice = all.slice(-limit);
+    const hasMore = all.length > slice.length;
+    setTimeout(() => {
+      ack?.({ conversationId, messages: slice, hasMore });
+    }, jitter(80, 120));
+  }
+
+  function handleSendMessage({ recipientId, conversationId, content, mediaUrl, replyToMessageId }, ack) {
+    let conv = conversationId
+      ? conversations.find(c => c.id === conversationId)
+      : conversations.find(c => c.participants.some(p => p.id === recipientId));
+
+    // Auto-create a conversation if none exists
+    if (!conv) {
+      const recipient = conversations
+        .flatMap(c => c.participants)
+        .find(p => p.id === recipientId) || {
+          id: recipientId, name: 'New connection', avatar: 'images/profile.jpg', headline: '',
+        };
+      conv = {
+        id: `c-${Date.now().toString(36)}`,
+        participants: [recipient],
+        lastMessage: null,
+        unreadCount: 0,
+        updatedAt: Date.now(),
+        focused: true,
+        starred: false,
+      };
+      conversations.push(conv);
+      messages.set(conv.id, []);
+    }
+
+    const msg = {
+      id: `m-${Date.now().toString(36)}-${Math.floor(Math.random() * 999)}`,
+      conversationId: conv.id,
+      senderId: MY_ID(),
+      content,
+      mediaUrl,
+      replyToMessageId,
+      createdAt: Date.now(),
+      read: false,
+    };
+    messages.get(conv.id).push(msg);
+    conv.lastMessage = { ...msg };
+    conv.updatedAt = msg.createdAt;
+
+    // Ack immediately
+    setTimeout(() => ack?.({ message: msg }), jitter(40, 60));
+
+    // Echo as newMessage so the UI unifies sender/receiver handling
+    emitToClient('newMessage', msg);
+
+    // Simulate the recipient reading it, then typing, then replying
+    simulateRecipientFlow(conv, recipientId);
+
+    return conv.id;
+  }
+
+  function handleMarkAsRead({ conversationId, lastReadMessageId }, ack) {
+    const list = messages.get(conversationId) || [];
+    list.forEach(m => { m.read = true; });
+    const conv = conversations.find(c => c.id === conversationId);
+    if (conv) conv.unreadCount = 0;
+    setTimeout(() => ack?.({ ok: true }), jitter(40, 60));
+
+    // Echo a read receipt from "the other side"
+    emitToClient('readReceipt', { conversationId, lastReadMessageId });
+  }
+
+  function handleTyping({ conversationId, typing }) {
+    const conv = conversations.find(c => c.id === conversationId);
+    if (!conv) return;
+    const other = conv.participants[0];
+    // In mock, we only send typing to our own client when *we* type.
+    // Real server would broadcast to the other party.
+  }
+
+  // ── Auto-reply simulation ──────────────────────────────────
+  function simulateRecipientFlow(conv, recipientId) {
+    const recipient = conv.participants.find(p => p.id === recipientId) || conv.participants[0];
+    if (!recipient) return;
+
+    // 1) Mark their read receipt after a short pause
+    setTimeout(() => {
+      emitToClient('readReceipt', {
+        conversationId: conv.id,
+        lastReadMessageId: messages.get(conv.id).at(-1)?.id,
+      });
+    }, jitter(500, 700));
+
+    // 2) Typing indicator
+    setTimeout(() => {
+      emitToClient('typing', { conversationId: conv.id, userId: recipient.id, typing: true });
+    }, jitter(900, 500));
+
+    // 3) Reply after a natural pause
+    setTimeout(() => {
+      emitToClient('typing', { conversationId: conv.id, userId: recipient.id, typing: false });
+
+      const reply = {
+        id: `m-${Date.now().toString(36)}-${Math.floor(Math.random() * 999)}`,
+        conversationId: conv.id,
+        senderId: recipient.id,
+        content: REPLY_POOL[Math.floor(Math.random() * REPLY_POOL.length)],
+        createdAt: Date.now(),
+        read: false,
+      };
+      messages.get(conv.id).push(reply);
+      conv.lastMessage = { ...reply };
+      conv.updatedAt = reply.createdAt;
+      conv.unreadCount = (conv.unreadCount || 0) + 1;
+      emitToClient('newMessage', reply);
+    }, jitter(2600, 1400));
+  }
+
+  // ── Socket facade ──────────────────────────────────────────
+  const socket = {
+    get connected() { return connected; },
+
+    on(event, handler) {
+      if (!handlers.has(event)) handlers.set(event, new Set());
+      handlers.get(event).add(handler);
+      return () => handlers.get(event)?.delete(handler);
+    },
+
+    off(event, handler) {
+      handlers.get(event)?.delete(handler);
+    },
+
+    emit(event, payload, ack) {
+      switch (event) {
+        case 'getMessages':  return handleGetMessages(payload, ack);
+        case 'sendMessage':  return handleSendMessage(payload, ack);
+        case 'markAsRead':   return handleMarkAsRead(payload, ack);
+        case 'typing':       return handleTyping(payload);
+        default:
+          console.warn(`[socket-mock] unhandled emit: ${event}`);
+      }
+    },
+
+    connect() {
+      if (connected) return socket;
+      connected = true;
+      setTimeout(() => dispatch('connect'), jitter(60, 80));
+      return socket;
+    },
+
+    disconnect() {
+      connected = false;
+      dispatch('disconnect');
+    },
+
+    // Test helper — expose conversation list for hydration in the UI
+    _getConversations() { return conversations; },
+  };
+
+  return socket.connect();
+}
+
+================== src/js/mocks/data/conversations.json
+{
+  "connections": [
+    { "id": "u-002", "firstName": "Emma",    "lastName": "Watson",     "profilePic": "images/profile.jpg", "headline": "Senior UI/UX Designer at Apple",       "connectedAt": 1737000000000 },
+    { "id": "u-003", "firstName": "James",   "lastName": "Rodriguez",  "profilePic": "images/profile.jpg", "headline": "Backend Developer at Microsoft",        "connectedAt": 1737100000000 },
+    { "id": "u-004", "firstName": "Aisha",   "lastName": "Bello",      "profilePic": "images/profile.jpg", "headline": "Product Manager at Paystack",           "connectedAt": 1737200000000 },
+    { "id": "u-005", "firstName": "Chinedu","lastName": "Okafor",     "profilePic": "images/profile.jpg", "headline": "Data Scientist · Freelance",            "connectedAt": 1737300000000 },
+    { "id": "u-006", "firstName": "Fatima",  "lastName": "Yusuf",      "profilePic": "images/profile.jpg", "headline": "DevOps Engineer at Flutterwave",        "connectedAt": 1737400000000 },
+    { "id": "u-007", "firstName": "Daniel",  "lastName": "Kimani",     "profilePic": "images/profile.jpg", "headline": "Mobile Engineer · Flutter & Swift",     "connectedAt": 1737500000000 },
+    { "id": "u-008", "firstName": "Zara",    "lastName": "Ahmed",      "profilePic": "images/profile.jpg", "headline": "Founder at Northwind Labs",             "connectedAt": 1737600000000 },
+    { "id": "u-009", "firstName": "Tobi",    "lastName": "Adeyemi",    "profilePic": "images/profile.jpg", "headline": "Full-stack Developer at Andela",        "connectedAt": 1737700000000 }
+  ],
+  "requests": [
+    { "id": "u-010", "firstName": "Sarah",   "lastName": "Chen",       "profilePic": "images/profile.jpg", "headline": "Product Manager at Stripe",              "mutualCount": 5, "requestedAt": 1737800000000 },
+    { "id": "u-011", "firstName": "Kwame",   "lastName": "Mensah",     "profilePic": "images/profile.jpg", "headline": "Cloud Architect at AWS",                 "mutualCount": 2, "requestedAt": 1737810000000 },
+    { "id": "u-012", "firstName": "Layla",   "lastName": "Hassan",     "profilePic": "images/profile.jpg", "headline": "Design Lead at Figma",                   "mutualCount": 8, "requestedAt": 1737820000000 }
+  ],
+  "recommendations": {
+    "aty": [
+      { "id": "u-020", "firstName": "Alex",   "lastName": "Johnson",   "profilePic": "images/profile.jpg", "headline": "Frontend Engineer at Vercel",            "mutualCount": 12, "reason": "12 mutual connections" },
+      { "id": "u-021", "firstName": "Priya",  "lastName": "Sharma",    "profilePic": "images/profile.jpg", "headline": "ML Engineer at OpenAI",                  "mutualCount": 7,  "reason": "7 mutual connections" },
+      { "id": "u-022", "firstName": "Marcus", "lastName": "Oduya",     "profilePic": "images/profile.jpg", "headline": "Growth Lead at Notion",                  "mutualCount": 4,  "reason": "Works at Notion" },
+      { "id": "u-023", "firstName": "Ngozi",  "lastName": "Eze",       "profilePic": "images/profile.jpg", "headline": "Backend Developer at Cloudflare",        "mutualCount": 3,  "reason": "3 mutual connections" },
+      { "id": "u-024", "firstName": "Hugo",   "lastName": "Silva",     "profilePic": "images/profile.jpg", "headline": "iOS Engineer at Spotify",                "mutualCount": 2,  "reason": "Similar role" },
+      { "id": "u-025", "firstName": "Mira",   "lastName": "Patel",     "profilePic": "images/profile.jpg", "headline": "Staff Engineer at Stripe",               "mutualCount": 6,  "reason": "6 mutual connections" }
+    ],
+    "acr": [
+      { "id": "u-030", "firstName": "Yusuf",  "lastName": "Rahman",    "profilePic": "images/profile.jpg", "headline": "Backend Developer at Wise",              "reason": "You both liked posts about distributed systems" },
+      { "id": "u-031", "firstName": "Adaeze", "lastName": "Nwosu",     "profilePic": "images/profile.jpg", "headline": "Frontend Engineer at Monzo",             "reason": "You both commented on Adeyemi's post" },
+      { "id": "u-032", "firstName": "Ethan",  "lastName": "Park",      "profilePic": "images/profile.jpg", "headline": "SRE at Cloudflare",                      "reason": "You both follow ArchiveHubs Engineering" }
+    ],
+    "rcr": [
+      { "id": "u-040", "firstName": "Sofia",  "lastName": "Rossi",     "profilePic": "images/profile.jpg", "headline": "Senior Backend Developer at Revolut",    "reason": "Same role as you" },
+      { "id": "u-041", "firstName": "Kwesi",  "lastName": "Boateng",   "profilePic": "images/profile.jpg", "headline": "Backend Developer at MTN",               "reason": "Similar experience level" },
+      { "id": "u-042", "firstName": "Ines",   "lastName": "Costa",     "profilePic": "images/profile.jpg", "headline": "Platform Engineer at Nubank",            "reason": "Works in your industry" }
+    ],
+    "pcr": [
+      { "id": "u-050", "firstName": "Ravi",   "lastName": "Krishnan",  "profilePic": "images/profile.jpg", "headline": "CTO at Fintech Labs",                    "reason": "Popular in your network" },
+      { "id": "u-051", "firstName": "Amara",  "lastName": "Okonkwo",   "profilePic": "images/profile.jpg", "headline": "VP Engineering at Paystack",             "reason": "Trending this week" }
+    ],
+    "bcr": [
+      { "id": "u-060", "firstName": "Acme",   "lastName": "Corp",      "profilePic": "images/Logo.jpg",    "headline": "Enterprise Software · 1.2k followers",   "account_type": "corporate", "reason": "You follow similar pages" },
+      { "id": "u-061", "firstName": "Bytebase","lastName": "Inc",      "profilePic": "images/Logo.jpg",    "headline": "Database tools · 800 followers",         "account_type": "corporate", "reason": "Popular in tech" }
+    ]
+  },
+  "birthdays": {
+    "tbr": [
+      { "id": "u-002", "firstName": "Emma",  "lastName": "Watson",  "profilePic": "images/profile.jpg", "headline": "Senior UI/UX Designer at Apple" }
+    ],
+    "rbr": [
+      { "id": "u-004", "firstName": "Aisha", "lastName": "Bello",   "profilePic": "images/profile.jpg", "headline": "Product Manager at Paystack" }
+    ],
+    "ubr": [
+      { "id": "u-006", "firstName": "Fatima","lastName": "Yusuf",   "profilePic": "images/profile.jpg", "headline": "DevOps Engineer at Flutterwave" },
+      { "id": "u-007", "firstName": "Daniel","lastName": "Kimani",  "profilePic": "images/profile.jpg", "headline": "Mobile Engineer · Flutter & Swift" }
+    ]
+  }
+}
+
+
+========== src/pages/messages.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -211,3 +1168,58 @@
   <script type="module" src="/js/pages/messages.js"></script>
 </body>
 </html>
+
+===== src/js/pages/messages.js
+import { mountPartials }  from '../core/include.js';
+import { requireAuth }    from '../core/session.js';
+import { initNavbar }     from '../components/navbar.js';
+import { initMessaging }  from '../components/messaging.js';
+
+async function boot() {
+  console.log('[messages] booting…');
+  await mountPartials();
+  const ok = await requireAuth();
+  if (!ok) return;
+
+  initNavbar();
+  await initMessaging();
+
+  console.log('[messages] ready');
+}
+
+boot().catch(err => console.error('[messages] boot failed:', err));
+
+
+=====archivehubs-frontend\vite.config.js
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+
+export default defineConfig({
+  root: 'src',
+  envDir: resolve(__dirname),
+  publicDir: '../public',
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        index:  resolve(__dirname, 'src/pages/index.html'),
+        login:  resolve(__dirname, 'src/pages/login.html'),
+        signup: resolve(__dirname, 'src/pages/signup.html'),
+        home:   resolve(__dirname, 'src/pages/home.html'),
+        connections: resolve(__dirname, 'src/pages/connections.html'),
+        messages:    resolve(__dirname, 'src/pages/messages.html'),
+      },
+    },
+  },
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/api/, ''),
+      },
+    },
+  },
+});
