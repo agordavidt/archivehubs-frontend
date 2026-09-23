@@ -1,16 +1,15 @@
 import { mountPartials }        from '../core/include.js';
 import { requireAuth }          from '../core/session.js';
 import { initNavbar }           from '../components/navbar.js';
-import { initStories }          from '../components/stories.js';
 import { initFeed }             from '../components/feed.js';
 import { initComments }         from '../components/comments.js';
 import { initCreatePost }       from '../components/create-post.js';
 import { initCreateStory }      from '../components/create-story.js';
+import { initStories }          from '../components/stories.js';
 import { initHomeSidebar }      from '../components/home-sidebar.js';
+import { initMessagingWidget }  from '../components/messaging-widget.js';
 
 async function boot() {
-  console.log('[home] booting…');
-
   await mountPartials();
   const ok = await requireAuth();
   if (!ok) return;
@@ -21,7 +20,8 @@ async function boot() {
   initCreatePost();
   initCreateStory();
   initStories();
-  initHomeSidebar();        // ← NEW
+  initHomeSidebar();
+  initMessagingWidget();       // ← NEW
 
   console.log('[home] ready');
 }

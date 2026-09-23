@@ -636,3 +636,173 @@
   .msg-thread  { min-height: 500px; }
   .msg-bubble  { max-width: 85%; }
 }
+
+/* ══════════════ FLOATING WIDGET ══════════════ */
+.mwidget {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  width: 320px;
+  background: var(--bg-primary);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  z-index: 9999;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  transition: height 0.2s ease;
+}
+
+.mwidget-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--bg-primary);
+}
+.mwidget-bar:hover { background: var(--bg-hover); }
+
+.mwidget-bar-left {
+  display: flex; align-items: center; gap: 10px;
+  min-width: 0;
+}
+
+.mwidget-avatars { display: flex; flex-shrink: 0; }
+.mwidget-avatars img {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-primary);
+  object-fit: cover;
+}
+.mwidget-avatars img:not(:first-child) { margin-left: -10px; }
+
+.mwidget-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mwidget-badge {
+  min-width: 20px; height: 20px;
+  padding: 0 6px;
+  background: #dc2626;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 11px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+.mwidget-bar-actions {
+  display: flex; gap: 2px;
+  flex-shrink: 0;
+}
+
+.mwidget-icon-btn {
+  width: 30px; height: 30px;
+  border: none; background: transparent;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.mwidget-icon-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.mwidget-icon-btn .material-symbols-outlined { font-size: 18px; }
+
+.mwidget-panel {
+  max-height: 400px;
+  overflow-y: auto;
+  border-top: 1px solid var(--border-color);
+}
+
+.mwidget-panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px;
+  font-size: 12px; font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.mwidget-see-all {
+  font-size: 11.5px;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.mwidget-see-all:hover { text-decoration: underline; }
+
+.mwidget-conv-list { padding-bottom: 6px; }
+
+.mwidget-conv {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+.mwidget-conv:hover { background: var(--bg-hover); }
+.mwidget-conv img {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.mwidget-conv-body { flex: 1; min-width: 0; }
+.mwidget-conv-row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.mwidget-conv-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mwidget-conv-badge {
+  min-width: 16px; height: 16px;
+  padding: 0 5px;
+  background: var(--accent-color);
+  color: var(--color-dark);
+  border-radius: 8px;
+  font-size: 10px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.mwidget-conv-preview {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-top: 1px;
+}
+.mwidget-conv.unread .mwidget-conv-preview {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.mwidget-empty {
+  padding: 24px 14px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.mwidget-loading {
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .mwidget {
+    bottom: 70px;   /* above bottom nav */
+    left: 10px; right: 10px;
+    width: auto;
+  }
+}
