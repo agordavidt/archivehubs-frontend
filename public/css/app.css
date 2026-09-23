@@ -52,6 +52,10 @@
 @import url('app/components/messaging.css');
 @import url('app/components/messaging-modals.css');
 
+/* Profile */
+@import url('app/components/profile-page.css');
+@import url('app/components/profile-edit.css');
+
 /* Modals */
 @import url('app/components/comment-modal.css');
 @import url('app/components/share-repost.css');
@@ -64,3 +68,5 @@
 @import url('app/dark.css');
 @import url('app/responsive.css');
 @import url('app/animations.css');
+
+

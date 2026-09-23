@@ -272,4 +272,25 @@ export const api = {
       if (!path) throw new Error(`Unknown birthday kind: ${kind}`);
       return request(`/connection/${path}?paginate=${paginate}`);
     },
+
+
+      // ── PROFILE ─────────────────────────────────────────────────
+      getIndividualProfile: (userId) =>
+        request('/profile/individual/info', { method: 'GET', body: { userId: userId || undefined } }),
+
+      updateProfileSection: (section, data) =>
+        request('/profile/individual/section', { method: 'POST', body: { section, data } }),
+
+      saveProfileEntry: (section, entryId, data) =>
+        request('/profile/individual/section/entry', { method: 'POST', body: { section, entryId, data } }),
+
+      deleteProfileEntry: (section, entryId) =>
+        request('/profile/individual/section/delete', { method: 'POST', body: { section, entryId } }),
+
+      uploadProfileMedia: (kind, file) => {
+        const form = new FormData();
+        form.append('kind', kind);
+        form.append('file', file);
+        return request('/profile/individual/upload', { method: 'POST', body: form, isForm: true });
+      },
 };

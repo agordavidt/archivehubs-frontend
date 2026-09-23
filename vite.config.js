@@ -16,6 +16,7 @@ export default defineConfig({
         home:   resolve(__dirname, 'src/pages/home.html'),
         connections: resolve(__dirname, 'src/pages/connections.html'),
         messages:    resolve(__dirname, 'src/pages/messages.html'),
+        profile: resolve(__dirname, 'src/pages/profile.html'),
       },
     },
   },

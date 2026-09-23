@@ -4,12 +4,41 @@ import commentsJSON from './data/comments.json';
 import accountsJSON from './data/accounts.json';
 import storiesJSON from './data/stories.json';
 import connectionsJSON from './data/connections.json';
+import profilesJSON from './data/profiles.json';
+
+
+
 
 const delay = (ms) => new Promise(r => setTimeout(r, ms));
 async function tick() { await delay(60 + Math.random() * 90); }  // was 200-400
 
 const stories = storiesJSON.stories.map(s => ({ ...s }));
 let nextStoryId = 100;
+
+
+const profiles = JSON.parse(JSON.stringify(profilesJSON));
+
+function ensureProfile(userId) {
+  if (!profiles[userId]) {
+    const u = users.find(x => x.id === userId);
+    profiles[userId] = {
+      id: userId,
+      account_type: u?.account_type || 'individual',
+      header: {
+        fullName: u ? `${u.firstName} ${u.lastName}`.trim() : 'User',
+        headline: u?.headline || '',
+        location: u?.state_province || '',
+        connectionCount: 0,
+        profilePic: u?.profilePic || 'images/profile.jpg',
+        banner: 'images/hubs.jpg',
+      },
+      about: {}, contact: {},
+      experience: [], education: [], licenses: [], affiliations: [],
+      volunteer: [], languages: [], skills: [], personalInterests: [], references: [],
+    };
+  }
+  return profiles[userId];
+}
 
 // ── Persistent mock state ─────────────────────────────────
 const MOCK_SESSION_KEY = 'ah:mock:userId';
@@ -735,6 +764,88 @@ export async function mockRequest(path, { method = 'GET', body } = {}) {
           .map(decorate);
         return { connections: filtered };
       }
+
+      // ════════════ PROFILE ════════════
+    if (method === 'GET' && pathname === '/profile/individual/info') {
+      const { userId } = body || {};
+      const me = currentUserId();
+      if (!me) throw mockError(401, 'Unauthorized');
+
+      const targetId = userId || me;
+      const profile = ensureProfile(targetId);
+
+      // Compute relationship
+      let connectionStatus = 'none';
+      if (targetId === me) connectionStatus = 'self';
+      else if (connectionState.connections.some(c => c.id === targetId)) connectionStatus = 'connected';
+      else if (connectionState.sentRequests.has(targetId)) connectionStatus = 'pending';
+      else if (connectionState.requests.some(r => r.id === targetId)) connectionStatus = 'incoming';
+
+      return {
+        profile: {
+          ...profile,
+          header: { ...profile.header, connectionStatus, isOwner: targetId === me },
+        },
+      };
+    }
+
+    if (method === 'POST' && pathname === '/profile/individual/section') {
+      const { section, data } = body || {};
+      const me = currentUserId();
+      if (!me) throw mockError(401, 'Unauthorized');
+      const profile = ensureProfile(me);
+      if (!['about', 'contact', 'personalInterests', 'header'].includes(section)) {
+        throw mockError(400, `Section '${section}' is not a single-value section`);
+      }
+      if (section === 'personalInterests') {
+        profile[section] = Array.isArray(data[section]) ? data[section] : [];
+      } else {
+        profile[section] = { ...(profile[section] || {}), ...data };
+      }
+      return { message: 'Section updated', section, data: profile[section] };
+    }
+
+    if (method === 'POST' && pathname === '/profile/individual/section/entry') {
+      const { section, entryId, data } = body || {};
+      const me = currentUserId();
+      if (!me) throw mockError(401, 'Unauthorized');
+      const profile = ensureProfile(me);
+      if (!Array.isArray(profile[section])) {
+        throw mockError(400, `Section '${section}' is not a list section`);
+      }
+      if (entryId) {
+        const idx = profile[section].findIndex(e => e.id === entryId);
+        if (idx < 0) throw mockError(404, 'Entry not found');
+        profile[section][idx] = { ...profile[section][idx], ...data, id: entryId };
+        return { message: 'Entry updated', entry: profile[section][idx] };
+      }
+      const entry = { id: `e-${Date.now().toString(36)}-${Math.floor(Math.random() * 999)}`, ...data };
+      profile[section].unshift(entry);
+      return { message: 'Entry created', entry };
+    }
+
+    if (method === 'POST' && pathname === '/profile/individual/section/delete') {
+      const { section, entryId } = body || {};
+      const me = currentUserId();
+      if (!me) throw mockError(401, 'Unauthorized');
+      const profile = ensureProfile(me);
+      if (!Array.isArray(profile[section])) throw mockError(400, 'Not a list section');
+      profile[section] = profile[section].filter(e => e.id !== entryId);
+      return { message: 'Entry deleted' };
+    }
+
+    if (method === 'POST' && pathname === '/profile/individual/upload') {
+      const me = currentUserId();
+      if (!me) throw mockError(401, 'Unauthorized');
+      const kind = body.get('kind');
+      const file = body.get('file');
+      if (!kind || !file) throw mockError(400, 'kind and file are required');
+      const url = URL.createObjectURL(file);
+      const profile = ensureProfile(me);
+      if (kind === 'avatar') profile.header.profilePic = url;
+      else if (kind === 'banner') profile.header.banner = url;
+      return { message: 'Uploaded', url, kind };
+    }
 
   throw mockError(501, `[mock] Unhandled: ${method} ${path}`);
 }

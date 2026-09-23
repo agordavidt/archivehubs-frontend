@@ -1,0 +1,5 @@
+GET   /profile/individual/info              body: { userId }        → full profile
+POST  /profile/individual/section           body: { section, data }  → replace single-value section
+POST  /profile/individual/section/entry     body: { section, entryId?, data }  → create or update list entry
+POST  /profile/individual/section/delete    body: { section, entryId }
+POST  /profile/individual/upload            multipart: { kind, file }  kind = avatar | banner | companyLogo

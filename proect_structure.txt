@@ -1,0 +1,176 @@
+ArchiveHubs — frontend project state
+Goal: Social B2B networking platform (LinkedIn-style). Frontend is fully mock-driven with a real backend being built in parallel using Bun + Express + Neo4j (users/connections/posts) + DynamoDB (chat) + Redis (sessions) + S3 + Socket.io. Session-cookie auth.
+
+Stack: Vite + vanilla ES modules + CSS custom properties. No framework. Partials loaded at runtime via data-include.
+
+Directory structure
+text
+archivehubs-frontend/
+├── package.json
+├── vite.config.js
+├── .env.development                    # VITE_USE_MOCK=true, VITE_API_URL, VITE_WS_URL
+│
+├── public/                             # served as-is, no build step
+│   ├── css/
+│   │   ├── tokens.css                  # CSS custom properties (light + dark)
+│   │   ├── auth.css                    # login/signup/index page styles
+│   │   ├── app.css                     # @import entry — the ONLY css linked by app pages
+│   │   └── app/
+│   │       ├── base.css                # reset, html/body, element defaults
+│   │       ├── layout.css              # main-content grid, sidebars
+│   │       ├── utilities.css           # .hidden and global scrollbar
+│   │       ├── dark.css                # all [data-theme="dark"] overrides
+│   │       ├── responsive.css          # all media queries
+│   │       ├── animations.css          # keyframes
+│   │       └── components/
+│   │           ├── navbar.css
+│   │           ├── mobile-header.css
+│   │           ├── mobile-nav.css
+│   │           ├── account-popup.css
+│   │           ├── profile-card.css
+│   │           ├── quick-links.css
+│   │           ├── stories.css
+│   │           ├── create-post-bar.css
+│   │           ├── create-post-modal.css
+│   │           ├── create-story-modal.css
+│   │           ├── story-viewer.css
+│   │           ├── post-card.css
+│   │           ├── feed.css
+│   │           ├── comment-modal.css
+│   │           ├── connections.css
+│   │           ├── connections-page.css
+│   │           ├── sponsored.css
+│   │           ├── right-sidebar.css
+│   │           ├── toggles.css
+│   │           ├── messaging.css       # full page + collapsed widget
+│   │           ├── messaging-modals.css
+│   │           └── share-repost.css
+│   │
+│   └── images/                         # static images (Logo, profile.jpg, etc.)
+│
+└── src/
+    ├── pages/                          # HTML entry points
+    │   ├── index.html                  # boot redirect (auth check → home or login)
+    │   ├── login.html
+    │   ├── signup.html
+    │   ├── home.html                   # feed + stories + create-post + right sidebar
+    │   ├── connections.html            # tabs: list, requests, suggestions, birthdays
+    │   └── messages.html               # full LinkedIn-style messaging page
+    │
+    ├── components/                     # HTML partials injected at runtime
+    │   ├── navbar.html                 # desktop navbar + mobile header + account popup
+    │   ├── messaging.html              # full messaging shell (used on messages page)
+    │   ├── messaging-widget.html       # collapsed floating widget (used on home/connections)
+    │   ├── sidebars/
+    │   │   └── network.html            # "Add to your network" widget
+    │   └── modals/
+    │       ├── create-post.html
+    │       ├── create-story.html
+    │       ├── story-viewer.html
+    │       └── comment-modal.html
+    │
+    └── js/
+        ├── core/                       # framework-agnostic primitives
+        │   ├── api.js                  # single HTTP facade — the only file that knows mock vs real
+        │   ├── socket.js               # single WS facade — mock or real socket.io-client
+        │   ├── session.js              # auth state, current user, account switching
+        │   ├── store.js                # pub/sub event bus (no library)
+        │   ├── schemas.js              # JSDoc typedefs for every entity
+        │   └── include.js              # mounts [data-include] partials
+        │
+        ├── components/                 # one module per UI component
+        │   ├── navbar.js               # account popup, active-nav highlight
+        │   ├── feed.js                 # infinite scroll feed + skeleton loaders
+        │   ├── post-card.js            # single post render + optimistic like
+        │   ├── comments.js             # comment modal + threaded replies
+        │   ├── create-post.js          # full create-post modal
+        │   ├── create-story.js         # full create-story modal
+        │   ├── stories.js              # story row + fullscreen viewer
+        │   ├── home-sidebar.js         # "Add to your network" widget
+        │   ├── connections.js          # connections page (list/requests/suggestions/birthdays)
+        │   ├── messaging.js            # full-page messaging
+        │   └── messaging-widget.js     # collapsed floating widget
+        │
+        ├── pages/                      # one module per HTML page — bootstraps
+        │   ├── index.js
+        │   ├── login.js
+        │   ├── signup.js
+        │   ├── home.js
+        │   ├── connections.js
+        │   └── messages.js
+        │
+        └── mocks/                      # mock data + fake network
+            ├── index.js                # mockRequest dispatcher for api.js
+            ├── socket-mock.js          # in-process socket.io-compatible mock
+            └── data/
+                ├── user.json
+                ├── feed.json
+                ├── comments.json
+                ├── stories.json
+                ├── accounts.json
+                └── conversations.json
+Key architectural rules
+Only api.js and socket.js know whether we're running mock or real. Flip VITE_USE_MOCK=false in .env and everything points at the backend. No other file changes.
+
+Components never fetch directly. They call api.* or emit socket events.
+
+Components never call each other. They store.emit('event', payload) and others store.on(...).
+
+Every HTML page uses one CSS link: /css/app.css. It @imports everything else.
+
+Every HTML page includes /components/navbar.html via data-include.
+
+Every page has a matching src/js/pages/<page>.js that calls mountPartials() then requireAuth() then per-component init functions.
+
+Dark-mode and responsive rules live centrally (dark.css, responsive.css) — never inside component files.
+
+Store events (pub/sub contract)
+Event	Emitted by	Consumed by
+session:ready / session:anonymous / session:expired	session.js	navbar, sidebar widgets
+account:switched	session.js	navbar, feed, sidebar
+post:created / post:deleted	create-post, feed	feed
+comment:open / comment:created	post-card, comments	comments, feed
+story:created / story:deleted	create-story	stories
+connection:requested / connection:accepted / connection:rejected	connections, home-sidebar	connections, home-sidebar
+message:openWith	anywhere	messaging (opens thread)
+notification	anywhere	future notifications system
+Mock login credentials
+text
+john@archivehubs.dev  /  password123
+What's done
+✅ Auth (login, signup, session persistence, account switching)
+
+✅ Navbar + mobile header + account popup
+
+✅ Feed with infinite scroll, skeleton loaders, optimistic likes
+
+✅ Post card + comments (threaded)
+
+✅ Create post modal (formatting, media, tags, location, audience)
+
+✅ Create story modal + fullscreen story viewer
+
+✅ Connections page (4 tabs, 8 recommendation variants, birthdays)
+
+✅ Home sidebar "Add to your network" widget
+
+✅ Messaging full page (LinkedIn-style, mock socket, read receipts, typing indicator)
+
+✅ Collapsed messaging widget
+
+✅ CSS split into 20+ component files
+
+✅ HTML partials for shared chrome
+
+What's next
+Group chat — backend supports it via separate socket events
+
+Notifications page — hook the notifications:${userId} socket room
+
+Profile page — GET /profile/individual/info, POST /profile/individual/about
+
+Drive / file browser — GET /drive/storage/items and friends
+
+Home sidebar trending/suggested pages — same widget pattern as network
+
+Swap mock → real backend — flip .env, add getConversations socket event on the server side

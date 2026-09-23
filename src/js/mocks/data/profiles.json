@@ -1,0 +1,175 @@
+{
+  "u-john-001": {
+    "id": "u-john-001",
+    "account_type": "individual",
+    "header": {
+      "fullName": "John Doe",
+      "headline": "Software Developer · AI Enthusiast · Full-stack Engineer",
+      "tagline": "Building the graph-native future of professional networking.",
+      "location": "Lagos, Nigeria",
+      "connectionCount": 342,
+      "profilePic": "images/profile.jpg",
+      "banner": "images/hubs.jpg"
+    },
+    "about": {
+      "bio": "Full-stack engineer with a decade of experience shipping products across fintech and developer tooling. Currently leading the graph layer at ArchiveHubs. I write about Neo4j, distributed systems, and the craft of product engineering.",
+      "expertise": "Neo4j · Node.js · TypeScript · React · AWS · Distributed Systems · API Design"
+    },
+    "contact": {
+      "email": "john@archivehubs.dev",
+      "phone": "+234 800 000 0000",
+      "website": "https://johndoe.dev",
+      "address": "Lagos, Nigeria"
+    },
+    "experience": [
+      {
+        "id": "exp-1",
+        "title": "Lead Software Engineer",
+        "company": "ArchiveHubs",
+        "companyLogo": "images/Logo.jpg",
+        "location": "Lagos, Nigeria · Remote",
+        "startDate": "2024-01",
+        "endDate": "",
+        "current": true,
+        "description": "Leading the backend platform team. Architected the graph-native feed and connection recommendation engine.",
+        "tools": ["Neo4j", "Node.js", "TypeScript", "Redis", "DynamoDB"]
+      },
+      {
+        "id": "exp-2",
+        "title": "Senior Backend Engineer",
+        "company": "Paystack",
+        "companyLogo": "images/Logo.jpg",
+        "location": "Lagos, Nigeria",
+        "startDate": "2021-03",
+        "endDate": "2023-12",
+        "current": false,
+        "description": "Owned merchant payouts infrastructure. Scaled throughput 8× while reducing failure rate to <0.01%.",
+        "tools": ["Node.js", "PostgreSQL", "Kafka", "AWS"]
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-1",
+        "institution": "University of Lagos",
+        "degree": "B.Sc. Computer Science",
+        "field": "Computer Science",
+        "startYear": "2014",
+        "endYear": "2018",
+        "description": "First Class Honours · Led the ACM student chapter"
+      }
+    ],
+    "licenses": [
+      {
+        "id": "lic-1",
+        "name": "AWS Certified Solutions Architect – Associate",
+        "issuer": "Amazon Web Services",
+        "issueDate": "2022-06",
+        "expirationDate": "2025-06",
+        "credentialId": "AWS-1234567"
+      },
+      {
+        "id": "lic-2",
+        "name": "Neo4j Certified Professional",
+        "issuer": "Neo4j",
+        "issueDate": "2023-09",
+        "credentialId": "NEO4J-8877"
+      }
+    ],
+    "affiliations": [
+      {
+        "id": "aff-1",
+        "organization": "IEEE Computer Society",
+        "role": "Member",
+        "startDate": "2020-01",
+        "description": "Active in the distributed systems and graph databases working groups."
+      }
+    ],
+    "volunteer": [
+      {
+        "id": "vol-1",
+        "organization": "Tech Education Initiative",
+        "role": "Mentor",
+        "startDate": "2022-01",
+        "description": "Teaching backend engineering fundamentals to underprivileged youth in Lagos."
+      }
+    ],
+    "languages": [
+      { "language": "English", "proficiency": "native" },
+      { "language": "Yoruba", "proficiency": "fluent" },
+      { "language": "French", "proficiency": "intermediate" }
+    ],
+    "skills": [
+      { "name": "Neo4j",        "level": "expert" },
+      { "name": "Node.js",      "level": "expert" },
+      { "name": "TypeScript",   "level": "advanced" },
+      { "name": "React",        "level": "advanced" },
+      { "name": "AWS",          "level": "advanced" },
+      { "name": "Redis",        "level": "advanced" }
+    ],
+    "personalInterests": [
+      "Long-distance cycling",
+      "Analog photography",
+      "West African literature"
+    ],
+    "references": [
+      {
+        "id": "ref-1",
+        "name": "Adaeze Nwosu",
+        "designation": "Engineering Manager",
+        "organization": "Paystack",
+        "email": "adaeze@example.com",
+        "description": "Worked closely with John for 2 years. Exceptional systems thinker."
+      }
+    ]
+  },
+
+  "u-002": {
+    "id": "u-002",
+    "account_type": "individual",
+    "header": {
+      "fullName": "Emma Watson",
+      "headline": "Senior UI/UX Designer at Apple",
+      "location": "Cupertino, CA",
+      "connectionCount": 1248,
+      "profilePic": "images/profile.jpg",
+      "banner": "images/hubs.jpg"
+    },
+    "about": {
+      "bio": "Designer focused on the intersection of craft, systems, and storytelling. Currently leading design for a new developer platform at Apple. Previously at Stripe and Figma.",
+      "expertise": "Design Systems · Prototyping · Figma · Motion Design · Product Strategy"
+    },
+    "contact": { "email": "emma@example.com" },
+    "experience": [
+      {
+        "id": "exp-e1",
+        "title": "Senior Product Designer",
+        "company": "Apple",
+        "companyLogo": "images/Logo.jpg",
+        "location": "Cupertino, CA",
+        "startDate": "2022-04",
+        "current": true,
+        "description": "Design lead for the developer platform. Shipped three major surfaces in the last 18 months."
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-e1",
+        "institution": "Rhode Island School of Design",
+        "degree": "BFA, Graphic Design",
+        "startYear": "2013",
+        "endYear": "2017"
+      }
+    ],
+    "licenses": [],
+    "affiliations": [],
+    "volunteer": [],
+    "languages": [{ "language": "English", "proficiency": "native" }],
+    "skills": [
+      { "name": "Figma", "level": "expert" },
+      { "name": "Design Systems", "level": "expert" },
+      { "name": "Prototyping", "level": "advanced" }
+    ],
+    "personalInterests": ["Ceramics", "Trail running"],
+    "references": []
+  }
+}
