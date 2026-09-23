@@ -6,6 +6,7 @@ import { initFeed }             from '../components/feed.js';
 import { initComments }         from '../components/comments.js';
 import { initCreatePost }       from '../components/create-post.js';
 import { initCreateStory }      from '../components/create-story.js';
+import { initHomeSidebar }      from '../components/home-sidebar.js';
 
 async function boot() {
   console.log('[home] booting…');
@@ -19,13 +20,10 @@ async function boot() {
   initComments();
   initCreatePost();
   initCreateStory();
-
-  // Stories after the synchronous stuff so its first paint doesn't block
   initStories();
+  initHomeSidebar();        // ← NEW
 
   console.log('[home] ready');
 }
 
-boot().catch(err => {
-  console.error('[home] boot failed:', err);
-});
+boot().catch(err => console.error('[home] boot failed:', err));
