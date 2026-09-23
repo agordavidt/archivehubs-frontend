@@ -1,0 +1,213 @@
+=== pages ===
+----archivehubs-frontend\src\pages\home.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | ArchiveHubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+  <!-- Shared chrome -->
+  <div data-include="/components/navbar.html"></div>
+
+  <main class="main-content">
+    <section class="middle-section" style="grid-column: 1 / -1; max-width: 640px; margin: 0 auto;">
+
+      <!-- Create post bar -->
+      <div class="create-post">
+        <div class="post-input-container">
+          <img src="/images/profile.jpg" alt="" class="user-profile-pic" data-me-avatar>
+          <div class="post-input-wrapper" data-open-create-post style="cursor:pointer">
+            <input type="text" placeholder="Start a post" class="post-input" readonly>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="action-btn" data-open-create-post type="button">
+            <i class="fas fa-image"></i><span>Media</span>
+          </button>
+          <button class="action-btn" data-open-create-story type="button">
+            <i class="fas fa-plus-square"></i><span>Story</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stories -->
+      <div class="stories-section">
+        <div class="stories-container">
+          <div class="story-card create-story" data-open-create-story>
+            <div class="story-content">
+              <div class="create-story-top">
+                <img src="/images/profile.jpg" alt="" class="story-avatar" data-me-avatar>
+                <div class="create-story-plus"><i class="fas fa-plus"></i></div>
+                <span class="story-username">Create Story</span>
+              </div>
+            </div>
+          </div>
+          <!-- Rendered stories go here via stories.js (later slice) -->
+        </div>
+      </div>
+
+      <!-- Feed -->
+      <div class="posts-section">
+        <div class="feed-loading" style="text-align:center;padding:40px;">
+          <div class="spinner"></div>
+          <p>Loading posts…</p>
+        </div>
+      </div>
+    </section>
+    
+    <div class="right-sidebar">
+      <div data-include="/components/sidebars/network.html"></div>
+      <!-- Trending News, Suggested Pages, app promo go below -->
+    </div>
+    
+  </main>
+
+  <!-- Shared partials -->
+  <div data-include="/components/modals/create-post.html"></div>
+  <div data-include="/components/modals/create-story.html"></div>
+  <div data-include="/components/modals/story-viewer.html"></div>
+  <div data-include="/components/modals/comment-modal.html"></div>
+
+  <script type="module" src="/js/pages/home.js"></script>
+</body>
+</html>
+
+
+----\archivehubs-frontend\src\pages\connections.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Connections | ArchiveHubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+  <div data-include="/components/navbar.html"></div>
+
+  <main class="connections-page" data-connections-page>
+    <header class="cp-page-header">
+      <h1>My Connections</h1>
+      <p class="cp-page-sub">Manage your network, respond to requests, and discover people you may know.</p>
+    </header>
+
+    <nav class="cp-tabs" role="tablist">
+      <button class="cp-tab active" data-tab="list" role="tab" aria-selected="true">
+        <i class="fas fa-user-friends"></i>
+        <span>Your Connections</span>
+        <span class="cp-tab-count" data-count-connections></span>
+      </button>
+      <button class="cp-tab" data-tab="requests" role="tab" aria-selected="false">
+        <i class="fas fa-user-plus"></i>
+        <span>Requests</span>
+        <span class="cp-tab-badge hidden" data-count-requests></span>
+      </button>
+      <button class="cp-tab" data-tab="suggestions" role="tab" aria-selected="false">
+        <i class="fas fa-magic"></i>
+        <span>Suggestions</span>
+      </button>
+    </nav>
+
+    <div class="cp-page-body">
+
+      <!-- ─── Your Connections ────────────────────────────── -->
+      <section class="cp-panel active" data-panel="list">
+        <div class="cp-panel-header">
+          <h2>Your Connections</h2>
+          <div class="cp-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search connections…" data-search-connections>
+          </div>
+        </div>
+        <div class="connection-grid" data-connections-grid>
+          <div class="cp-loading"><div class="spinner"></div></div>
+        </div>
+      </section>
+
+      <!-- ─── Requests ─────────────────────────────────────── -->
+      <section class="cp-panel" data-panel="requests">
+        <div class="cp-panel-header">
+          <h2>Pending Requests</h2>
+        </div>
+        <div class="connection-grid" data-requests-grid>
+          <div class="cp-loading"><div class="spinner"></div></div>
+        </div>
+      </section>
+
+      <!-- ─── Suggestions ──────────────────────────────────── -->
+      <section class="cp-panel" data-panel="suggestions">
+        <div class="cp-panel-header">
+          <h2>People you may know</h2>
+        </div>
+
+        <div class="cp-subtabs" role="tablist">
+          <button class="cp-subtab active" data-subtab="aty" role="tab">For you</button>
+          <button class="cp-subtab" data-subtab="acr" role="tab">Activity</button>
+          <button class="cp-subtab" data-subtab="rcr" role="tab">Role</button>
+          <button class="cp-subtab" data-subtab="pcr" role="tab">Popular</button>
+          <button class="cp-subtab" data-subtab="bcr" role="tab">Business</button>
+        </div>
+
+        <div class="connection-grid" data-suggestions-grid>
+          <div class="cp-loading"><div class="spinner"></div></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ─── Birthdays widget ─────────────────────────────── -->
+    <aside class="cp-birthdays">
+      <div class="cp-birthdays-header">
+        <h3><i class="fas fa-birthday-cake"></i> Birthdays</h3>
+      </div>
+      <div class="cp-birthdays-tabs">
+        <button class="cp-bday-tab active" data-bday="tbr">Today</button>
+        <button class="cp-bday-tab" data-bday="rbr">Recent</button>
+        <button class="cp-bday-tab" data-bday="ubr">Upcoming</button>
+      </div>
+      <div class="cp-birthdays-list" data-birthdays-list>
+        <div class="cp-loading"><div class="spinner"></div></div>
+      </div>
+    </aside>
+
+  </main>
+
+  <script type="module" src="/js/pages/connections.js"></script>
+</body>
+</html>
+
+----archivehubs-frontend\src\pages\messages.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messaging | ArchiveHubs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+  <div data-include="/components/navbar.html"></div>
+  <div data-include="/components/messaging.html"></div>
+
+  <script type="module" src="/js/pages/messages.js"></script>
+</body>
+</html>

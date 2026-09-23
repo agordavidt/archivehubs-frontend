@@ -1,57 +1,57 @@
 {
   "connections": [
-    { "id": "u-002", "firstName": "Emeka", "lastName": "Okoro", "profilePic": "images/profile.jpg", "headline": "Secondary School Teacher at Government College", "connectedAt": 1737000000000 },
-    { "id": "u-003", "firstName": "Blessing", "lastName": "Eze", "profilePic": "images/profile.jpg", "headline": "Registered Nurse at University Teaching Hospital", "connectedAt": 1737100000000 },
-    { "id": "u-004", "firstName": "Amina", "lastName": "Sani", "profilePic": "images/profile.jpg", "headline": "Accountant at First City Bank", "connectedAt": 1737200000000 },
-    { "id": "u-005", "firstName": "Chinedu", "lastName": "Okafor", "profilePic": "images/profile.jpg", "headline": "Small Business Owner · Retail & Trading", "connectedAt": 1737300000000 },
-    { "id": "u-006", "firstName": "Fatima", "lastName": "Yusuf", "profilePic": "images/profile.jpg", "headline": "Civil Servant at State Ministry of Education", "connectedAt": 1737400000000 },
-    { "id": "u-007", "firstName": "Ibrahim", "lastName": "Abdullahi", "profilePic": "images/profile.jpg", "headline": "Farmer · Crop and Livestock Production", "connectedAt": 1737500000000 },
-    { "id": "u-008", "firstName": "Grace", "lastName": "Adeyemi", "profilePic": "images/profile.jpg", "headline": "Fashion Designer · Self-employed", "connectedAt": 1737600000000 },
-    { "id": "u-009", "firstName": "Tobi", "lastName": "Adewale", "profilePic": "images/profile.jpg", "headline": "Quantity Surveyor at BuildRight Nigeria", "connectedAt": 1737700000000 }
+    { "id": "u-002", "firstName": "Emma",    "lastName": "Watson",     "profilePic": "images/profile.jpg", "headline": "Senior UI/UX Designer at Apple",       "connectedAt": 1737000000000 },
+    { "id": "u-003", "firstName": "James",   "lastName": "Rodriguez",  "profilePic": "images/profile.jpg", "headline": "Backend Developer at Microsoft",        "connectedAt": 1737100000000 },
+    { "id": "u-004", "firstName": "Aisha",   "lastName": "Bello",      "profilePic": "images/profile.jpg", "headline": "Product Manager at Paystack",           "connectedAt": 1737200000000 },
+    { "id": "u-005", "firstName": "Chinedu","lastName": "Okafor",     "profilePic": "images/profile.jpg", "headline": "Data Scientist · Freelance",            "connectedAt": 1737300000000 },
+    { "id": "u-006", "firstName": "Fatima",  "lastName": "Yusuf",      "profilePic": "images/profile.jpg", "headline": "DevOps Engineer at Flutterwave",        "connectedAt": 1737400000000 },
+    { "id": "u-007", "firstName": "Daniel",  "lastName": "Kimani",     "profilePic": "images/profile.jpg", "headline": "Mobile Engineer · Flutter & Swift",     "connectedAt": 1737500000000 },
+    { "id": "u-008", "firstName": "Zara",    "lastName": "Ahmed",      "profilePic": "images/profile.jpg", "headline": "Founder at Northwind Labs",             "connectedAt": 1737600000000 },
+    { "id": "u-009", "firstName": "Tobi",    "lastName": "Adeyemi",    "profilePic": "images/profile.jpg", "headline": "Full-stack Developer at Andela",        "connectedAt": 1737700000000 }
   ],
   "requests": [
-    { "id": "u-010", "firstName": "Sarah", "lastName": "Ibrahim", "profilePic": "images/profile.jpg", "headline": "Pharmacist at City Care Pharmacy", "mutualCount": 5, "requestedAt": 1737800000000 },
-    { "id": "u-011", "firstName": "Musa", "lastName": "Garba", "profilePic": "images/profile.jpg", "headline": "Police Officer · Nigeria Police Force", "mutualCount": 2, "requestedAt": 1737810000000 },
-    { "id": "u-012", "firstName": "Ngozi", "lastName": "Nwankwo", "profilePic": "images/profile.jpg", "headline": "Human Resources Officer at Zenith Foods", "mutualCount": 8, "requestedAt": 1737820000000 }
+    { "id": "u-010", "firstName": "Sarah",   "lastName": "Chen",       "profilePic": "images/profile.jpg", "headline": "Product Manager at Stripe",              "mutualCount": 5, "requestedAt": 1737800000000 },
+    { "id": "u-011", "firstName": "Kwame",   "lastName": "Mensah",     "profilePic": "images/profile.jpg", "headline": "Cloud Architect at AWS",                 "mutualCount": 2, "requestedAt": 1737810000000 },
+    { "id": "u-012", "firstName": "Layla",   "lastName": "Hassan",     "profilePic": "images/profile.jpg", "headline": "Design Lead at Figma",                   "mutualCount": 8, "requestedAt": 1737820000000 }
   ],
   "recommendations": {
     "aty": [
-      { "id": "u-020", "firstName": "Samuel", "lastName": "Ogunleye", "profilePic": "images/profile.jpg", "headline": "Civil Engineer at Julius Berger", "mutualCount": 12, "reason": "12 mutual connections" },
-      { "id": "u-021", "firstName": "Mary", "lastName": "Chukwu", "profilePic": "images/profile.jpg", "headline": "Primary School Teacher at Bright Future School", "mutualCount": 7, "reason": "7 mutual connections" },
-      { "id": "u-022", "firstName": "Kabiru", "lastName": "Bello", "profilePic": "images/profile.jpg", "headline": "Auto Mechanic · Self-employed", "mutualCount": 4, "reason": "Works in the same area" },
-      { "id": "u-023", "firstName": "Esther", "lastName": "Eze", "profilePic": "images/profile.jpg", "headline": "Lawyer at Eze & Partners", "mutualCount": 3, "reason": "3 mutual connections" },
-      { "id": "u-024", "firstName": "David", "lastName": "Ojo", "profilePic": "images/profile.jpg", "headline": "Banking Officer at Access Bank", "mutualCount": 2, "reason": "Similar professional interests" },
-      { "id": "u-025", "firstName": "Hauwa", "lastName": "Mohammed", "profilePic": "images/profile.jpg", "headline": "Public Health Officer at State Ministry of Health", "mutualCount": 6, "reason": "6 mutual connections" }
+      { "id": "u-020", "firstName": "Alex",   "lastName": "Johnson",   "profilePic": "images/profile.jpg", "headline": "Frontend Engineer at Vercel",            "mutualCount": 12, "reason": "12 mutual connections" },
+      { "id": "u-021", "firstName": "Priya",  "lastName": "Sharma",    "profilePic": "images/profile.jpg", "headline": "ML Engineer at OpenAI",                  "mutualCount": 7,  "reason": "7 mutual connections" },
+      { "id": "u-022", "firstName": "Marcus", "lastName": "Oduya",     "profilePic": "images/profile.jpg", "headline": "Growth Lead at Notion",                  "mutualCount": 4,  "reason": "Works at Notion" },
+      { "id": "u-023", "firstName": "Ngozi",  "lastName": "Eze",       "profilePic": "images/profile.jpg", "headline": "Backend Developer at Cloudflare",        "mutualCount": 3,  "reason": "3 mutual connections" },
+      { "id": "u-024", "firstName": "Hugo",   "lastName": "Silva",     "profilePic": "images/profile.jpg", "headline": "iOS Engineer at Spotify",                "mutualCount": 2,  "reason": "Similar role" },
+      { "id": "u-025", "firstName": "Mira",   "lastName": "Patel",     "profilePic": "images/profile.jpg", "headline": "Staff Engineer at Stripe",               "mutualCount": 6,  "reason": "6 mutual connections" }
     ],
     "acr": [
-      { "id": "u-030", "firstName": "Yusuf", "lastName": "Abubakar", "profilePic": "images/profile.jpg", "headline": "Electrical Technician · Self-employed", "reason": "You both liked posts about local businesses" },
-      { "id": "u-031", "firstName": "Adaeze", "lastName": "Nwosu", "profilePic": "images/profile.jpg", "headline": "Medical Laboratory Scientist at General Hospital", "reason": "You both commented on Adeyemi's post" },
-      { "id": "u-032", "firstName": "Peter", "lastName": "Onyeka", "profilePic": "images/profile.jpg", "headline": "Real Estate Agent at Prime Homes Nigeria", "reason": "You both follow ArchiveHubs Community" }
+      { "id": "u-030", "firstName": "Yusuf",  "lastName": "Rahman",    "profilePic": "images/profile.jpg", "headline": "Backend Developer at Wise",              "reason": "You both liked posts about distributed systems" },
+      { "id": "u-031", "firstName": "Adaeze", "lastName": "Nwosu",     "profilePic": "images/profile.jpg", "headline": "Frontend Engineer at Monzo",             "reason": "You both commented on Adeyemi's post" },
+      { "id": "u-032", "firstName": "Ethan",  "lastName": "Park",      "profilePic": "images/profile.jpg", "headline": "SRE at Cloudflare",                      "reason": "You both follow ArchiveHubs Engineering" }
     ],
     "rcr": [
-      { "id": "u-040", "firstName": "Janet", "lastName": "Akinyemi", "profilePic": "images/profile.jpg", "headline": "Business Administrator at Greenfield Stores", "reason": "Same professional field" },
-      { "id": "u-041", "firstName": "Kwame", "lastName": "Boateng", "profilePic": "images/profile.jpg", "headline": "Electrician · Self-employed", "reason": "Similar experience level" },
-      { "id": "u-042", "firstName": "Rose", "lastName": "Eneh", "profilePic": "images/profile.jpg", "headline": "Customer Service Officer at MTN Nigeria", "reason": "Works in your industry" }
+      { "id": "u-040", "firstName": "Sofia",  "lastName": "Rossi",     "profilePic": "images/profile.jpg", "headline": "Senior Backend Developer at Revolut",    "reason": "Same role as you" },
+      { "id": "u-041", "firstName": "Kwesi",  "lastName": "Boateng",   "profilePic": "images/profile.jpg", "headline": "Backend Developer at MTN",               "reason": "Similar experience level" },
+      { "id": "u-042", "firstName": "Ines",   "lastName": "Costa",     "profilePic": "images/profile.jpg", "headline": "Platform Engineer at Nubank",            "reason": "Works in your industry" }
     ],
     "pcr": [
-      { "id": "u-050", "firstName": "Michael", "lastName": "Oladipo", "profilePic": "images/profile.jpg", "headline": "Managing Director at Oladipo Trading Company", "reason": "Popular in your network" },
-      { "id": "u-051", "firstName": "Amaka", "lastName": "Okonkwo", "profilePic": "images/profile.jpg", "headline": "Veterinary Doctor at Green Farms Veterinary Clinic", "reason": "Trending this week" }
+      { "id": "u-050", "firstName": "Ravi",   "lastName": "Krishnan",  "profilePic": "images/profile.jpg", "headline": "CTO at Fintech Labs",                    "reason": "Popular in your network" },
+      { "id": "u-051", "firstName": "Amara",  "lastName": "Okonkwo",   "profilePic": "images/profile.jpg", "headline": "VP Engineering at Paystack",             "reason": "Trending this week" }
     ],
     "bcr": [
-      { "id": "u-060", "firstName": "Market", "lastName": "Square", "profilePic": "images/Logo.jpg", "headline": "Retail & Consumer Goods · 1.2k followers", "account_type": "corporate", "reason": "You follow similar pages" },
-      { "id": "u-061", "firstName": "Greenfield", "lastName": "Farms", "profilePic": "images/Logo.jpg", "headline": "Agriculture & Food Production · 800 followers", "account_type": "corporate", "reason": "Popular in your community" }
+      { "id": "u-060", "firstName": "Acme",   "lastName": "Corp",      "profilePic": "images/Logo.jpg",    "headline": "Enterprise Software · 1.2k followers",   "account_type": "corporate", "reason": "You follow similar pages" },
+      { "id": "u-061", "firstName": "Bytebase","lastName": "Inc",      "profilePic": "images/Logo.jpg",    "headline": "Database tools · 800 followers",         "account_type": "corporate", "reason": "Popular in tech" }
     ]
   },
   "birthdays": {
     "tbr": [
-      { "id": "u-002", "firstName": "Emeka", "lastName": "Okoro", "profilePic": "images/profile.jpg", "headline": "Secondary School Teacher at Government College" }
+      { "id": "u-002", "firstName": "Emma",  "lastName": "Watson",  "profilePic": "images/profile.jpg", "headline": "Senior UI/UX Designer at Apple" }
     ],
     "rbr": [
-      { "id": "u-004", "firstName": "Amina", "lastName": "Sani", "profilePic": "images/profile.jpg", "headline": "Accountant at First City Bank" }
+      { "id": "u-004", "firstName": "Aisha", "lastName": "Bello",   "profilePic": "images/profile.jpg", "headline": "Product Manager at Paystack" }
     ],
     "ubr": [
-      { "id": "u-006", "firstName": "Fatima", "lastName": "Yusuf", "profilePic": "images/profile.jpg", "headline": "Civil Servant at State Ministry of Education" },
-      { "id": "u-007", "firstName": "Ibrahim", "lastName": "Abdullahi", "profilePic": "images/profile.jpg", "headline": "Farmer · Crop and Livestock Production" }
+      { "id": "u-006", "firstName": "Fatima","lastName": "Yusuf",   "profilePic": "images/profile.jpg", "headline": "DevOps Engineer at Flutterwave" },
+      { "id": "u-007", "firstName": "Daniel","lastName": "Kimani",  "profilePic": "images/profile.jpg", "headline": "Mobile Engineer · Flutter & Swift" }
     ]
   }
 }

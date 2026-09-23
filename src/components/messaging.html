@@ -1,0 +1,165 @@
+<div class="msg-shell" data-msg-shell>
+
+  <!-- ═══ CONVERSATION LIST (left) ═══ -->
+  <aside class="msg-sidebar">
+
+    <header class="msg-sidebar-header">
+      <h1 class="msg-title">Messaging</h1>
+      <div class="msg-sidebar-actions">
+        <button class="msg-icon-btn" data-msg-compose title="New message" type="button">
+          <span class="material-symbols-outlined">edit_square</span>
+        </button>
+        <button class="msg-icon-btn" data-msg-menu title="More" type="button">
+          <span class="material-symbols-outlined">more_horiz</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="msg-search">
+      <span class="material-symbols-outlined">search</span>
+      <input type="text" placeholder="Search messages" data-msg-search autocomplete="off">
+    </div>
+
+    <nav class="msg-inbox-tabs" role="tablist">
+      <button class="msg-inbox-tab active" data-inbox="focused" role="tab" aria-selected="true">
+        Focused
+        <span class="msg-inbox-count hidden" data-count-focused></span>
+      </button>
+      <button class="msg-inbox-tab" data-inbox="other" role="tab" aria-selected="false">
+        Other
+        <span class="msg-inbox-count hidden" data-count-other></span>
+      </button>
+    </nav>
+
+    <div class="msg-conv-list" data-conv-list>
+      <div class="msg-loading"><div class="spinner"></div></div>
+    </div>
+  </aside>
+
+  <!-- ═══ THREAD / EMPTY STATE (right) ═══ -->
+  <section class="msg-thread" data-msg-thread>
+
+    <div class="msg-empty-state" data-msg-empty>
+      <span class="material-symbols-outlined msg-empty-icon">forum</span>
+      <h2>Your conversations</h2>
+      <p>Select a conversation from the list, or start a new one.</p>
+      <button class="msg-primary-btn" data-msg-compose type="button">
+        <span class="material-symbols-outlined">edit_square</span>
+        New message
+      </button>
+    </div>
+
+    <div class="msg-active hidden" data-msg-active>
+      <!-- Header -->
+      <header class="msg-thread-header">
+        <img src="/images/profile.jpg" alt="" class="msg-thread-avatar" data-thread-avatar>
+        <div class="msg-thread-info">
+          <span class="msg-thread-name" data-thread-name></span>
+          <span class="msg-thread-status" data-thread-status></span>
+        </div>
+        <div class="msg-thread-actions">
+          <button class="msg-icon-btn" data-thread-star title="Star" type="button">
+            <span class="material-symbols-outlined">star_border</span>
+          </button>
+          <button class="msg-icon-btn" data-thread-more title="More" type="button">
+            <span class="material-symbols-outlined">more_horiz</span>
+          </button>
+          <div class="msg-thread-menu hidden" data-thread-menu>
+            <button type="button" data-thread-action="archive">
+              <span class="material-symbols-outlined">archive</span> Archive
+            </button>
+            <button type="button" data-thread-action="delete">
+              <span class="material-symbols-outlined">delete</span> Delete
+            </button>
+            <button type="button" data-thread-action="block">
+              <span class="material-symbols-outlined">block</span> Block
+            </button>
+            <button type="button" data-thread-action="report">
+              <span class="material-symbols-outlined">report</span> Report
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Messages -->
+      <div class="msg-messages" data-msg-messages></div>
+
+      <!-- Typing indicator (shown when other party types) -->
+      <div class="msg-typing hidden" data-msg-typing>
+        <span class="msg-typing-dot"></span>
+        <span class="msg-typing-dot"></span>
+        <span class="msg-typing-dot"></span>
+        <span class="msg-typing-text" data-typing-name></span>
+      </div>
+
+      <!-- Composer -->
+      <form class="msg-composer" data-msg-composer>
+        <div class="msg-composer-input-wrap">
+          <div class="msg-composer-input"
+               contenteditable="true"
+               data-msg-input
+               data-placeholder="Write a message…"
+               role="textbox"
+               aria-multiline="true"></div>
+        </div>
+
+        <div class="msg-composer-toolbar">
+          <div class="msg-composer-attach">
+            <button type="button" class="msg-icon-btn" data-msg-attach="image" title="Photo">
+              <span class="material-symbols-outlined">image</span>
+            </button>
+            <button type="button" class="msg-icon-btn" data-msg-attach="file" title="File">
+              <span class="material-symbols-outlined">attach_file</span>
+            </button>
+            <button type="button" class="msg-icon-btn" data-msg-attach="gif" title="GIF">
+              <span class="material-symbols-outlined">gif_box</span>
+            </button>
+            <input type="file" data-msg-file-input hidden multiple>
+          </div>
+          <button type="submit" class="msg-send-btn" data-msg-send disabled>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </section>
+</div>
+
+<!-- ═══ COMPOSE MODAL ═══ -->
+<div class="msg-compose-overlay hidden" data-msg-compose-modal>
+  <div class="msg-compose-backdrop" data-compose-close></div>
+  <div class="msg-compose-modal">
+    <header class="msg-compose-header">
+      <h2>New message</h2>
+      <button class="msg-icon-btn" data-compose-close type="button">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </header>
+
+    <div class="msg-compose-recipient">
+      <label>To:</label>
+      <input type="text" placeholder="Type a name…" data-compose-search autocomplete="off">
+    </div>
+
+    <div class="msg-compose-suggestions" data-compose-suggestions></div>
+
+    <div class="msg-compose-body hidden" data-compose-body>
+      <div class="msg-compose-chosen hidden" data-compose-chosen></div>
+      <div class="msg-composer-input-wrap">
+        <div class="msg-composer-input"
+             contenteditable="true"
+             data-compose-input
+             data-placeholder="Write a message…"
+             role="textbox"
+             aria-multiline="true"></div>
+      </div>
+    </div>
+
+    <footer class="msg-compose-footer">
+      <button class="msg-primary-btn" data-compose-send disabled type="button">
+        Send
+      </button>
+    </footer>
+  </div>
+</div>

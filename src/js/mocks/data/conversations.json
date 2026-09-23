@@ -1,0 +1,74 @@
+{
+  "conversations": [
+    {
+      "id": "c-001",
+      "participants": [
+        { "id": "u-002", "name": "Emma Watson",     "avatar": "images/profile.jpg", "headline": "Senior UI/UX Designer at Apple", "online": true }
+      ],
+      "lastMessage": { "id": "m-c001-4", "senderId": "u-002", "content": "Sure, happy to walk through the API tomorrow.", "createdAt": 1737920000000, "read": false },
+      "unreadCount": 2,
+      "updatedAt": 1737920000000,
+      "focused": true,
+      "starred": true
+    },
+    {
+      "id": "c-002",
+      "participants": [
+        { "id": "u-003", "name": "James Rodriguez", "avatar": "images/profile.jpg", "headline": "Backend Developer at Microsoft", "online": false }
+      ],
+      "lastMessage": { "id": "m-c002-2", "senderId": "u-003", "content": "Let's catch up next week if you're free.", "createdAt": 1737900000000, "read": true },
+      "unreadCount": 0,
+      "updatedAt": 1737900000000,
+      "focused": true,
+      "starred": false
+    },
+    {
+      "id": "c-003",
+      "participants": [
+        { "id": "u-004", "name": "Aisha Bello",     "avatar": "images/profile.jpg", "headline": "Product Manager at Paystack", "online": true }
+      ],
+      "lastMessage": { "id": "m-c003-1", "senderId": "u-004", "content": "Thanks for the intro!", "createdAt": 1737880000000, "read": true },
+      "unreadCount": 0,
+      "updatedAt": 1737880000000,
+      "focused": true,
+      "starred": false
+    },
+    {
+      "id": "c-004",
+      "participants": [
+        { "id": "u-010", "name": "Sarah Chen",      "avatar": "images/profile.jpg", "headline": "Product Manager at Stripe", "online": false }
+      ],
+      "lastMessage": { "id": "m-c004-1", "senderId": "u-010", "content": "Would love to hear about ArchiveHubs' roadmap when you have a moment.", "createdAt": 1737700000000, "read": false },
+      "unreadCount": 1,
+      "updatedAt": 1737700000000,
+      "focused": false,
+      "starred": false
+    },
+    {
+      "id": "c-005",
+      "participants": [
+        { "id": "u-011", "name": "Kwame Mensah",    "avatar": "images/profile.jpg", "headline": "Cloud Architect at AWS", "online": false }
+      ],
+      "lastMessage": { "id": "m-c005-1", "senderId": "u-011", "content": "Re: your post on distributed tracing — quick question", "createdAt": 1737500000000, "read": false },
+      "unreadCount": 1,
+      "updatedAt": 1737500000000,
+      "focused": false,
+      "starred": false
+    }
+  ],
+  "messages": [
+    { "id": "m-c001-1", "conversationId": "c-001", "senderId": "u-002", "content": "Hey John! I came across your Neo4j post yesterday — really liked how you framed the graph model.", "createdAt": 1737910000000, "read": true },
+    { "id": "m-c001-2", "conversationId": "c-001", "senderId": "me",    "content": "Thanks Emma! Been living in it for the last few months. Are you exploring graph DBs for something specific?", "createdAt": 1737915000000, "read": true },
+    { "id": "m-c001-3", "conversationId": "c-001", "senderId": "u-002", "content": "Yeah — we're rethinking how we model user connections on our side and considering Neo4j for the graph layer.", "createdAt": 1737918000000, "read": true },
+    { "id": "m-c001-4", "conversationId": "c-001", "senderId": "u-002", "content": "Sure, happy to walk through the API tomorrow.", "createdAt": 1737920000000, "read": false },
+
+    { "id": "m-c002-1", "conversationId": "c-002", "senderId": "me",    "content": "Hey James — still up for that coffee chat on backend architecture?", "createdAt": 1737890000000, "read": true },
+    { "id": "m-c002-2", "conversationId": "c-002", "senderId": "u-003", "content": "Let's catch up next week if you're free.", "createdAt": 1737900000000, "read": true },
+
+    { "id": "m-c003-1", "conversationId": "c-003", "senderId": "u-004", "content": "Thanks for the intro!", "createdAt": 1737880000000, "read": true },
+
+    { "id": "m-c004-1", "conversationId": "c-004", "senderId": "u-010", "content": "Would love to hear about ArchiveHubs' roadmap when you have a moment.", "createdAt": 1737700000000, "read": false },
+
+    { "id": "m-c005-1", "conversationId": "c-005", "senderId": "u-011", "content": "Re: your post on distributed tracing — quick question", "createdAt": 1737500000000, "read": false }
+  ]
+}
